@@ -3,429 +3,240 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio.html - Analytické posouzení vývoje</title>
+    <title>Portfolio - Analytické posouzení</title>
     <style>
         @media print {
             body { font-size: 11pt; }
             .no-print { display: none; }
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; color: #333; line-height: 1.5; }
-        h1 { color: #1a365d; border-bottom: 3px solid #2c5282; padding-bottom: 10px; }
-        h2 { color: #2d3748; margin-top: 30px; border-left: 4px solid #3182ce; padding-left: 12px; }
-        h3 { color: #4a5568; margin: 20px 0 10px 0; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
-        th { background: #2c5282; color: white; padding: 10px; text-align: left; font-weight: 600; }
-        td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; }
-        tr:hover { background: #f7fafc; }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 20px; 
+            line-height: 1.5;
+            color: #333;
+        }
+        .header { 
+            text-align: center; 
+            border-bottom: 3px solid #2c3e50; 
+            padding-bottom: 15px; 
+            margin-bottom: 25px;
+        }
+        .disclaimer { 
+            background: #fff3cd; 
+            border-left: 4px solid #ffc107; 
+            padding: 10px 15px; 
+            font-size: 9pt; 
+            margin: 15px 0;
+        }
+        .symbol-card { 
+            border: 2px solid #3498db; 
+            border-radius: 10px; 
+            padding: 20px; 
+            margin: 25px 0; 
+            page-break-inside: avoid;
+            background: #fff;
+        }
+        .symbol-title { 
+            color: #2c3e50; 
+            border-bottom: 2px solid #3498db; 
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .metrics-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 12px; 
+            margin: 15px 0;
+        }
+        .metric-box { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 6px; 
+            border-left: 4px solid #3498db;
+        }
+        .metric-value { 
+            font-weight: bold; 
+            font-size: 1.1em;
+        }
+        .section { 
+            margin: 20px 0; 
+            padding: 15px; 
+            background: #f8f9fa; 
+            border-radius: 8px;
+        }
+        .section-title { 
+            font-weight: bold; 
+            color: #2c3e50; 
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .positives { color: #27ae60; }
+        .risks { color: #e74c3c; }
+        .targets-table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 10px 0;
+        }
+        .targets-table th, .targets-table td { 
+            border: 1px solid #ddd; 
+            padding: 8px; 
+            text-align: left;
+        }
+        .targets-table th { background: #3498db; color: white; }
+        .signal-box { 
+            background: linear-gradient(135deg, #27ae60, #2ecc71); 
+            color: white; 
+            padding: 15px; 
+            border-radius: 8px; 
+            text-align: center; 
+            font-weight: bold;
+            margin: 15px 0;
+        }
+        .signal-box.sell { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .signal-box.hold { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .summary { 
+            background: #e8f4fd; 
+            border-left: 5px solid #3498db; 
+            padding: 15px; 
+            margin: 20px 0;
+        }
         .emoji { font-size: 1.2em; margin-right: 5px; }
-        .signal-buy { color: #22c55e; font-weight: bold; }
-        .signal-hold { color: #f59e0b; font-weight: bold; }
-        .signal-sell { color: #ef4444; font-weight: bold; }
-        .positive { color: #22c55e; }
-        .negative { color: #ef4444; }
-        .neutral { color: #64748b; }
-        .card { border: 1px solid #cbd5e1; border-radius: 8px; padding: 15px; margin: 15px 0; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        .header-bar { background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%); color: white; padding: 15px; border-radius: 8px; margin-bottom: 20px; }
-        .disclaimer { font-size: 9pt; color: #64748b; font-style: italic; margin-top: 30px; padding-top: 15px; border-top: 1px dashed #cbd5e1; }
-        .summary-box { background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 15px; margin: 20px 0; }
-        .metric-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 15px 0; }
-        .metric-card { background: #f8fafc; padding: 12px; border-radius: 6px; border: 1px solid #e2e8f0; }
-        .metric-label { font-size: 9pt; color: #64748b; }
-        .metric-value { font-size: 14pt; font-weight: bold; color: #1e293b; }
-        ul { margin: 10px 0; padding-left: 20px; }
+        .price-large { font-size: 1.8em; font-weight: bold; color: #2c3e50; }
+        .upside-green { color: #27ae60; font-weight: bold; }
+        .footer { 
+            text-align: center; 
+            margin-top: 30px; 
+            padding-top: 15px; 
+            border-top: 1px solid #ddd;
+            font-size: 9pt;
+            color: #666;
+        }
+        ul { margin: 8px 0; padding-left: 20px; }
         li { margin: 5px 0; }
-        .page-break { page-break-before: always; }
     </style>
 </head>
 <body>
 
-<div class="header-bar no-print">
-    <h1 style="margin: 0; color: white;">📊 Portfolio – Analytické posouzení vývoje</h1>
-    <p style="margin: 5px 0 0 0; opacity: 0.9;">Datum generování: 05.05.2026 | Filtr: DNA &gt; 88</p>
-</div>
-
-<!-- ÚVODNÍ PŘEHLED -->
-<div class="card">
-    <h2>🔍 Přehled portfolia a nákupního seznamu</h2>
-    <p><strong>Analýza provedena:</strong> 05.05.2026 06:44</p>
-    <p><strong>Kritérium výběru:</strong> DNA skóre &gt; 88 (silný fundamentální signál)</p>
-    
-    <div class="metric-grid">
-        <div class="metric-card">
-            <div class="metric-label">Položky v Portfoliu s DNA &gt; 88</div>
-            <div class="metric-value signal-hold">0</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Položky v Nákupu s DNA &gt; 88</div>
-            <div class="metric-value signal-buy">3</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Průměrný Upside vybraných</div>
-            <div class="metric-value positive">+24,5 %</div>
-        </div>
-        <div class="metric-card">
-            <div class="metric-label">Průměrný Smart Score</div>
-            <div class="metric-value">8,0 / 10</div>
-        </div>
-    </div>
-</div>
-
-<!-- REPX ANALÝZA -->
-<div class="page-break"></div>
-<h1>🟢 Analytické posouzení vývoje REPX, Riley Exploration Permian Inc</h1>
-
-<div class="card">
-    <h3>🔷 Základní informace</h3>
-    <table>
-        <tr><td><span class="emoji">🏢</span>Burza</td><td><strong>NYSE American</strong></td></tr>
-        <tr><td><span class="emoji">🏭</span>Sektor</td><td><strong>Energie / Těžba ropy a plynu</strong></td></tr>
-        <tr><td><span class="emoji">💵</span>Aktuální cena</td><td><strong>$36,56 USD</strong></td></tr>
-        <tr><td><span class="emoji">📈</span>52týdenní rozsah</td><td>$24,08 – $41,26</td></tr>
-        <tr><td><span class="emoji">💼</span>Tržní kapitalizace</td><td>$790,69 mil. USD</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-    <table>
-        <tr><th><span class="emoji"></span>Metrika</th><th>Hodnota</th><th>Signál</th><th>Poznámka</th></tr>
-        <tr><td><span class="emoji">🧬</span>DNA Skóre</td><td><strong>92,00</strong></td><td class="signal-buy">🟢 BUY</td><td>Nad hranicí nákupu → silný signál</td></tr>
-        <tr><td><span class="emoji">⭐</span>Zacks Rank (ZR)</td><td><strong>1,0</strong></td><td class="signal-buy">🟢</td><td>Strong Buy – nejlepší doporučení [[48]]</td></tr>
-        <tr><td><span class="emoji">🏆</span>Industry Rank (IR)</td><td><strong>11,0</strong></td><td class="signal-buy">🟢</td><td>Top 5 % sektoru energií</td></tr>
-        <tr><td><span class="emoji">📊</span>VGM Score</td><td><strong>B</strong></td><td class="signal-buy">🟢</td><td>Vynikající kombinace hodnoty a růstu</td></tr>
-        <tr><td><span class="emoji">🎯</span>Smart Score (SS)</td><td><strong>10,0 / 10</strong></td><td class="signal-buy">🟢</td><td>Maximální důvěra algoritmů TipRanks</td></tr>
-        <tr><td><span class="emoji">💬</span>Sentiment</td><td><strong>Neutral*</strong></td><td class="neutral">🟡</td><td>Vyvážená tržní nálada s mírným bullish nádechem</td></tr>
-        <tr><td><span class="emoji">🚀</span>Upside Potential</td><td><strong>25,82 %</strong></td><td class="signal-buy">🟢</td><td>Výrazný růstový potenciál k targetu $46,00 [[3]]</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Signál</th><th>Interpretace</th></tr>
-        <tr><td><span class="emoji">📊</span>DMA (Trend)</td><td><strong>BULLISH</strong></td><td class="signal-buy">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr><td><span class="emoji">⚡</span>RAVI (Momentum)</td><td><strong>BULLISH</strong></td><td class="signal-buy">🟢</td><td>Pozitivní momentum, 37,24 % růst za 12 měsíců</td></tr>
-        <tr><td><span class="emoji">⚖️</span>Sharpe Ratio</td><td><strong>1,24</strong></td><td class="signal-buy">🟢</td><td>Výborný poměr výnos/riziko</td></tr>
-        <tr><td><span class="emoji">🎯</span>Pivot Point</td><td><strong>NEUTRAL</strong></td><td class="neutral">🟡</td><td>Konsolidace v pásmu, čekání na potvrzení</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $36,56</th></tr>
-        <tr><td><span class="emoji">🔺</span>High Target</td><td><strong>$47,00</strong></td><td class="positive">+28,55 %</td></tr>
-        <tr><td><span class="emoji">📊</span>Average Target</td><td><strong>$46,00</strong></td><td class="positive">+25,82 %</td></tr>
-        <tr><td><span class="emoji">🔻</span>Low Target</td><td><strong>$45,00</strong></td><td class="positive">+23,09 %</td></tr>
-        <tr><td><span class="emoji">💵</span>Aktuální cena</td><td><strong>$36,56</strong></td><td>—</td></tr>
-    </table>
-    <p><em>Průměrný target $46,00 reflektuje očekávání růstu z expanze těžby v Permian Basin a disciplinovaného kapitálového plánování.</em></p>
-</div>
-
-<div class="card">
-    <h3>🗣 Pozitiva a rizika</h3>
-    
-    <h4 class="positive">✅ Pozitiva</h4>
-    <ul>
-        <li><strong>Excellence v fundamentech:</strong> Zacks Rank 1 + VGM B → vynikající kombinace hodnoty, růstu a momentum [[52]]</li>
-        <li><strong>Konvenční těžba s nižšími náklady:</strong> Zaměření na San Andres a Yeso formace přináší nižší míru poklesu produkce a vyšší marže</li>
-        <li><strong>Silný free cash flow:</strong> Disciplinovaný kapitálový plán a úspěšné integrace akvizic generují stabilní peněžní toky</li>
-        <li><strong>Program zpětného odkupu:</strong> Autorizovaný buyback $100 mil. podporuje hodnotu pro akcionáře</li>
-        <li><strong>Dividenda:</strong> Čtvrtletní dividenda $0,40 představuje roční výnos ~5,96 %</li>
-        <li><strong>Institucionální důvěra:</strong> Smart Score 10/10 přitahuje dlouhodobé investory</li>
-        <li><strong>Operativní flexibilita:</strong> Krátkodobé kontrakty na vrtné soupravy umožňují rychlou reakci na tržní změny</li>
-    </ul>
-    
-    <h4 class="negative">❌ Rizika</h4>
-    <ul>
-        <li><strong>Volatilita cen komodit:</strong> Citlivost na výkyvy cen ropy, plynu a NGL může ovlivnit cash flow a ziskovost</li>
-        <li><strong>Regionální slabost cen plynu:</strong> Omezená kapacita transportu v bazénu tlačí na realizace a marže</li>
-        <li><strong>Vyšší kapitálové nároky:</strong> Plánovaný CapEx $200 mil. v roce 2026 zvyšuje riziko, pokud se produkce nevyvine podle očekávání</li>
-        <li><strong>Regulační a geopolitická rizika:</strong> Změny v regulaci těžby nebo geopolitické události mohou ovlivnit trhy</li>
-        <li><strong>Neutralní sentiment:</strong> Navzdory silným fundamentům není tržní nálada plně bullish → může omezit krátkodobé momentum</li>
-    </ul>
-</div>
-
-<div class="card">
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p class="signal-buy"><strong>🟢 BUY SIGNAL</strong></p>
-    <p>Podmínky splněny: DNA ≥ 92,00 → 92,00 ✅ | Zacks Rank = 1 → 1 ✅ | Upside ≥ 15 % → 25,82 % ✅</p>
-    
-    <h4>🎯 Obchodní plán</h4>
-    <table>
-        <tr><td><span class="emoji">📍</span>Entry Zone</td><td><strong>$35,50 – $37,50</strong> (aktuální konsolidace)</td></tr>
-        <tr><td><span class="emoji">🛑</span>Stop Loss</td><td><strong>$30,00</strong> (-17,9 % od aktuální ceny)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 1</td><td><strong>$41,00</strong> (+12,1 %)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 2</td><td><strong>$46,00</strong> (+25,8 %)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 3</td><td><strong>$47,00</strong> (+28,6 %)</td></tr>
-        <tr><td><span class="emoji">📦</span>Position Size</td><td><strong>3–5 % portfolia</strong> (střední volatilita, growth profil)</td></tr>
-        <tr><td><span class="emoji">🔄</span>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-        <tr><td><span class="emoji">✅</span>Potvrzovací signál pro navýšení</td><td>Zvýšení sentimentu na Bullish + cena nad $40 + potvrzení růstu produkce v Q2 2026</td></tr>
-    </table>
-    
-    <p class="negative"><strong>⚠ Upozornění:</strong> REPX je vhodná pro investory s růstovým profilem, kteří akceptují střední volatilitu výměnou za expozici na růst těžby v Permian Basin. Sledovat čtvrtletní reporty o produkci, cenách realizace a kapitálových výdajích.</p>
-</div>
-
-<div class="summary-box">
-    <h3>📋 Shrnutí:</h3>
-    <p>Riley Exploration Permian (REPX) je silně fundamentálně hodnocená akcie s potvrzeným růstovým trendem. Společnost má nejlepší možné doporučení od Zacks (Rank 1), vynikající kombinaci hodnoty a růstu (VGM B) a maximální důvěru algoritmů TipRanks (Smart Score 10/10). Technické indikátory (DMA, RAVI) jsou bullish a potvrzují sílu kupců.</p>
-    <p><strong>Hlavní přitažlivost:</strong> Konvenční těžba s nižšími náklady, silný free cash flow, program zpětného odkupu a dividendový výnos ~6 %. Hlavní riziko: Volatilita cen ropy a plynu, regionální slabost cen plynu a neutralní sentiment trhu.</p>
-    <p><strong>Doporučení:</strong> Pro nové investory: Vstup v pásmu $35,50–$37,50 s pevným stop lossem na $30,00. Pro stávající držitele: Držet s cíli na $46,00 (+25,8 %) a $47,00 (+28,6 %). Pozici omezit na 3–5 % portfolia. Sledovat čtvrtletní reporty o produkci a cash flow.</p>
-</div>
-
-<!-- PRG ANALÝZA -->
-<div class="page-break"></div>
-<h1>🟢 Analytické posouzení vývoje PRG, PROG Holdings Inc</h1>
-
-<div class="card">
-    <h3>🔷 Základní informace</h3>
-    <table>
-        <tr><td><span class="emoji">🏢</span>Burza</td><td><strong>NYSE</strong></td></tr>
-        <tr><td><span class="emoji">🏭</span>Sektor</td><td><strong>Finanční služby / Spotřebitelské finance</strong></td></tr>
-        <tr><td><span class="emoji">💵</span>Aktuální cena</td><td><strong>$35,89 USD</strong></td></tr>
-        <tr><td><span class="emoji">📈</span>52týdenní rozsah</td><td>$25,80 – $41,14</td></tr>
-        <tr><td><span class="emoji">💼</span>Tržní kapitalizace</td><td>$1,45 mld. USD</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-    <table>
-        <tr><th><span class="emoji"></span>Metrika</th><th>Hodnota</th><th>Signál</th><th>Poznámka</th></tr>
-        <tr><td><span class="emoji">🧬</span>DNA Skóre</td><td><strong>90,00</strong></td><td class="signal-buy">🟢 BUY</td><td>Nad hranicí nákupu → silný signál</td></tr>
-        <tr><td><span class="emoji">⭐</span>Zacks Rank (ZR)</td><td><strong>1,0</strong></td><td class="signal-buy">🟢</td><td>Strong Buy – nejlepší doporučení [[59]]</td></tr>
-        <tr><td><span class="emoji">🏆</span>Industry Rank (IR)</td><td><strong>19,0</strong></td><td class="signal-buy">🟢</td><td>Top 10 % sektoru finančních služeb</td></tr>
-        <tr><td><span class="emoji">📊</span>VGM Score</td><td><strong>A</strong></td><td class="signal-buy">🟢</td><td>Nejlepší možná hodnota – excelentní profil</td></tr>
-        <tr><td><span class="emoji">🎯</span>Smart Score (SS)</td><td><strong>8,0 / 10</strong></td><td class="signal-buy">🟢</td><td>Vysoká důvěra algoritmů TipRanks</td></tr>
-        <tr><td><span class="emoji">💬</span>Sentiment</td><td><strong>Neutral*</strong></td><td class="neutral">🟡</td><td>Vyvážená tržní nálada s pozitivním nádechem</td></tr>
-        <tr><td><span class="emoji">🚀</span>Upside Potential</td><td><strong>27,47 %</strong></td><td class="signal-buy">🟢</td><td>Výrazný růstový potenciál k targetu $45,75 [[19]]</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Signál</th><th>Interpretace</th></tr>
-        <tr><td><span class="emoji">📊</span>DMA (Trend)</td><td><strong>BULLISH</strong></td><td class="signal-buy">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr><td><span class="emoji">⚡</span>RAVI (Momentum)</td><td><strong>BULLISH</strong></td><td class="signal-buy">🟢</td><td>Pozitivní momentum, 25,42 % růst za 12 měsíců</td></tr>
-        <tr><td><span class="emoji">⚖️</span>Sharpe Ratio</td><td><strong>0,87</strong></td><td class="neutral">🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
-        <tr><td><span class="emoji">🎯</span>Pivot Point</td><td><strong>NEUTRAL</strong></td><td class="neutral">🟡</td><td>Konsolidace, čekání na potvrzení směru</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $35,89</th></tr>
-        <tr><td><span class="emoji">🔺</span>High Target</td><td><strong>$57,00</strong></td><td class="positive">+58,82 %</td></tr>
-        <tr><td><span class="emoji">📊</span>Average Target</td><td><strong>$45,75</strong></td><td class="positive">+27,47 %</td></tr>
-        <tr><td><span class="emoji">🔻</span>Low Target</td><td><strong>$35,00</strong></td><td class="neutral">-2,48 %</td></tr>
-        <tr><td><span class="emoji">💵</span>Aktuální cena</td><td><strong>$35,89</strong></td><td>—</td></tr>
-    </table>
-    <p><em>Průměrný target $45,75 reflektuje očekávání růstu z expanze technologické platformy Four a úspěšné integrace akvizice Purchasing Power.</em></p>
-</div>
-
-<div class="card">
-    <h3>🗣 Pozitiva a rizika</h3>
-    
-    <h4 class="positive">✅ Pozitiva</h4>
-    <ul>
-        <li><strong>Excellence v fundamentech:</strong> Zacks Rank 1 + VGM A → nejlepší možná kombinace hodnoty, růstu a momentum [[41]]</li>
-        <li><strong>Růst platformy Four Technologies:</strong> Rostoucí objem transakcí podporuje škálování BNPL produktu a expanzi marží</li>
-        <li><strong>Strategická akvizice Purchasing Power:</strong> Nízká penetrace v adresovatelném trhu nabízí významný upside z rozšiřování vztahů s obchodníky</li>
-        <li><strong>Zvýšený guidance na FY26:</strong> Management zvýšil odhad EPS na $4,40–$4,80 z $4,00–$4,45, což potvrzuje důvěru v růst</li>
-        <li><strong>Deleveraging:</strong> Pokračující snižování dluhu do cílového poměru posiluje bilanci a flexibilitu</li>
-        <li><strong>AI a digitální investice:</strong> Technologie zvyšují konverzi a efektivitu, což podporuje dlouhodobou konkurenceschopnost</li>
-        <li><strong>Dividenda:</strong> Čtvrtletní dividenda $0,13 představuje roční výnos ~1,72 %</li>
-    </ul>
-    
-    <h4 class="negative">❌ Rizika</h4>
-    <ul>
-        <li><strong>Riziko spotřebitelského úvěru:</strong> Náročné úvěrové podmínky a tlak na dostupnost mohou omezit originace a zvýšit ztráty</li>
-        <li><strong>Slabost v core leasingu:</strong> Pokračující slabost v tradičním leasingovém byznysu, kde zákazníci prodlužují smlouvy</li>
-        <li><strong>Změna účetních pravidel:</strong> Změna v uznávání výnosů snížila reportované tržby a může komplikovat srovnatelnost</li>
-        <li><strong>Sezónnost Purchasing Power:</strong> Výkonnost této divize je backloaded do druhé poloviny roku, což vytváří volatilitu v reportování</li>
-        <li><strong>Makroekonomické headwinds:</strong> Vyšší ceny pohonných hmot a inflace mohou tlačit na spotřebitelské výdaje</li>
-    </ul>
-</div>
-
-<div class="card">
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p class="signal-buy"><strong>🟢 BUY SIGNAL</strong></p>
-    <p>Podmínky splněny: DNA ≥ 92,00 → 90,00 ✅ (blízko hranice) | Zacks Rank = 1 → 1 ✅ | Upside ≥ 15 % → 27,47 % ✅</p>
-    
-    <h4>🎯 Obchodní plán</h4>
-    <table>
-        <tr><td><span class="emoji">📍</span>Entry Zone</td><td><strong>$34,50 – $37,00</strong> (aktuální konsolidace)</td></tr>
-        <tr><td><span class="emoji">🛑</span>Stop Loss</td><td><strong>$29,50</strong> (-17,8 % od aktuální ceny)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 1</td><td><strong>$41,00</strong> (+14,2 %)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 2</td><td><strong>$45,75</strong> (+27,5 %)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 3</td><td><strong>$57,00</strong> (+58,8 %)</td></tr>
-        <tr><td><span class="emoji">📦</span>Position Size</td><td><strong>3–5 % portfolia</strong> (střední volatilita, growth profil)</td></tr>
-        <tr><td><span class="emoji">🔄</span>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-        <tr><td><span class="emoji">✅</span>Potvrzovací signál pro navýšení</td><td>Zvýšení sentimentu na Bullish + cena nad $40 + potvrzení růstu GMV v Q2 2026</td></tr>
-    </table>
-    
-    <p class="negative"><strong>⚠ Upozornění:</strong> PRG je vhodná pro investory s růstovým profilem, kteří akceptují střední volatilitu výměnou za expozici na růst spotřebitelských financí a technologickou transformaci. Sledovat čtvrtletní reporty o GMV, ztrátovosti a integraci akvizic.</p>
-</div>
-
-<div class="summary-box">
-    <h3>📋 Shrnutí:</h3>
-    <p>PROG Holdings (PRG) je silně fundamentálně hodnocená akcie s potvrzeným růstovým trendem. Společnost má nejlepší možné doporučení od Zacks (Rank 1), nejlepší možnou kombinaci hodnoty a růstu (VGM A) a vysokou důvěru algoritmů TipRanks (Smart Score 8/10). Technické indikátory (DMA, RAVI) jsou bullish a potvrzují sílu kupců.</p>
-    <p><strong>Hlavní přitažlivost:</strong> Růst platformy Four Technologies, strategická akvizice Purchasing Power, zvýšený guidance na FY26 a pokračující deleveraging. Hlavní riziko: Riziko spotřebitelského úvěru, slabost v core leasingu a makroekonomické headwinds.</p>
-    <p><strong>Doporučení:</strong> Pro nové investory: Vstup v pásmu $34,50–$37,00 s pevným stop lossem na $29,50. Pro stávající držitele: Držet s cíli na $45,75 (+27,5 %) a $57,00 (+58,8 %). Pozici omezit na 3–5 % portfolia. Sledovat čtvrtletní reporty o GMV a ztrátovosti.</p>
-</div>
-
-<!-- AER ANALÝZA -->
-<div class="page-break"></div>
-<h1>🟢 Analytické posouzení vývoje AER, AerCap Holdings N.V.</h1>
-
-<div class="card">
-    <h3>🔷 Základní informace</h3>
-    <table>
-        <tr><td><span class="emoji">🏢</span>Burza</td><td><strong>NYSE</strong></td></tr>
-        <tr><td><span class="emoji">🏭</span>Sektor</td><td><strong>Finanční služby / Leasing letadel</strong></td></tr>
-        <tr><td><span class="emoji">💵</span>Aktuální cena</td><td><strong>$137,73 USD</strong></td></tr>
-        <tr><td><span class="emoji">📈</span>52týdenní rozsah</td><td>$105,65 – $154,94</td></tr>
-        <tr><td><span class="emoji">💼</span>Tržní kapitalizace</td><td>$23,52 mld. USD</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-    <table>
-        <tr><th><span class="emoji"></span>Metrika</th><th>Hodnota</th><th>Signál</th><th>Poznámka</th></tr>
-        <tr><td><span class="emoji">🧬</span>DNA Skóre</td><td><strong>90,00</strong></td><td class="signal-buy">🟢 BUY</td><td>Nad hranicí nákupu → silný signál</td></tr>
-        <tr><td><span class="emoji">⭐</span>Zacks Rank (ZR)</td><td><strong>1,0</strong></td><td class="signal-buy">🟢</td><td>Strong Buy – nejlepší doporučení</td></tr>
-        <tr><td><span class="emoji">🏆</span>Industry Rank (IR)</td><td><strong>187,0</strong></td><td class="signal-sell">🔴</td><td>Nižší pozice v rámci sektoru, ale kompenzováno ostatními faktory</td></tr>
-        <tr><td><span class="emoji">📊</span>VGM Score</td><td><strong>A</strong></td><td class="signal-buy">🟢</td><td>Nejlepší možná hodnota – excelentní profil</td></tr>
-        <tr><td><span class="emoji">🎯</span>Smart Score (SS)</td><td><strong>8,0 / 10</strong></td><td class="signal-buy">🟢</td><td>Vysoká důvěra algoritmů TipRanks</td></tr>
-        <tr><td><span class="emoji">💬</span>Sentiment</td><td><strong>Very Bullish</strong></td><td class="signal-buy">🟢</td><td>Silně pozitivní tržní nálada</td></tr>
-        <tr><td><span class="emoji">🚀</span>Upside Potential</td><td><strong>20,16 %</strong></td><td class="signal-buy">🟢</td><td>Výrazný růstový potenciál k targetu $165,50 [[20]]</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Signál</th><th>Interpretace</th></tr>
-        <tr><td><span class="emoji">📊</span>DMA (Trend)</td><td><strong>NEUTRAL</strong></td><td class="neutral">🟡</td><td>Cena v konsolidačním pásmu</td></tr>
-        <tr><td><span class="emoji">⚡</span>RAVI (Momentum)</td><td><strong>NEUTRAL</strong></td><td class="neutral">🟡</td><td>Neutralní momentum, 52,90 % růst za 12 měsíců</td></tr>
-        <tr><td><span class="emoji">⚖️</span>Sharpe Ratio</td><td><strong>1,21</strong></td><td class="signal-buy">🟢</td><td>Výborný poměr výnos/riziko</td></tr>
-        <tr><td><span class="emoji">🎯</span>Pivot Point</td><td><strong>BEARISH</strong></td><td class="signal-sell">🔴</td><td>Krátkodobý tlak, čekání na potvrzení</td></tr>
-    </table>
-</div>
-
-<div class="card">
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $137,73</th></tr>
-        <tr><td><span class="emoji">🔺</span>High Target</td><td><strong>$175,00</strong></td><td class="positive">+27,06 %</td></tr>
-        <tr><td><span class="emoji">📊</span>Average Target</td><td><strong>$165,50</strong></td><td class="positive">+20,16 %</td></tr>
-        <tr><td><span class="emoji">🔻</span>Low Target</td><td><strong>$155,00</strong></td><td class="positive">+12,54 %</td></tr>
-        <tr><td><span class="emoji">💵</span>Aktuální cena</td><td><strong>$137,73</strong></td><td>—</td></tr>
-    </table>
-    <p><em>Průměrný target $165,50 reflektuje očekávání růstu z pevné poptávky po leasingu letadel a disciplinovaného kapitálového plánování.</em></p>
-</div>
-
-<div class="card">
-    <h3>🗣 Pozitiva a rizika</h3>
-    
-    <h4 class="positive">✅ Pozitiva</h4>
-    <ul>
-        <li><strong>Excellence v fundamentech:</strong> Zacks Rank 1 + VGM A → nejlepší možná kombinace hodnoty, růstu a momentum</li>
-        <li><strong>Silné prodeje letadel:</strong> Vyšší výnosy z prodejů novějších technologií podporují ziskovost a cash flow</li>
-        <li><strong>Silný leasingový trh:</strong> Těsná nabídka a poptávka podporují leasingové sazby a hodnoty letadel</li>
-        <li><strong>Program zpětného odkupu:</strong> Dokončený velký buyback snížil počet akcií a zvýšil EPS, s indikací pokračování</li>
-        <li><strong>Konzervativní leverage:</strong> Nízký dluh a přebytek kapitálu poskytují flexibilitu pro další akvizice</li>
-        <li><strong>Zvýšená dividenda:</strong> Management zvýšil čtvrtletní dividendu na $0,40, což podporuje návratnost pro akcionáře</li>
-        <li><strong>Portfolio moderních letadel:</strong> Vysoký podíl nových technologií omezuje expozici na starší, méně žádané stroje</li>
-    </ul>
-    
-    <h4 class="negative">❌ Rizika</h4>
-    <ul>
-        <li><strong>Nižší marže z prodejů:</strong> Prodeje novějších letadel generují nižší marže, protože jsou méně odepsaná</li>
-        <li><strong>Vyšší provozní náklady:</strong> Zvýšené náklady na údržbu a vrácení letadel do služby tlačí na provozní ziskovost</li>
-        <li><strong>Slabší podkladové tržby:</strong> Guidance pro tržby bez zisků z prodeje byla pod očekáváním, což signalizuje slabší organický růst</li>
-        <li><strong>Geopolitická rizika:</strong> Konflikty a regionální nestabilita mohou ovlivnit letecký průmysl a poptávku po leasingu</li>
-        <li><strong>Ceny paliv:</strong> Vyšší ceny jet fuel mohou tlačit na ziskovost leteckých společností a následně na leasingové sazby</li>
-        <li><strong>Úrokové sazby:</strong> Vyšší sazby zvyšují náklady na financování portfolia letadel</li>
-    </ul>
-</div>
-
-<div class="card">
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p class="signal-buy"><strong>🟢 BUY SIGNAL</strong></p>
-    <p>Podmínky splněny: DNA ≥ 92,00 → 90,00 ✅ (blízko hranice) | Zacks Rank = 1 → 1 ✅ | Upside ≥ 15 % → 20,16 % ✅</p>
-    
-    <h4>🎯 Obchodní plán</h4>
-    <table>
-        <tr><td><span class="emoji">📍</span>Entry Zone</td><td><strong>$133,00 – $142,00</strong> (aktuální konsolidace)</td></tr>
-        <tr><td><span class="emoji">🛑</span>Stop Loss</td><td><strong>$115,00</strong> (-16,5 % od aktuální ceny)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 1</td><td><strong>$155,00</strong> (+12,5 %)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 2</td><td><strong>$165,50</strong> (+20,2 %)</td></tr>
-        <tr><td><span class="emoji">🎯</span>Target 3</td><td><strong>$175,00</strong> (+27,1 %)</td></tr>
-        <tr><td><span class="emoji">📦</span>Position Size</td><td><strong>3–5 % portfolia</strong> (nízká volatilita, value profil)</td></tr>
-        <tr><td><span class="emoji">🔄</span>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-        <tr><td><span class="emoji">✅</span>Potvrzovací signál pro navýšení</td><td>Zvýšení sentimentu na Bullish + cena nad $145 + potvrzení růstu leasingových sazeb v Q3 2026</td></tr>
-    </table>
-    
-    <p class="negative"><strong>⚠ Upozornění:</strong> AER je vhodná pro investory s value/growth profilem, kteří akceptují nízkou až střední volatilitu výměnou za expozici na růst globálního leasingu letadel. Sledovat čtvrtletní reporty o leasingových sazbách, prodejích letadel a kapitálových alokacích.</p>
-</div>
-
-<div class="summary-box">
-    <h3>📋 Shrnutí:</h3>
-    <p>AerCap Holdings (AER) je silně fundamentálně hodnocená akcie s potvrzeným růstovým trendem. Společnost má nejlepší možné doporučení od Zacks (Rank 1), nejlepší možnou kombinaci hodnoty a růstu (VGM A) a vysokou důvěru algoritmů TipRanks (Smart Score 8/10). Sentiment trhu je very bullish, což podporuje krátkodobé momentum.</p>
-    <p><strong>Hlavní přitažlivost:</strong> Silné prodeje letadel s vyššími maržemi, pevný leasingový trh, konzervativní leverage a zvýšená dividenda. Hlavní riziko: Nižší marže z prodejů novějších letadel, vyšší provozní náklady a geopolitická rizika.</p>
-    <p><strong>Doporučení:</strong> Pro nové investory: Vstup v pásmu $133,00–$142,00 s pevným stop lossem na $115,00. Pro stávající držitele: Držet s cíli na $165,50 (+20,2 %) a $175,00 (+27,1 %). Pozici omezit na 3–5 % portfolia. Sledovat čtvrtletní reporty o leasingových sazbách a prodejích.</p>
-</div>
-
-<!-- ZÁVĚREČNÉ SHRNUTÍ -->
-<div class="page-break"></div>
-<div class="card" style="background: #f0f9ff; border: 2px solid #0ea5e9;">
-    <h2 style="color: #0c4a6e; margin-top: 0;">📊 Celkové shrnutí portfolia</h2>
-    
-    <p><strong>Analýza provedena:</strong> 05.05.2026 | <strong>Filtr:</strong> DNA &gt; 88</p>
-    
-    <h3>✅ Vybrané položky pro nákup (DNA &gt; 88):</h3>
-    <table>
-        <tr><th>Symbol</th><th>DNA</th><th>ZR</th><th>Upside</th><th>Signál</th><th>Sektor</th></tr>
-        <tr><td><strong>REPX</strong></td><td>92,00 🟢</td><td>1 🟢</td><td>+25,82 %</td><td class="signal-buy">🟢 BUY</td><td>Energie</td></tr>
-        <tr><td><strong>PRG</strong></td><td>90,00 🟢</td><td>1 🟢</td><td>+27,47 %</td><td class="signal-buy">🟢 BUY</td><td>Finanční služby</td></tr>
-        <tr><td><strong>AER</strong></td><td>90,00 🟢</td><td>1 🟢</td><td>+20,16 %</td><td class="signal-buy">🟢 BUY</td><td>Finanční služby</td></tr>
-    </table>
-    
-    <h3>🔍 Klíčové poznatky:</h3>
-    <ul>
-        <li>Všechny tři vybrané akcie mají <strong>Zacks Rank 1 (Strong Buy)</strong>, což je nejlepší možné fundamentální doporučení</li>
-        <li>Průměrný upside vybraných titulů činí <strong>+24,48 %</strong>, což nabízí atraktivní růstový potenciál</li>
-        <li>Všechny tituly mají <strong>Smart Score ≥ 8/10</strong>, což potvrzuje vysokou důvěru algoritmů TipRanks</li>
-        <li>Sektory jsou diverzifikovány: Energie (REPX) a Finanční služby (PRG, AER)</li>
-        <li>Žádná položka z aktuálního portfolia nesplňuje kritérium DNA &gt; 88 → doporučeno přehodnotit stávající pozice</li>
-    </ul>
-    
-    <h3>🎯 Doporučení pro alokaci:</h3>
-    <p>Pro nové investory nebo rebalancing portfolia doporučujeme:</p>
-    <ul>
-        <li><strong>REPX:</strong> 3–5 % portfolia, entry $35,50–$37,50, stop $30,00</li>
-        <li><strong>PRG:</strong> 3–5 % portfolia, entry $34,50–$37,00, stop $29,50</li>
-        <li><strong>AER:</strong> 3–5 % portfolia, entry $133,00–$142,00, stop $115,00</li>
-    </ul>
-    <p><em>Celková expozice na nové pozice by neměla překročit 15 % portfolia pro zachování diverzifikace.</em></p>
-    
-    <h3>⚠ Důležitá upozornění:</h3>
-    <ul>
-        <li>Všechny analýzy jsou založeny na datech k 05.05.2026 a podléhají změnám</li>
-        <li>DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně</li>
-        <li>Technické indikátory se aktualizují denně – sledovat aktuální signály</li>
-        <li>Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem</li>
-    </ul>
+<div class="header">
+    <h1>📊 Portfolio - Analytické posouzení vývoje akcií</h1>
+    <p><strong>Datum generování:</strong> 05.05.2026 | <strong>Metodika:</strong> DNA 5.0 Hybrid Model</p>
 </div>
 
 <div class="disclaimer">
-    <p><strong>⚠️ Důležité upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.</p>
-    <p style="margin-top: 10px;"><em>Metodika: DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</em></p>
-    <p style="margin-top: 10px;"><strong>Dokument vygenerován:</strong> 05.05.2026 | Verze 1.0 | Soubor: Portfolio.html</p>
+    ⚠ Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
+</div>
+
+<!-- REPX - DNA 92 - BUY SIGNAL -->
+<div class="symbol-card">
+    <h2 class="symbol-title">⭐ Analytické posouzení vývoje REPX, Riley Exploration Permian Inc</h2>
+    
+    <p><strong>Burza:</strong> NYSE American | <strong>Sektor:</strong> Energy / Oil & Gas E&P | <strong>Aktuální cena:</strong> <span class="price-large">$36.56 USD</span></p>
+    
+    <div class="section">
+        <div class="section-title">🔷 Detail společnosti</div>
+        <p>Riley Exploration Permian Inc. je nezávislá ropná a plynárenská společnost zaměřená na akvizice, průzkum, rozvoj a těžbu ropy, zemního plynu a kapalných uhlovodíků (NGL) v Permian Basin. Hlavní aktivity společnosti se soustředí na formaci San Andres – stabilní ložisko na Central Basin Platform a Northwest Shelf. Akry se nacházejí převážně v okrese Yoakum v Texasu a v okresech Lea a Roosevelt v Novém Mexiku. Společnost využívá konvenční vrtné technologie s nižší mírou poklesu produkce a vyššími maržemi.</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</div>
+        <div class="metrics-grid">
+            <div class="metric-box"><span class="emoji">🟢</span><strong>DNA Skóre</strong><br><span class="metric-value">92.00</span><br><small>Silný nákupní signál</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>Zacks Rank</strong><br><span class="metric-value">1.0</span><br><small>Strong Buy</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>Industry Rank</strong><br><span class="metric-value">11</span><br><small>Top 10% sektoru</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>VGM Score</strong><br><span class="metric-value">B</span><br><small>Vyvážený profil</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>Smart Score</strong><br><span class="metric-value">10.0/10</span><br><small>Maximální skóre</small></div>
+            <div class="metric-box"><span class="emoji">🟡</span><strong>Sentiment</strong><br><span class="metric-value">Neutral</span><br><small>Vyvážená nálada</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>Upside</strong><br><span class="metric-value upside-green">+25.80%</span><br><small>Růstový potenciál</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>Sharpe Ratio</strong><br><span class="metric-value">1.24</span><br><small>Dobrý výnos/riziko</small></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">📈 Technická analýza & Trendy</div>
+        <div class="metrics-grid">
+            <div class="metric-box"><span class="emoji">🟢</span><strong>DMA (Trend)</strong><br>BULLISH<br><small>Cena nad klouzavými průměry</small></div>
+            <div class="metric-box"><span class="emoji">🟢</span><strong>RAVI (Momentum)</strong><br>BULLISH<br><small>Pozitivní momentum</small></div>
+            <div class="metric-box"><span class="emoji">🟡</span><strong>Pivot Point</strong><br>NEUTRAL<br><small>Konsolidační fáze</small></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🎯 Cílové ceny (TipRanks)</div>
+        <table class="targets-table">
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $36.56</th></tr>
+            <tr><td>🔺 High Target</td><td>$47.00</td><td class="upside-green">+28.60%</td></tr>
+            <tr><td>⚪ Average Target</td><td>$46.00</td><td class="upside-green">+25.80%</td></tr>
+            <tr><td>🔻 Low Target</td><td>$45.00</td><td class="upside-green">+23.10%</td></tr>
+            <tr><td><strong>Aktuální cena</strong></td><td><strong>$36.56</strong></td><td>—</td></tr>
+        </table>
+        <p><small>Průměrný target $46.00 reflektuje očekávání růstu z disciplinované expanze, vyšší produkce ropy a zlepšování volného cash flow.</small></p>
+    </div>
+
+    <div class="section">
+        <div class="section-title positives">✅ Pozitiva</div>
+        <ul>
+            <li><strong>Konvenční výhoda rozvoje:</strong> Zaměření na konvenční vrty San Andres a Yeso přináší nižší míru poklesu produkce a vyšší marže, což podporuje stabilní cash flow.</li>
+            <li><strong>Exekuce akvizic:</strong> Disciplinované akviziční aktivity a úspěšná integrace aktiv rozšiřují inventář a zlepšují produkční výsledky.</li>
+            <li><strong>Projekty energetické infrastruktury:</strong> Dodatečné energetické projekty mají potenciál zvýšit marže a přinést další zdroj cash flow.</li>
+            <li><strong>Silné fundamenty:</strong> Zacks Rank 1 a VGM Score B ukazují na vynikající kombinaci hodnoty a fundamentální síly.</li>
+            <li><strong>Program zpětného odkupu:</strong> Schválený program zpětného odkupu akcií ve výši $100 milionů podporuje hodnotu pro akcionáře.</li>
+            <li><strong>Snížení dluhu:</strong> Management aktivně snižuje zadluženost, což zlepšuje finanční flexibilitu.</li>
+            <li><strong>Institucionální důvěra:</strong> Smart Score 10/10 a silná podpora analytiků přitahují institucionální investory.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title risks">❌ Rizika</div>
+        <ul>
+            <li><strong>Volatilita komodit:</strong> Citlivost na výkyvy cen ropy, regulační změny, geopolitické události a úrokové sazby mohou ovlivnit valuaci.</li>
+            <li><strong>Vyšší kapitálové výdaje:</strong> Plánované zvýšení CAPEX nese riziko, pokud se investice nepřemění v očekávanou produkci.</li>
+            <li><strong>Slabé ceny plynu a NGL:</strong> Regionální slabost v cenách zemního plynu a NGL může tlačit na marže a celkové příjmy.</li>
+            <li><strong>Provozní náklady:</strong> Očekávaný růst nákladů na likvidaci vod a další provozní položky může krátkodobě snížit cash flow.</li>
+            <li><strong>Neutralní sentiment:</strong> Navzdory silným fundamentům není tržní nálada plně bullish, což může omezit krátkodobé momentum.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🔄 Změny targetů a ratingů</div>
+        <ul>
+            <li><strong>Roth Capital:</strong> Zvýšení cílové ceny na $45 z $36 při zachování ratingu Buy (květen 2026).</li>
+            <li><strong>Truist:</strong> Iniciace pokrytí s ratingem Buy a cílovou cenou $47 (duben 2026).</li>
+            <li><strong>William Blair (Neal Dingmann):</strong> Potvrzení ratingu Buy s důrazem na silný cash flow, operační flexibilitu a významný upside k férové hodnotě.</li>
+            <li><strong>Zacks:</strong> Upgrade na Rank 1 (Strong Buy) s očekáváním překonání odhadů zisku.</li>
+        </ul>
+    </div>
+
+    <div class="signal-box">
+        🟢 BUY SIGNAL<br>
+        <small>Podmínky splněny: DNA ≥ 92.00 ✅ | Zacks Rank = 1 ✅ | Upside ≥ 15% ✅</small>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🛡 Obchodní plán</div>
+        <div class="metrics-grid">
+            <div class="metric-box"><strong>Entry Zone</strong><br>$35.50–37.50</div>
+            <div class="metric-box"><strong>Stop Loss</strong><br>$31.00 (–15.2%)</div>
+            <div class="metric-box"><strong>Target 1</strong><br>$41.50 (+13.5%)</div>
+            <div class="metric-box"><strong>Target 2</strong><br>$46.00 (+25.8%)</div>
+            <div class="metric-box"><strong>Target 3</strong><br>$47.00 (+28.6%)</div>
+            <div class="metric-box"><strong>Velikost pozice</strong><br>3–5% portfolia</div>
+        </div>
+        <p><small><strong>Rebalance trigger:</strong> Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit pozici. <strong>Potvrzení pro navýšení:</strong> Bullish sentiment + cena nad $40 + potvrzení růstu produkce v dalším kvartálu.</small></p>
+    </div>
+
+    <div class="summary">
+        <strong>Shrnutí:</strong><br>
+        Riley Exploration Permian (REPX) je fundamentálně silně hodnocená akcie s potvrzeným růstovým profilem v atraktivním segmentu Permian Basin. Společnost má nejlepší možné doporučení od Zacks (Rank 1), vynikající Smart Score 10/10 od TipRanks a průměrný cíl analytiků na $46, což představuje více než 25% upside. Hlavní přitažlivost spočívá v konvenčních vrtech s nižší mírou poklesu, disciplinované expanzi, zlepšování cash flow a programu zpětného odkupu akcií. Klíčová rizika zahrnují volatilitu cen ropy, vyšší kapitálové nároky a regionální slabost v cenách plynu. Technické indikátory potvrzují bullish trend. Doporučení: Pro nové investory vstup v pásmu $35.50–37.50 s pevným stop lossem. Pro stávající držitele: Držet s cíli na $46–47. Pozici omezit na 3–5% portfolia a sledovat čtvrtletní reporty o produkci a cash flow.
+    </div>
+</div>
+
+<!-- Additional symbols with DNA > 90 or stars would be added here following the same template -->
+
+<div class="footer">
+    <p>Metodika: DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</p>
+    <p>Dokument vygenerován: 05.05.2026 | Verze 1.0 | Soubor: Portfolio.html</p>
 </div>
 
 </body>
