@@ -3,711 +3,499 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio – Analytické posouzení vývoje</title>
+    <title>Portfolio - Analytické posouzení</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 20px; background: #fff; color: #222; line-height: 1.6; }
-        .header { background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
-        .disclaimer { background: #fff3cd; border-left: 4px solid #ffc107; padding: 12px 16px; margin: 15px 0; font-size: 0.9em; }
-        .section { margin: 25px 0; padding: 15px; border: 1px solid #e0e0e0; border-radius: 8px; }
-        .symbol-header { background: #f8f9fa; padding: 12px; border-left: 4px solid #2a5298; margin-bottom: 15px; }
-        table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 0.95em; }
-        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
-        th { background: #f1f5f9; font-weight: 600; }
-        .green { color: #22c55e; font-weight: 600; }
-        .yellow { color: #f59e0b; font-weight: 600; }
-        .red { color: #ef4444; font-weight: 600; }
-        .bullish { background: #dcfce7; }
-        .neutral { background: #fef3c7; }
-        .bearish { background: #fee2e2; }
-        .summary-box { background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 15px; margin: 15px 0; }
-        .positives li::before { content: "✅ "; }
-        .risks li::before { content: "❌ "; }
-        .footer { font-size: 0.85em; color: #666; margin-top: 30px; border-top: 1px solid #eee; padding-top: 15px; }
-        @media print { body { font-size: 11pt; } .section { page-break-inside: avoid; } }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background: #fff; }
+        h1 { color: #1a365d; border-bottom: 3px solid #3182ce; padding-bottom: 10px; }
+        h2 { color: #2c5282; margin-top: 30px; border-left: 4px solid #4299e1; padding-left: 12px; }
+        h3 { color: #2d3748; margin: 20px 0 10px; }
+        .disclaimer { background: #fff3cd; border: 1px solid #ffc107; border-radius: 5px; padding: 15px; margin: 20px 0; font-size: 0.9em; }
+        .symbol-card { border: 2px solid #e2e8f0; border-radius: 8px; padding: 20px; margin: 25px 0; background: #f8fafc; }
+        .symbol-header { background: linear-gradient(135deg, #3182ce 0%, #2c5282 100%); color: white; padding: 15px; border-radius: 6px 6px 0 0; margin: -20px -20px 20px -20px; }
+        .symbol-title { font-size: 1.4em; font-weight: bold; margin: 0; }
+        .symbol-meta { font-size: 0.9em; opacity: 0.9; margin-top: 5px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
+        th { background: #4a5568; color: white; padding: 10px; text-align: left; font-weight: 600; }
+        td { padding: 10px; border-bottom: 1px solid #e2e8f0; }
+        tr:nth-child(even) { background: #f7fafc; }
+        .green { color: #38a169; font-weight: bold; }
+        .yellow { color: #d69e2e; font-weight: bold; }
+        .red { color: #e53e3e; font-weight: bold; }
+        .signal-green { background: #c6f6d5; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .signal-yellow { background: #fef3c7; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .signal-red { background: #fed7d7; padding: 3px 8px; border-radius: 4px; font-weight: bold; }
+        .positives { background: #f0fff4; border-left: 4px solid #48bb78; padding: 12px 15px; margin: 10px 0; }
+        .risks { background: #fff5f5; border-left: 4px solid #f56565; padding: 12px 15px; margin: 10px 0; }
+        .summary { background: #ebf8ff; border: 2px solid #4299e1; border-radius: 8px; padding: 15px; margin: 20px 0; }
+        .summary-title { font-weight: bold; color: #2b6cb0; margin-bottom: 10px; }
+        .trade-plan { background: #f7fafc; border: 1px solid #cbd5e0; border-radius: 6px; padding: 15px; margin: 15px 0; }
+        .footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 0.85em; color: #718096; }
+        .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.85em; font-weight: 600; margin-right: 5px; }
+        .badge-star { background: #ffd700; color: #333; }
+        @media print { body { font-size: 11pt; } .symbol-card { page-break-inside: avoid; } }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <h1>📊 Portfolio – Analytické posouzení vývoje</h1>
-    <p><strong>Datum generování:</strong> 07.05.2026 06:45:00 | <strong>Verze:</strong> 1.0 | <strong>Jazyk:</strong> Čeština</p>
-</div>
-
+<h1>📊 Portfolio – Analytické posouzení vývoje vybraných symbolů</h1>
 <div class="disclaimer">
-    ⚠ Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
+    <strong>⚠ Upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
 </div>
 
-<!-- REPX -->
-<div class="section">
+<!-- CRC - Portfolio, ⭐, DNA 94 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje REPX, Riley Exploration Permian ⭐</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Oil & Gas E&P | <strong>Aktuální cena:</strong> $33.42 USD</p>
+        <div class="symbol-title">🌟 Analytické posouzení vývoje CRC, California Resources Corp</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Energy / Oil & Gas E&P | Datum: 10.05.2026 | Cena: $61.12 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>Riley Exploration Permian, Inc. je nezávislá ropná a plynárenská společnost zaměřená na akvizici, průzkum, rozvoj a těžbu ropy a zemního plynu v Permské pánvi v Texasu a Novém Mexiku. [[2]] Společnost se specializuje na horizontální vrtání v konvenčních, ropou nasycených formacích s vysokým obsahem kapalných uhlovodíků, které generují dlouhodobé cash flow. [[3]] Strategickým cílem je vytváření předvídatelného portfolia aktiv umožňujícího mírný růst produkce a stabilní návratnost pro akcionáře. [[4]]</p>
+    <p>California Resources Corporation je nezávislá energetická společnost zaměřená na těžbu ropy a zemního plynu v Kalifornii. Společnost provozuje dvě hlavní aktivity: těžbu uhlovodíků a správu uhlíkových emisí (CCS). CRC dodává suroviny kalifornským rafinériím a dalším odběratelům a zároveň rozvíjí projekty pro zachytávání a ukládání CO₂, což ji positioninguje jako lídra v oblasti nízkoemisní energie.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="green">94.00</td><td class="green">🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">9.0</td><td class="green">🟢</td><td>Top 10% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="green">B</td><td class="green">🟢</td><td>Velmi dobrá kombinace hodnoty/růstu</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td class="green">🟢</td><td>Maximální skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral*</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada s opatrností</td></tr>
-        <tr><td>Upside Potential</td><td class="green">37.6%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="green">94.00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">9.0</td><td>🟢</td><td>Top 10% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Vynikající kombinace hodnoty/růstu</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td>🟢</td><td>Maximální skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">30.2%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
     </table>
     
     <h3>📈 Technická analýza & Trendy</h3>
     <table>
         <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="neutral"><td>DMA (Trend)</td><td>NEUTRAL</td><td class="yellow">🟡</td><td>Cena v konsolidačním pásmu</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="neutral"><td>Sharpe Ratio</td><td>1.02</td><td class="yellow">🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
+        <tr><td>DMA (Trend)</td><td class="yellow">BULLISH</td><td>🟡</td><td>Cena nad klouzavými průměry</td></tr>
+        <tr><td>Sharpe Ratio</td><td class="yellow">1.43</td><td>🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
+        <tr><td>RAVI (Momentum)</td><td class="green">BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
+        <tr><td>Pivot Point</td><td class="yellow">BULLISH</td><td>🟡</td><td>Podpora dalšího růstu</td></tr>
     </table>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
+    <h3>🎯 Cílové ceny</h3>
     <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $33.42</th></tr>
-        <tr><td>High Target</td><td>$48.00</td><td class="green">+43.6%</td></tr>
-        <tr><td>Average Target</td><td>$41.00</td><td class="green">+22.7%</td></tr>
-        <tr><td>Low Target</td><td>$36.50</td><td class="green">+9.2%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$33.42</strong></td><td>—</td></tr>
+        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $61.12</th></tr>
+        <tr><td>High Target</td><td>$87.00</td><td class="green">+42.3%</td></tr>
+        <tr><td>Average Target</td><td>$79.60</td><td class="green">+30.2%</td></tr>
+        <tr><td>Low Target</td><td>$72.00</td><td class="green">+17.8%</td></tr>
+        <tr><td>Aktuální cena</td><td>$61.12</td><td>—</td></tr>
     </table>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Excellence v fundamentech:</strong> Zacks Rank 1 a Smart Score 10/10 potvrzují silnou finanční kondici a růstový potenciál.</li>
-        <li><strong>Strategická lokalita:</strong> Fokus na Permskou pánev – nejproduktivnější ropnou oblast v USA s nízkými náklady na těžbu.</li>
-        <li><strong>Konzervativní kapitálová alokace:</strong> Priorita návratnosti kapitálu před agresivní expanzí zvyšuje stabilitu cash flow.</li>
-        <li><strong>Hedgingová strategie:</strong> Částečné zajištění cen ropy a plynu snižuje expozici vůči tržní volatilitě.</li>
-        <li><strong>Dividendový potenciál:</strong> Silná generace hotovosti umožňuje budoucí návratnost akcionářům.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Volatilita komodit:</strong> Výnosy jsou citlivé na kolísání cen ropy a zemního plynu.</li>
-        <li><strong>Operační rizika:</strong> Těžba v Permské pánvi nese rizika spojená s geologií, infrastrukturou a regulací.</li>
-        <li><strong>Konkurenční tlak:</strong> Vysoká koncentrace těžařů v regionu může tlačit na marže a dostupnost služeb.</li>
-        <li><strong>ESG faktory:</strong> Sektor ropy a plynu čelí rostoucímu tlaku na udržitelnost a dekarbonizaci.</li>
-        <li><strong>Neutral sentiment:</strong> Tržní opatrnost může omezit krátkodobý růst ceny akcie.</li>
-    </ul>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Silná cash flow generace:</strong> Vysoká provozní ziskovost a volný cash flow umožňují financovat investice, dividendy a splácet dluh [[50]].<br>
+        • <strong>Proaktivní refinancování:</strong> Prodloužení splatností dluhu a snížení úrokových nákladů zlepšuje finanční flexibilitu [[50]].<br>
+        • <strong>CCS a datová centra:</strong> Komerční projekty na zachytávání CO₂ a partnerství v oblasti energetiky vytvářejí nové příjmové proudy [[50]].<br>
+        • <strong>Excellence ve fundamentech:</strong> Kombinace Zacks Rank 1, VGM B a Smart Score 10/10 signalizuje silnou pozici v sektoru.
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="green">🟢 BUY SIGNAL</span> – Podmínky splněny: DNA ≥ 92.00 → 94.00 ✅ | Zacks Rank = 1 → 1 ✅ | Upside ≥ 15% → 37.6% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$32.50–34.00 (aktuální konsolidace)</td></tr>
-        <tr><td>Stop Loss</td><td>$28.00 (-16.2% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$36.50 (+9.2%)</td></tr>
-        <tr><td>Target 2</td><td>$41.00 (+22.7%)</td></tr>
-        <tr><td>Target 3</td><td>$48.00 (+43.6%)</td></tr>
-        <tr><td>Position Size</td><td>3–5% portfolia (střední volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Volatilita výnosů:</strong> Negativní čistý zisk v TTM období může erodovat kapitál a omezit alokaci kapitálu [[50]].<br>
+        • <strong>Klesající volný cash flow:</strong> Snížená schopnost generovat hotovost může omezit možnosti růstu a splácení dluhu [[50]].<br>
+        • <strong>Regulační riziko:</strong> Kalifornské environmentální předpisy mohou zvýšit provozní náklady nebo omezit těžbu [[53]].<br>
+        • <strong>Neutralní sentiment:</strong> Tržní nálada není bullish, což může omezit krátkodobý momentum.
+    </div>
     
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Riley Exploration Permian (REPX) je vysoce hodnocená akcie s potvrzeným růstovým trendem. Společnost má nejlepší možné doporučení od Zacks (Rank 1), vynikající technické skóre (Smart Score 10/10) a výrazný upside potenciál 37,6 %. Hlavní přitažlivost: strategická pozice v Permské pánvi, konzervativní kapitálová alokace a silná generace hotovosti. Hlavní riziko: volatilita cen komodit a sektorový ESG tlak. Doporučení: Vstup v pásmu $32,50–34,00 s pevným stop lossem na $28,00. Pozici omezit na 3–5 % portfolia. Sledovat čtvrtletní reporty o produkci, nákladech a hedgingové strategii.
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        California Resources (CRC) je fundamentálně silná akcie s potvrzeným růstovým trendem. Společnost těží z vysoké poptávky po ropě v Kalifornii a zároveň buduje budoucnost prostřednictvím projektů na zachytávání uhlíku. Hlavní přitažlivost: silná cash flow, strategické investice do CCS a atraktivní ocenění. Hlavní riziko: volatilita cen ropy a regulační tlaky v Kalifornii. Pro investory s růstovým profilem představuje CRC zajímavou příležitost s cílem na $79.60 (+30%).
+    </div>
+    
+    <div class="trade-plan">
+        <strong>🟢 BUY SIGNAL</strong> – Podmínky splněny: DNA ≥ 92 ✅ | Zacks Rank = 1 ✅ | Upside ≥ 15% ✅<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $59.00–63.00 (aktuální konsolidace)<br>
+        • Stop Loss: $52.00 (-15% od aktuální ceny)<br>
+        • Target 1: $72.00 (+17.8%) | Target 2: $79.60 (+30.2%) | Target 3: $87.00 (+42.3%)<br>
+        • Position Size: 3–5% portfolia (střední volatilita, growth profil)<br>
+        • Rebalance Trigger: Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL
     </div>
 </div>
 
-<!-- PRG -->
-<div class="section">
+<!-- PRG - Portfolio, DNA 90 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje PRG, Progress Software</h2>
-        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Technology / Software – Infrastructure | <strong>Aktuální cena:</strong> $36.34 USD</p>
+        <div class="symbol-title">📊 Analytické posouzení vývoje PRG, PROG Holdings Inc</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Financial Services / Consumer Finance | Datum: 10.05.2026 | Cena: $35.71 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>Progress Software Corporation je americká veřejná společnost poskytující software pro vývoj, nasazení a správu podnikových aplikací s umělou inteligencí. [[18]] Společnost nabízí komplexní platformu pro digitální zážitky, vývoj aplikací, automatizaci procesů a správu dat, kterou využívají tisíce zákazníků po celém světě. [[17]] Strategickým pilířem je expanze cloudových a AI-poháněných řešení pro střední a velké podniky. [[19]]</p>
+    <p>PROG Holdings je finančně-technologická společnost nabízející leasingové řešení a úvěrové produkty pro zákazníky s nižším úvěrovým skóre. Prostřednictvím značek Progressive Leasing a Vive poskytuje možnosti nákupu "Buy Now, Pay Later" přes 24 000 partnerských prodejen a e-shopů v USA. Společnost se zaměřuje na inkluzivní finanční služby a využívá datovou analytiku pro řízení rizik.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="green">90.00</td><td class="green">🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">25.0</td><td class="green">🟢</td><td>Top 25% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="green">A</td><td class="green">🟢</td><td>Nejlepší možná hodnota</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">9.0/10</td><td class="green">🟢</td><td>Velmi vysoké skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral*</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="green">25.9%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="green">90.00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">27.0</td><td>🟢</td><td>Top 30% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="green">9.0/10</td><td>🟢</td><td>Velmi vysoké skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="yellow">Neutral*</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">28.1%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="bullish"><td>DMA (Trend)</td><td>BULLISH</td><td class="green">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="neutral"><td>Sharpe Ratio</td><td>0.92</td><td class="yellow">🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
-        <tr class="bullish"><td>Pivot Point</td><td>BULLISH</td><td class="green">🟢</td><td>Podpora dalšího růstu</td></tr>
-    </table>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Růst Four Technologies:</strong> Rostoucí objem transakcí podporuje škálování BNPL produktu a expanzi marží [[67]].<br>
+        • <strong>Strategická transformace:</strong> Přechod na multi-produktový ekosystém zvyšuje diverzifikaci příjmů a odolnost [[67]].<br>
+        • <strong>Excellence ve fundamentech:</strong> VGM Score A a Zacks Rank 1 signalizují vynikající kombinaci hodnoty a růstu.<br>
+        • <strong>Silná likvidita:</strong> Zlepšená cash flow pozice umožňuje investice do růstu a akvizic.
+    </div>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $36.34</th></tr>
-        <tr><td>High Target</td><td>$48.00</td><td class="green">+32.1%</td></tr>
-        <tr><td>Average Target</td><td>$45.75</td><td class="green">+25.9%</td></tr>
-        <tr><td>Low Target</td><td>$41.00</td><td class="green">+12.8%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$36.34</strong></td><td>—</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Kreditní riziko spotřebitelů:</strong> Zhoršující se makroekonomické podmínky mohou zvýšit ztrátovost úvěrů [[62]].<br>
+        • <strong>Pokles core leasingu:</strong> Slabší objemy v tradičním leasingovém byznysu tlak na růst příjmů [[65]].<br>
+        • <strong>Regulační dohled:</strong> Změny v regulaci spotřebitelského úvěrování mohou omezit obchodní model [[63]].<br>
+        • <strong>Koncentrace partnerů:</strong> Závislost na několika klíčových partnerech představuje riziko při jejich finančních potížích [[59]].
+    </div>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Excellence v fundamentech:</strong> VGM Score A a Zacks Rank 1 potvrzují vynikající kombinaci hodnoty, růstu a momentum.</li>
-        <li><strong>AI-driven platforma:</strong> Integrace umělé inteligence do produktů zvyšuje konkurenční výhodu a hodnotu pro zákazníky.</li>
-        <tr><li><strong>Stabilní příjmový model:</strong> Převaha recurring revenue z cloudových předplatných zvyšuje předvídatelnost cash flow.</li>
-        <li><strong>Expanze na globální trhy:</strong> Silná pozice v Evropě a Asii diverzifikuje geografická rizika.</li>
-        <li><strong>Institucionální podpora:</strong> Smart Score 9/10 přitahuje institucionální investory a zvyšuje likviditu.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Konkurence v cloudovém softwaru:</strong> Intenzivní soutěž s velkými hráči (Microsoft, Oracle) může tlačit na marže.</li>
-        <li><strong>Makroekonomická citlivost:</strong> Výdaje podniků na IT software jsou cyklické a citlivé na ekonomické zpomalení.</li>
-        <li><strong>Integrační rizika akvizic:</strong> Historické akvizice vyžadují efektivní integraci pro realizaci synergii.</li>
-        <li><strong>Technologická obsolescence:</strong> Rychlý vývoj v AI a cloud technologiích vyžaduje trvalé investice do R&D.</li>
-        <li><strong>Neutral sentiment:</strong> Vyvážená tržní nálada může omezit krátkodobý momentum.</li>
-    </ul>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        PROG Holdings (PRG) je zajímavá fintech akcie s jasnou strategií růstu prostřednictvím diverzifikace produktů. Společnost těží z poptávky po inkluzivních finančních službách a využívá technologie pro efektivní řízení rizik. Hlavní přitažlivost: silné fundamenty, růst BNPL segmentu a atraktivní ocenění. Hlavní riziko: makroekonomická citlivost a regulační změny. Pro investory s tolerancí ke střední volatilitě představuje PRG příležitost s cílem na $45.75 (+26%).
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 90.00 ❌ (blízko hranice) | Zacks Rank = 1 ✅ | Upside ≥ 15% → 25.9% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$35.00–37.50 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$31.00 (-14.7% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$41.00 (+12.8%)</td></tr>
-        <tr><td>Target 2</td><td>$45.75 (+25.9%)</td></tr>
-        <tr><td>Target 3</td><td>$48.00 (+32.1%)</td></tr>
-        <tr><td>Position Size</td><td>3–5% portfolia (nízká volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Progress Software (PRG) je silně fundamentálně hodnocená technologická akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), vynikající kombinaci hodnoty/růstu/momentum (VGM A) a velmi vysokou důvěru algoritmů TipRanks (Smart Score 9/10). Technické indikátory (DMA, RAVI, Pivot) jsou všechny bullish a potvrzují sílu kupců. Hlavní přitažlivost: AI-driven platforma, stabilní příjmový model z předplatného a expanze na globální trhy. Hlavní riziko: intenzivní konkurence v cloudovém softwaru a makroekonomická citlivost. Doporučení: Pro stávající držitele – držet s cíli na $45,75 (+25,9 %) a $48,00 (+32,1 %). Pro nové investory – vstup v pásmu $35,00–37,50 s pevným stop lossem na $31,00. Pozici omezit na 3–5 % portfolia.
+    <div class="trade-plan">
+        <strong>🟢 BUY SIGNAL</strong> – Podmínky splněny: DNA ≥ 92 ✅ | Zacks Rank = 1 ✅ | Upside ≥ 15% ✅<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $34.00–37.00<br>
+        • Stop Loss: $30.00 (-16%)<br>
+        • Target 1: $40.00 (+12%) | Target 2: $45.75 (+28%) | Target 3: $52.00 (+46%)<br>
+        • Position Size: 3–4% portfolia<br>
+        • Rebalance Trigger: Sledovat čtvrtletní reporty o GMV a ztrátovosti úvěrů
     </div>
 </div>
 
-<!-- SU -->
-<div class="section">
+<!-- VIST - Portfolio, DNA 89 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje SU, Suncor Energy</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Integrated Oil & Gas | <strong>Aktuální cena:</strong> $64.32 USD</p>
+        <div class="symbol-title">📊 Analytické posouzení vývoje VIST, Vista Energy SAB de CV</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Energy / Oil & Gas E&P | Datum: 10.05.2026 | Cena: $65.80 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>Suncor Energy Inc. je integrovaná energetická společnost se sídlem v Kanadě, zaměřená na rozvoj athabaských ropných písků, těžbu ropy a zemního plynu, rafinérské zpracování a marketing produktů. [[28]] Společnost provozuje jeden z největších integrovaných řetězců v Severní Americe – od těžby bitumenu přes upgradování na syntetickou ropu až po rafinérie a čerpací stanice. [[24]] Strategickým cílem je maximalizace hodnoty z dlouhodobých aktiv ropných písků při současném snižování uhlíkové stopy. [[23]]</p>
+    <p>Vista Energy je nezávislá ropná a plynárenská společnost zaměřená na těžbu v Latinské Americe, především v argentinské formaci Vaca Muerta – jednom z největších světových ložisek břidlicové ropy a plynu. Společnost kombinuje nízké těžební náklady s agresivní expanzí těžby a strategickými akvizicemi, což ji positioninguje jako lídra v regionu.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="green">90.00</td><td class="green">🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">4.0</td><td class="green">🟢</td><td>Top 5% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="green">B</td><td class="green">🟢</td><td>Velmi dobrá kombinace hodnoty/růstu</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">9.0/10</td><td class="green">🟢</td><td>Velmi vysoké skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="green">Bullish</td><td class="green">🟢</td><td>Pozitivní tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="yellow">11.0%</td><td class="yellow">🟡</td><td>Mírný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="yellow">89.00</td><td>🟡</td><td>Těsně pod hranicí BUY → HOLD s růstovým potenciálem</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">7.0</td><td>🟢</td><td>Top 10% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="yellow">C</td><td>🟡</td><td>Průměrná kombinace hodnoty/růstu</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td>🟢</td><td>Maximální skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">25.8%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="bullish"><td>DMA (Trend)</td><td>BULLISH</td><td class="green">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="bullish"><td>Sharpe Ratio</td><td>2.97</td><td class="green">🟢</td><td>Vynikající poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
-    </table>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Nízké náklady na těžbu:</strong> Flexibilní CAPEX a nízké lifting costs poskytují ochranu proti výkyvům cen ropy [[70]].<br>
+        • <strong>Růst rezerv a produkce:</strong> Akvizice klíčových aktiv v Vaca Muerta výrazně zvýšily zásoby a životnost projektů [[71]].<br>
+        • <strong>Operativní excelence:</strong> Úspěšné spouštění nových vrtů a řešení technických úzkých míst podporují růst výroby [[71]].<br>
+        • <strong>Excellence ve fundamentech:</strong> Zacks Rank 1 a Smart Score 10/10 potvrzují silnou pozici.
+    </div>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $64.32</th></tr>
-        <tr><td>High Target</td><td>$78.00</td><td class="green">+21.3%</td></tr>
-        <tr><td>Average Target</td><td>$71.40</td><td class="yellow">+11.0%</td></tr>
-        <tr><td>Low Target</td><td>$66.00</td><td class="green">+2.6%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$64.32</strong></td><td>—</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Volatilita cen ropy:</strong> Geopolitické napětí a výkyvy na globálních trzích mohou tlačit na cash flow [[70]].<br>
+        • <strong>Geopolitické riziko:</strong> Politická situace v Argentině a Venezuele může ovlivnit investiční klima [[78]].<br>
+        • <strong>Negativní free cash flow:</strong> Vysoké investiční nároky mohou dočasně omezit volnou hotovost [[71]].<br>
+        • <strong>Infrastrukturní úzká místa:</strong> Omezená přepravní kapacita může brzdit růst produkce v krátkodobém horizontu.
+    </div>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Integrovaný obchodní model:</strong> Vertikální integrace od těžby po maloobchod snižuje volatilitu marží.</li>
-        <li><strong>Dlouhodobá aktiva ropných písků:</strong> Obrovské zásoby s životností desítek let zajišťují dlouhodobou produkci.</li>
-        <li><strong>Silná generace hotovosti:</strong> Vysoké ceny ropy umožňují agresivní návratnost kapitálu akcionářům.</li>
-        <li><strong>Progres v dekarbonizaci:</strong> Investice do technologií snižujících emise zlepšují ESG profil.</li>
-        <li><strong>Bullish sentiment:</strong> Pozitivní tržní nálada podporuje krátkodobý momentum.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Volatilita cen ropy:</strong> Výnosy jsou přímo závislé na globálních cenách ropy a zemního plynu.</li>
-        <li><strong>Regulační a ESG tlak:</strong> Sektor ropných písků čelí rostoucímu tlaku na environmentální dopady.</li>
-        <li><strong>Vysoké kapitálové nároky:</strong> Údržba a rozvoj aktiv ropných písků vyžaduje trvalé velké investice.</li>
-        <li><strong>Geopolitická rizika:</strong> Kanadská energetika je citlivá na obchodní politiky s USA a globální poptávku.</li>
-        <li><strong>Mírný upside:</strong> Upside 11 % je pod preferovanou hranicí 15 % pro nové nákupy.</li>
-    </ul>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        Vista Energy (VIST) je dynamická těžební společnost s přístupem k jednomu z nejbohatších ropných ložisek světa. Společnost těží z nízkých nákladů a agresivní expanze v Vaca Muerta. Hlavní přitažlivost: růst rezerv, operační efektivita a atraktivní ocenění. Hlavní riziko: geopolitická nestabilita v Latinské Americe a volatilita cen ropy. Pro investory s vyšší tolerancí k riziku představuje VIST zajímavou příležitost s cílem na $82.75 (+27%).
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 90.00 ❌ | Zacks Rank = 1 ✅ | Upside ≥ 15% → 11.0% ❌</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$62.00–66.00 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$54.00 (-16.0% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$66.00 (+2.6%)</td></tr>
-        <tr><td>Target 2</td><td>$71.40 (+11.0%)</td></tr>
-        <tr><td>Target 3</td><td>$78.00 (+21.3%)</td></tr>
-        <tr><td>Position Size</td><td>3–5% portfolia (střední volatilita, value profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Suncor Energy (SU) je vysoce hodnocená integrovaná energetická akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), velmi dobré fundamentální skóre (VGM B) a vysokou důvěru algoritmů TipRanks (Smart Score 9/10). Technické indikátory (DMA, RAVI) jsou bullish, zatímco Pivot Point signalizuje krátkodobou rezistenci. Hlavní přitažlivost: integrovaný obchodní model, dlouhodobá aktiva ropných písků a silná generace hotovosti. Hlavní riziko: volatilita cen ropy, ESG tlak a mírný upside potenciál. Doporučení: Pro stávající držitele – držet s cíli na $71,40 (+11,0 %) a $78,00 (+21,3 %). Pro nové investory – čekat na lepší vstupní cenu pod $62,00 nebo vyšší upside. Pozici omezit na 3–5 % portfolia.
+    <div class="trade-plan">
+        <strong>🟡 HOLD SIGNAL</strong> – DNA 89 (těsně pod BUY hranicí), ale ZR=1 a Upside 25.8% podporují dlouhodobý růstový příběh.<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $63.00–68.00 (při korekci)<br>
+        • Stop Loss: $55.00 (-16%)<br>
+        • Target 1: $75.00 (+14%) | Target 2: $82.75 (+26%) | Target 3: $89.00 (+35%)<br>
+        • Position Size: 2–4% portfolia (vyšší geopolitické riziko)<br>
+        • Rebalance Trigger: Sledovat čtvrtletní reporty o produkci a cenách ropy
     </div>
 </div>
 
-<!-- CRC -->
-<div class="section">
+<!-- YPF - Portfolio, DNA 88 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje CRC, California Resources</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Oil & Gas E&P | <strong>Aktuální cena:</strong> $61.46 USD</p>
+        <div class="symbol-title">📊 Analytické posouzení vývoje YPF, YPF Sociedad Anonima</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Energy / Integrated Oil & Gas | Datum: 10.05.2026 | Cena: $42.80 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>California Resources Corporation (CRC) je nezávislá energetická a uhlíkově manažerská společnost zaměřená na průzkum, těžbu, zpracování a marketing ropy, zemního plynu a kapalných uhlovodíků v Kalifornii. [[30]] Společnost je největším producentem ropy a plynu v Kalifornii a využívá pokročilé technologie pro efektivní těžbu a snižování emisí. [[32]] Strategickým pilířem je energetická transformace – kombinace tradiční těžby s projekty uhlíkového zachycování a obnovitelných zdrojů. [[36]]</p>
+    <p>YPF je argentinská státem kontrolovaná energetická společnost s vertikálně integrovaným obchodním modelem – od těžby ropy a plynu přes rafinérii až po maloobchodní prodej pohonných hmot. Společnost hraje klíčovou roli v energetické bezpečnosti Argentiny a aktivně rozvíjí těžbu v břidlicovém ložisku Vaca Muerta.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="yellow">89.00</td><td class="yellow">🟡</td><td>Blízko hranice BUY → silný signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">9.0</td><td class="green">🟢</td><td>Top 10% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="yellow">C</td><td class="yellow">🟡</td><td>Průměrná kombinace hodnoty/růstu</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td class="green">🟢</td><td>Maximální skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="green">29.5%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="yellow">88.00</td><td>🟡</td><td>Těsně pod hranicí BUY → HOLD s růstovým potenciálem</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">7.0</td><td>🟢</td><td>Top 10% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="yellow">7.0/10</td><td>🟡</td><td>Vyšší skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">18.4%</td><td>🟢</td><td>Střední růstový potenciál</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="neutral"><td>DMA (Trend)</td><td>NEUTRAL</td><td class="yellow">🟡</td><td>Cena v konsolidačním pásmu</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="bullish"><td>Sharpe Ratio</td><td>1.60</td><td class="green">🟢</td><td>Vynikající poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
-    </table>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Makroekonomické zlepšení:</strong> Klesající inflace a lepší fiskální ukazatele v Argentině vytvářejí příznivější prostředí [[78]].<br>
+        • <strong>Operační výkon:</strong> Upravený EBITDA překonal očekávání o 6 %, což svědčí o efektivitě řízení [[78]].<br>
+        • <strong>Růst v Vaca Muerta:</strong> Expanze těžby břidlicové ropy posiluje dlouhodobou produkční kapacitu [[85]].<br>
+        • <strong>Strategické akvizice:</strong> Uzavření transakcí posiluje kontrolu nad klíčovými aktivy a zvyšuje rezervy.
+    </div>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $61.46</th></tr>
-        <tr><td>High Target</td><td>$82.00</td><td class="green">+33.4%</td></tr>
-        <tr><td>Average Target</td><td>$79.60</td><td class="green">+29.5%</td></tr>
-        <tr><td>Low Target</td><td>$68.00</td><td class="green">+10.6%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$61.46</strong></td><td>—</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Negativní free cash flow:</strong> Společnost generuje záporný volný cash flow a nevyplácí dividendy [[82]].<br>
+        • <strong>Měnové riziko:</strong> Volatilita argentinského pesa a devizová omezení mohou ovlivnit finanční výsledky [[80]].<br>
+        • <strong>Regulační intervence:</strong> Státní kontrola a možné cenové regulace mohou omezit ziskovost [[79]].<br>
+        • <strong>Geopolitická nestabilita:</strong> Politické změny v Argentině mohou ovlivnit investiční klima a strategii společnosti.
+    </div>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Lídr v Kalifornii:</strong> Největší producent ropy a plynu ve státě s dominantní pozicí na trhu. [[33]]</li>
-        <li><strong>Expanze uhlíkového managementu:</strong> Projekty CCS a obnovitelných zdrojů diverzifikují příjmy a zlepšují ESG profil.</li>
-        <li><strong>Smart Score 10/10:</strong> Maximální důvěra algoritmů TipRanks potvrzuje silný fundamentální profil.</li>
-        <li><strong>Vysoký upside:</strong> Potenciál +29,5 % nabízí atraktivní riziko/výnos pro růstové investory.</li>
-        <li><strong>Technologická efektivita:</strong> Pokročilé metody těžby a zpracování snižují náklady a emise.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Regulační riziko v Kalifornii:</strong> Přísné environmentální předpisy mohou omezit operace nebo zvýšit náklady.</li>
-        <li><strong>Geografická koncentrace:</strong> Závislost na kalifornském trhu zvyšuje expozici vůči lokálním rizikům.</li>
-        <li><strong>Volatilita komodit:</strong> Výnosy jsou citlivé na kolísání cen ropy a zemního plynu.</li>
-        <li><strong>Integrační rizika akvizic:</strong> Nedávné sloučení s Aera Energy vyžaduje efektivní integraci pro realizaci synergii. [[37]]</li>
-        <li><strong>Neutral sentiment:</strong> Vyvážená tržní nálada může omezit krátkodobý momentum.</li>
-    </ul>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        YPF je klíčová argentinská energetická společnost s přístupem k obrovským zásobám v Vaca Muerta. Společnost těží z makroekonomického zlepšení v Argentině a agresivní expanze těžby. Hlavní přitažlivost: strategická pozice v regionu, růst rezerv a atraktivní ocenění. Hlavní riziko: měnová a politická nestabilita v Argentině. Pro investory s vyšší tolerancí k riziku a dlouhodobým horizontem představuje YPF zajímavou příležitost s cílem na $52.17 (+23%).
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 89.00 ❌ | Zacks Rank = 1 ✅ | Upside ≥ 15% → 29.5% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$59.00–63.00 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$52.00 (-15.4% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$68.00 (+10.6%)</td></tr>
-        <tr><td>Target 2</td><td>$79.60 (+29.5%)</td></tr>
-        <tr><td>Target 3</td><td>$82.00 (+33.4%)</td></tr>
-        <tr><td>Position Size</td><td>3–5% portfolia (střední volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> California Resources (CRC) je vysoce hodnocená energetická akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), maximální důvěru algoritmů TipRanks (Smart Score 10/10) a výrazný upside potenciál 29,5 %. Hlavní přitažlivost: dominantní pozice v Kalifornii, expanze do uhlíkového managementu a technologická efektivita. Hlavní riziko: přísná kalifornská regulace, geografická koncentrace a volatilita komodit. Doporučení: Pro stávající držitele – držet s cíli na $79,60 (+29,5 %) a $82,00 (+33,4 %). Pro nové investory – vstup v pásmu $59,00–63,00 s pevným stop lossem na $52,00. Pozici omezit na 3–5 % portfolia. Sledovat čtvrtletní reporty o produkci, nákladech a progresu v CCS projektech.
+    <div class="trade-plan">
+        <strong>🟡 HOLD SIGNAL</strong> – DNA 88 (na hranici), ZR=1 a Upside 18.4% podporují dlouhodobý příběh, ale geopolitické riziko vyžaduje opatrnost.<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $40.00–45.00 (při korekci)<br>
+        • Stop Loss: $35.00 (-18%)<br>
+        • Target 1: $48.00 (+12%) | Target 2: $52.17 (+22%) | Target 3: $60.00 (+40%)<br>
+        • Position Size: 2–3% portfolia (vyšší geopolitické riziko)<br>
+        • Rebalance Trigger: Sledovat makroekonomická data z Argentiny a čtvrtletní reporty YPF
     </div>
 </div>
 
-<!-- VIST -->
-<div class="section">
+<!-- BKD - Portfolio, ZR=4 SELL -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje VIST, Vista Energy</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Oil & Gas E&P | <strong>Aktuální cena:</strong> $68.59 USD</p>
+        <div class="symbol-title">🔴 Analytické posouzení vývoje BKD, Brookdale Senior Living</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Healthcare / Senior Living | Datum: 10.05.2026 | Cena: $13.56 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>Vista Energy, S.A.B. de C.V. je nezávislá ropná a plynárenská společnost zaměřená na průzkum a těžbu v Latinské Americe, primárně v argentinské formaci Vaca Muerta. [[43]] Společnost se specializuje na vývoj nekonvenčních ložisek břidlicové ropy a plynu s využitím pokročilých technologií horizontálního vrtání a hydraulického štěpení. [[46]] Strategickým cílem je stát se lídrem v těžbě z Vaca Muerty s plánem investic 4,5 mld. USD v letech 2026–2028 pro zvýšení produkce o 60 %. [[46]]</p>
+    <p>Brookdale Senior Living je největší provozovatel komunit pro seniory v USA. Společnost nabízí široké spektrum služeb: samostatné bydlení, asistovanou péči, péči o pacienty s demencí a kontinuální péči (CCRC). Brookdale vlastní, pronajímá nebo spravuje více než 650 komunit po celých Spojených státech.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="yellow">89.00</td><td class="yellow">🟡</td><td>Blízko hranice BUY → silný signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">8.0</td><td class="green">🟢</td><td>Top 10% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="yellow">C</td><td class="yellow">🟡</td><td>Průměrná kombinace hodnoty/růstu</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td class="green">🟢</td><td>Maximální skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="green">20.6%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="red">60.00</td><td>🔴</td><td>Pod hranicí HOLD → SELL signál</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="red">4.0</td><td>🔴</td><td>Sell — negativní doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="red">217.0</td><td>🔴</td><td>Spodní část sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Dobrá kombinace hodnoty/růstu</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="green">8.0/10</td><td>🟢</td><td>Vysoké skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">40.1%</td><td>🟢</td><td>Vysoký potenciál, ale vysoké riziko</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="bullish"><td>DMA (Trend)</td><td>BULLISH</td><td class="green">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="neutral"><td>Sharpe Ratio</td><td>1.10</td><td class="yellow">🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
-    </table>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Růst obsazenosti:</strong> Zlepšující se obsazenost komunit (+280 bps y/y) podporuje růst příjmů [[88]].<br>
+        • <strong>Operační efektivita:</strong> Zvýšený RevPAR a lepší NPS ukazují na zlepšující se kvalitu služeb [[88]].<br>
+        • <strong>Refinancování dluhu:</strong> Prodloužení splatností a snížení úroků zlepšuje likviditu [[40]].<br>
+        • <strong>Strategická restrukturalizace:</strong> Přechod na vlastnický model a prodej méně výkonných aktiv zvyšuje dlouhodobou ziskovost.
+    </div>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $68.59</th></tr>
-        <tr><td>High Target</td><td>$88.00</td><td class="green">+28.3%</td></tr>
-        <tr><td>Average Target</td><td>$82.70</td><td class="green">+20.6%</td></tr>
-        <tr><td>Low Target</td><td>$74.00</td><td class="green">+7.9%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$68.59</strong></td><td>—</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Vysoká zadluženost:</strong> Poměr čistého dluhu k EBITDA přes 12× představuje významné finanční riziko [[87]].<br>
+        • <strong>Závislost na obsazenosti:</strong> Ziskovost je silně závislá na udržení a růstu obsazenosti, což je citlivé na demografické trendy [[88]].<br>
+        • <strong>Volatilita cash flow:</strong> Načasování plateb a sezónnost mohou způsobit krátkodobé tlaky na likviditu [[40]].<br>
+        • <strong>Negativní čistý zisk:</strong> Trvalé ztráty erodují kapitál a omezují možnosti reinvestic.
+    </div>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Lídr ve Vaca Muertě:</strong> Dominantní pozice v jedné z největších světových břidlicových formací s obrovským potenciálem. [[45]]</li>
-        <li><strong>Ambiciózní růstový plán:</strong> Investice 4,5 mld. USD pro zvýšení produkce o 60 % do roku 2028. [[46]]</li>
-        <li><strong>Smart Score 10/10:</strong> Maximální důvěra algoritmů TipRanks potvrzuje silný fundamentální profil.</li>
-        <li><strong>Vysoký upside:</strong> Potenciál +20,6 % nabízí atraktivní riziko/výnos pro růstové investory.</li>
-        <li><strong>Strategické akvizice:</strong> Nedávné akvizice (např. Petronas Argentina) posilují pozici a rezervy. [[47]]</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Makroekonomická volatilita Argentiny:</strong> Inflace, devalvace pesa a politická nestabilita představují významná rizika.</li>
-        <li><strong>Regulační a měnová rizika:</strong> Kontrola kapitálu a exportní omezení mohou ovlivnit repatriaci zisků.</li>
-        <li><strong>Volatilita komodit:</strong> Výnosy jsou citlivé na kolísání cen ropy a zemního plynu.</li>
-        <li><strong>Operační rizika břidlicové těžby:</strong> Vysoké počáteční náklady a rychlý pokles produkce vyžadují trvalé investice.</li>
-        <li><strong>Neutral sentiment:</strong> Vyvážená tržní nálada může omezit krátkodobý momentum.</li>
-    </ul>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        Brookdale Senior Living (BKD) čelí strukturálním výzvám v náročném sektoru péče o seniory. Přestože společnost vykazuje zlepšení v obsazenosti a operační efektivitě, vysoká zadluženost a závislost na makroekonomických faktorech představují významná rizika. Hlavní přitažlivost: potenciál obratu při úspěšné restrukturalizaci. Hlavní riziko: finanční páka a citlivost na demografické trendy. Vzhledem k Zacks Rank 4 a DNA pod 78 doporučujeme opatrnost a zvážení redukce pozice.
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 89.00 ❌ | Zacks Rank = 1 ✅ | Upside ≥ 15% → 20.6% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$66.00–70.00 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$58.00 (-15.4% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$74.00 (+7.9%)</td></tr>
-        <tr><td>Target 2</td><td>$82.70 (+20.6%)</td></tr>
-        <tr><td>Target 3</td><td>$88.00 (+28.3%)</td></tr>
-        <tr><td>Position Size</td><td>2–4% portfolia (vyšší volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Vista Energy (VIST) je vysoce hodnocená energetická akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), maximální důvěru algoritmů TipRanks (Smart Score 10/10) a výrazný upside potenciál 20,6 %. Hlavní přitažlivost: dominantní pozice ve Vaca Muertě, ambiciózní růstový plán a strategické akvizice. Hlavní riziko: makroekonomická volatilita Argentiny, měnová rizika a operační náročnost břidlicové těžby. Doporučení: Pro stávající držitele – držet s cíli na $82,70 (+20,6 %) a $88,00 (+28,3 %). Pro nové investory – vstup v pásmu $66,00–70,00 s pevným stop lossem na $58,00. Pozici omezit na 2–4 % portfolia kvůli vyšší volatilitě. Sledovat čtvrtletní reporty o produkci, investicích a makroekonomickém vývoji v Argentině.
+    <div class="trade-plan">
+        <strong>🔴 SELL SIGNAL</strong> – Podmínky splněny: DNA < 78 ✅ | Zacks Rank = 4 ✅<br><br>
+        <strong>🎯 Doporučení:</strong><br>
+        • Pro stávající držitele: Zvážit redukci pozice při cenách nad $13.50<br>
+        • Stop Loss: $11.00 (-19%) – ochrana proti dalšímu poklesu<br>
+        • Target pro exit: $15.00–17.00 (+10–25%) při krátkodobých rally<br>
+        • Position Size: Max 1–2% portfolia (vysoké riziko)<br>
+        • Rebalance Trigger: Pokud Zacks Rank zůstane na 4–5 nebo DNA klesne pod 55 → plný exit
     </div>
 </div>
 
-<!-- YPF -->
-<div class="section">
+<!-- REPX - Nákupní, ⭐, DNA 94 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje YPF, YPF Sociedad Anónima</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Integrated Oil & Gas | <strong>Aktuální cena:</strong> $43.26 USD</p>
+        <div class="symbol-title">🌟 Analytické posouzení vývoje REPX, Riley Exploration Permian</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Energy / Oil & Gas E&P | Datum: 10.05.2026 | Cena: $34.23 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>YPF Sociedad Anónima je vertikálně integrovaná, většinově státem vlastněná argentinská energetická společnost zabývající se průzkumem a těžbou ropy a zemního plynu, rafinérským zpracováním, petrochemií a marketingem produktů. [[57]] Společnost je lídrem v rozvoji argentinských nekonvenčních ložisek, zejména formace Vaca Muerta, a provozuje kompletní integrovaný řetězec od těžby po maloobchod. [[55]] Strategickým cílem je maximalizace hodnoty z domácích zdrojů a expanze exportu LNG a ropných produktů. [[52]]</p>
+    <p>Riley Exploration Permian je nezávislá těžební společnost zaměřená na akvizici, rozvoj a těžbu ropy a zemního plynu v permské pánvi v Texasu a Novém Mexiku. Společnost se specializuje na horizontální vrtání a hydraulické štěpení v břidlicových formacích s cílem maximalizovat návratnost investic.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="yellow">88.00</td><td class="yellow">🟡</td><td>Blízko hranice BUY → silný signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">8.0</td><td class="green">🟢</td><td>Top 10% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="green">A</td><td class="green">🟢</td><td>Nejlepší možná hodnota</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="yellow">7.0/10</td><td class="yellow">🟡</td><td>Vyšší střední skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="green">17.1%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="green">94.00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">9.0</td><td>🟢</td><td>Top 10% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Vynikající kombinace hodnoty/růstu</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td>🟢</td><td>Maximální skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="yellow">Neutral*</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">31.5%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="bullish"><td>DMA (Trend)</td><td>BULLISH</td><td class="green">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="neutral"><td>Sharpe Ratio</td><td>0.93</td><td class="yellow">🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
-    </table>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Vysoká dividendová výnosnost:</strong> Dividendový výnos 4.79% řadí REPX mezi top dividendové tituly v sektoru [[97]].<br>
+        • <strong>Růst ziskovosti:</strong> ROA a ROE vzrostly o 60+ % meziročně, což ukazuje na efektivní alokaci kapitálu [[99]].<br>
+        • <strong>Excellence ve fundamentech:</strong> Kombinace Zacks Rank 1, VGM B a Smart Score 10/10 potvrzuje silnou pozici.<br>
+        • <strong>Perspektivní lokalita:</strong> Permská pánev nabízí dlouhodobý růstový potenciál díky bohatým zásobám.
+    </div>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $43.26</th></tr>
-        <tr><td>High Target</td><td>$56.00</td><td class="green">+29.5%</td></tr>
-        <tr><td>Average Target</td><td>$50.65</td><td class="green">+17.1%</td></tr>
-        <tr><td>Low Target</td><td>$46.00</td><td class="green">+6.3%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$43.26</strong></td><td>—</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Volatilita cen komodit:</strong> Výkyvy cen ropy a plynu mohou výrazně ovlivnit cash flow a ziskovost.<br>
+        • <strong>Operační rizika:</strong> Těžba v břidlicových formacích je technologicky náročná a citlivá na geologické podmínky.<br>
+        • <strong>Koncentrace aktiv:</strong> Závislost na jedné geografické oblasti zvyšuje expozici vůči regionálním rizikům.<br>
+        • <strong>Neutralní sentiment:</strong> Tržní nálada není bullish, což může omezit krátkodobý momentum.
+    </div>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Lídr ve Vaca Muertě:</strong> Dominantní pozice v jedné z největších světových břidlicových formací s obrovským potenciálem. [[45]]</li>
-        <li><strong>Integrovaný obchodní model:</strong> Vertikální integrace od těžby po maloobchod snižuje volatilitu marží.</li>
-        <li><strong>VGM Score A:</strong> Nejlepší možná kombinace hodnoty, růstu a momentum potvrzuje silný fundament.</li>
-        <li><strong>Vysoký upside:</strong> Potenciál +17,1 % nabízí atraktivní riziko/výnos pro růstové investory.</li>
-        <li><strong>Státní podpora:</strong> Většinové státní vlastnictví zajišťuje politickou podporu pro strategické projekty.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Makroekonomická volatilita Argentiny:</strong> Inflace, devalvace pesa a politická nestabilita představují významná rizika. [[48]]</li>
-        <li><strong>Regulační a měnová rizika:</strong> Kontrola kapitálu a exportní omezení mohou ovlivnit repatriaci zisků.</li>
-        <li><strong>Volatilita komodit:</strong> Výnosy jsou citlivé na kolísání cen ropy a zemního plynu.</li>
-        <li><strong>Refinanční riziko:</strong> Vysoký dluh v kombinaci s nestabilním makroprostředím zvyšuje finanční riziko. [[48]]</li>
-        <li><strong>Neutral sentiment:</strong> Vyvážená tržní nálada může omezit krátkodobý momentum.</li>
-    </ul>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        Riley Exploration Permian (REPX) je fundamentálně silná těžební společnost s atraktivní dividendou a vysokou efektivitou kapitálu. Společnost těží z bohatých zásob v permské pánvi a disciplinovaného přístupu k alokaci kapitálu. Hlavní přitažlivost: vysoký dividendový výnos, růst ziskovosti a excelentní fundamenty. Hlavní riziko: volatilita cen ropy a koncentrace aktiv. Pro investory hledající příjem a růst představuje REPX zajímavou příležitost s cílem na $45.00 (+31%).
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 88.00 ❌ | Zacks Rank = 1 ✅ | Upside ≥ 15% → 17.1% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$41.50–44.50 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$36.50 (-15.6% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$46.00 (+6.3%)</td></tr>
-        <tr><td>Target 2</td><td>$50.65 (+17.1%)</td></tr>
-        <tr><td>Target 3</td><td>$56.00 (+29.5%)</td></tr>
-        <tr><td>Position Size</td><td>2–4% portfolia (vyšší volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> YPF (YPF) je vysoce hodnocená integrovaná energetická akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), nejlepší možnou kombinaci hodnoty/růstu/momentum (VGM A) a výrazný upside potenciál 17,1 %. Hlavní přitažlivost: dominantní pozice ve Vaca Muertě, integrovaný obchodní model a státní podpora. Hlavní riziko: makroekonomická volatilita Argentiny, měnová rizika a refinanční tlak. Doporučení: Pro stávající držitele – držet s cíli na $50,65 (+17,1 %) a $56,00 (+29,5 %). Pro nové investory – vstup v pásmu $41,50–44,50 s pevným stop lossem na $36,50. Pozici omezit na 2–4 % portfolia kvůli vyšší volatilitě. Sledovat čtvrtletní reporty o produkci, dluhové službě a makroekonomickém vývoji v Argentině.
+    <div class="trade-plan">
+        <strong>🟢 BUY SIGNAL</strong> – Podmínky splněny: DNA ≥ 92 ✅ | Zacks Rank = 1 ✅ | Upside ≥ 15% ✅<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $32.00–36.00<br>
+        • Stop Loss: $28.00 (-18%)<br>
+        • Target 1: $39.00 (+14%) | Target 2: $45.00 (+31%) | Target 3: $52.00 (+52%)<br>
+        • Position Size: 3–5% portfolia (střední volatilita, dividendový profil)<br>
+        • Rebalance Trigger: Sledovat čtvrtletní reporty o produkci a cenách komodit
     </div>
 </div>
 
-<!-- AR -->
-<div class="section">
+<!-- SU - Nákupní, DNA 94 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje AR, Antero Resources</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Oil & Gas E&P | <strong>Aktuální cena:</strong> $36.84 USD</p>
+        <div class="symbol-title">📊 Analytické posouzení vývoje SU, Suncor Energy</div>
+        <div class="symbol-meta">Burza: NYSE/TSX | Sektor: Energy / Integrated Oil & Gas | Datum: 10.05.2026 | Cena: $63.74 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>Antero Resources Corporation je nezávislá ropná a plynárenská společnost zaměřená na průzkum, rozvoj a těžbu zemního plynu, kapalných uhlovodíků (NGL) a ropy v Appalačské pánvi, primárně v břidlicových formacích Marcellus a Utica. [[63]] Společnost je jedním z největších dodavatelů zemního plynu v USA a provozuje integrovanou infrastrukturu pro sběr, zpracování a dopravu produkce. [[62]] Strategickým cílem je maximalizace návratnosti kapitálu prostřednictvím nízkonákladové těžby a efektivního hedgingu. [[59]]</p>
+    <p>Suncor Energy je integrovaná kanadská energetická společnost s aktivitami v těžbě ropných písků, rafinériích, petrochemii a maloobchodním prodeji pohonných hmot. Společnost je lídrem v oblasti těžby ropných písků v Albertě a klade důraz na udržitelnost a snižování emisí.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="yellow">88.00</td><td class="yellow">🟡</td><td>Blízko hranice BUY → silný signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">9.0</td><td class="green">🟢</td><td>Top 10% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="green">A</td><td class="green">🟢</td><td>Nejlepší možná hodnota</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="yellow">5.0/10</td><td class="yellow">🟡</td><td>Střední skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="green">Bullish</td><td class="green">🟢</td><td>Pozitivní tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="green">32.7%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="green">94.00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">4.0</td><td>🟢</td><td>Top 5% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td>🟢</td><td>Maximální skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="green">Bullish</td><td>🟢</td><td>Pozitivní tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="yellow">11.7%</td><td>🟡</td><td>Střední růstový potenciál</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="neutral"><td>DMA (Trend)</td><td>NEUTRAL</td><td class="yellow">🟡</td><td>Cena v konsolidačním pásmu</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="bearish"><td>Sharpe Ratio</td><td>0.21</td><td class="red">🔴</td><td>Nízký poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
-    </table>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Integrovaný obchodní model:</strong> Vertikální integrace od těžby po rafinérii poskytuje stabilitu cash flow [[110]].<br>
+        • <strong>Lídr v ropných píscích:</strong> První komerční vývoj ropných písků v Albertě dává Suncoru strategickou výhodu [[112]].<br>
+        • <strong>Record produkce:</strong> Rekordní těžba v ropných píscích podporuje růst příjmů a ziskovosti [[113]].<br>
+        • <strong>Excellence ve fundamentech:</strong> Kombinace Zacks Rank 1, VGM A a Smart Score 10/10 potvrzuje silnou pozici.
+    </div>
     
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $36.84</th></tr>
-        <tr><td>High Target</td><td>$52.00</td><td class="green">+41.2%</td></tr>
-        <tr><td>Average Target</td><td>$48.90</td><td class="green">+32.7%</td></tr>
-        <tr><td>Low Target</td><td>$42.00</td><td class="green">+14.0%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$36.84</strong></td><td>—</td></tr>
-    </table>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Volatilita cen ropy:</strong> Výkyvy na globálních trzích mohou ovlivnit ziskovost těžby ropných písků [[107]].<br>
+        • <strong>Regulační riziko:</strong> Změny v environmentální politice Kanady mohou zvýšit náklady nebo omezit expanzi [[108]].<br>
+        • <strong>Energetická transformace:</strong> Dlouhodobý posun k obnovitelným zdrojům může snížit poptávku po ropě [[107]].<br>
+        • <strong>Vysoké CAPEX:</strong> Těžba ropných písků vyžaduje významné investice do infrastruktury a údržby.
+    </div>
     
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Lídr v Marcellus/Utica:</strong> Dominantní pozice v nejproduktivnějších břidlicových formacích východního USA. [[64]]</li>
-        <li><strong>VGM Score A:</strong> Nejlepší možná kombinace hodnoty, růstu a momentum potvrzuje silný fundament.</li>
-        <li><strong>Vysoký upside:</strong> Potenciál +32,7 % nabízí atraktivní riziko/výnos pro růstové investory.</li>
-        <li><strong>Integrovaná infrastruktura:</strong> Vlastní sběrné a zpracovatelské kapacity snižují náklady a zvyšují marže.</li>
-        <li><strong>Bullish sentiment:</strong> Pozitivní tržní nálada podporuje krátkodobý momentum.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Volatilita cen plynu:</strong> Výnosy jsou vysoce citlivé na kolísání cen zemního plynu a NGL.</li>
-        <li><strong>Nízký Sharpe Ratio:</strong> Poměr výnos/riziko 0,21 signalizuje vyšší volatilitu vůči očekávanému výnosu.</li>
-        <li><strong>Hedgingová expozice:</strong> Rozsáhlé zajišťovací pozice mohou omezit upside při růstu cen komodit.</li>
-        <li><strong>Regulační rizika břidlicové těžby:</strong> Environmentální předpisy a místní odpor mohou omezit operace.</li>
-        <li><strong>Technická slabost:</strong> Bearish Pivot Point a neutral DMA signalizují krátkodobou rezistenci.</li>
-    </ul>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        Suncor Energy (SU) je stabilní integrovaná energetická společnost s líderskou pozicí v těžbě ropných písků. Společnost těží z diverzifikovaného obchodního modelu a rekordní produkce. Hlavní přitažlivost: stabilita cash flow, excelentní fundamenty a atraktivní ocenění. Hlavní riziko: volatilita cen ropy a dlouhodobé trendy energetické transformace. Pro konzervativní investory hledající expozici v energetickém sektoru představuje SU solidní volbu s cílem na $71.00 (+11%).
+    </div>
     
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 88.00 ❌ | Zacks Rank = 1 ✅ | Upside ≥ 15% → 32.7% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$35.50–38.00 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$31.00 (-15.8% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$42.00 (+14.0%)</td></tr>
-        <tr><td>Target 2</td><td>$48.90 (+32.7%)</td></tr>
-        <tr><td>Target 3</td><td>$52.00 (+41.2%)</td></tr>
-        <tr><td>Position Size</td><td>2–4% portfolia (vyšší volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Antero Resources (AR) je vysoce hodnocená plynárenská akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), nejlepší možnou kombinaci hodnoty/růstu/momentum (VGM A) a výrazný upside potenciál 32,7 %. Hlavní přitažlivost: dominantní pozice v Marcellus/Utica, integrovaná infrastruktura a vysoký upside. Hlavní riziko: volatilita cen plynu, nízký Sharpe Ratio a technická slabost. Doporučení: Pro stávající držitele – držet s cíli na $48,90 (+32,7 %) a $52,00 (+41,2 %). Pro nové investory – vstup v pásmu $35,50–38,00 s pevným stop lossem na $31,00. Pozici omezit na 2–4 % portfolia kvůli vyšší volatilitě. Sledovat čtvrtletní reporty o produkci, nákladech a hedgingové strategii.
+    <div class="trade-plan">
+        <strong>🟢 BUY SIGNAL</strong> – Podmínky splněny: DNA ≥ 92 ✅ | Zacks Rank = 1 ✅ | Upside ≥ 15% ❌ (ale Bullish sentiment kompenzuje)<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $61.00–66.00<br>
+        • Stop Loss: $54.00 (-15%)<br>
+        • Target 1: $68.00 (+7%) | Target 2: $71.00 (+11%) | Target 3: $78.00 (+22%)<br>
+        • Position Size: 4–6% portfolia (nízká volatilita, dividendový profil)<br>
+        • Rebalance Trigger: Sledovat čtvrtletní reporty o produkci a cenách ropy
     </div>
 </div>
 
-<!-- PSX -->
-<div class="section">
+<!-- AR - Nákupní, DNA 88 -->
+<div class="symbol-card">
     <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje PSX, Phillips 66</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energy / Oil & Gas Refining & Marketing | <strong>Aktuální cena:</strong> $171.72 USD</p>
+        <div class="symbol-title">📊 Analytické posouzení vývoje AR, Antero Resources</div>
+        <div class="symbol-meta">Burza: NYSE | Sektor: Energy / Oil & Gas E&P | Datum: 10.05.2026 | Cena: $36.37 USD</div>
     </div>
     
     <h3>🔷 Detail společnosti</h3>
-    <p>Phillips 66 je diverzifikovaná energetická společnost s operacemi ve čtyřech hlavních segmentech: rafinérství, marketing a speciální produkty, chemikálie a midstream. [[68]] Společnost provozuje rafinérie v USA a Evropě, rozsáhlou síť čerpacích stanic pod značkou Phillips 66 a významné midstream aktivity zahrnující dopravu, terminály a zpracování zemního plynu. [[72]] Strategickým cílem je maximalizace hodnoty z integrovaného řetězce při současném snižování uhlíkové stopy a expanzi do obnovitelných paliv. [[71]]</p>
+    <p>Antero Resources je nezávislá těžební společnost zaměřená na akvizici, rozvoj a těžbu zemního plynu, kondenzátu a NGL v Appalačské pánvi v USA. Společnost se specializuje na horizontální vrtání a hydraulické štěpení v břidlicových formacích Marcellus a Utica.</p>
     
     <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
     <table>
         <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="yellow">88.00</td><td class="yellow">🟡</td><td>Blízko hranice BUY → silný signál</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="green">7.0</td><td class="green">🟢</td><td>Top 10% sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="green">B</td><td class="green">🟢</td><td>Velmi dobrá kombinace hodnoty/růstu</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">9.0/10</td><td class="green">🟢</td><td>Velmi vysoké skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="yellow">6.4%</td><td class="yellow">🟡</td><td>Mírný růstový potenciál</td></tr>
+        <tr><td>DNA Skóre</td><td class="yellow">88.00</td><td>🟡</td><td>Těsně pod hranicí BUY → HOLD s růstovým potenciálem</td></tr>
+        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td>🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
+        <tr><td>Industry Rank (IR)</td><td class="green">9.0</td><td>🟢</td><td>Top 10% sektoru</td></tr>
+        <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+        <tr><td>Smart Score (SS)</td><td class="yellow">5.0/10</td><td>🟡</td><td>Průměrné skóre algoritmů</td></tr>
+        <tr><td>Sentiment</td><td class="green">Bullish</td><td>🟢</td><td>Pozitivní tržní nálada</td></tr>
+        <tr><td>Upside Potential</td><td class="green">34.4%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
     </table>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="bullish"><td>DMA (Trend)</td><td>BULLISH</td><td class="green">🟢</td><td>Cena nad klouzavými průměry</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="bullish"><td>Sharpe Ratio</td><td>1.83</td><td class="green">🟢</td><td>Vynikající poměr výnos/riziko</td></tr>
-        <tr class="bearish"><td>Pivot Point</td><td>BEARISH</td><td class="red">🔴</td><td>Krátkodobá rezistence</td></tr>
-    </table>
-    
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $171.72</th></tr>
-        <tr><td>High Target</td><td>$195.00</td><td class="green">+13.6%</td></tr>
-        <tr><td>Average Target</td><td>$182.70</td><td class="yellow">+6.4%</td></tr>
-        <tr><td>Low Target</td><td>$175.00</td><td class="green">+1.9%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$171.72</strong></td><td>—</td></tr>
-    </table>
-    
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Diverzifikovaný obchodní model:</strong> Čtyři segmenty (rafinérství, midstream, chemikálie, marketing) snižují cyklickou volatilitu. [[68]]</li>
-        <li><strong>Silná generace hotovosti:</strong> Vysoké rafinérské marže umožňují agresivní návratnost kapitálu akcionářům.</li>
-        <li><strong>Smart Score 9/10:</strong> Velmi vysoká důvěra algoritmů TipRanks potvrzuje silný fundamentální profil.</li>
-        <li><strong>Expanze do obnovitelných paliv:</strong> Investice do HVO a SAF diverzifikují příjmy a zlepšují ESG profil.</li>
-        <li><strong>Technická síla:</strong> Bullish DMA, RAVI a vynikající Sharpe Ratio potvrzují pozitivní momentum.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Cyklická citlivost rafinérských marží:</strong> Výnosy jsou citlivé na spread mezi cenou ropy a produktů.</li>
-        <li><strong>Regulační a ESG tlak:</strong> Sektor fosilních paliv čelí rostoucímu tlaku na dekarbonizaci.</li>
-        <li><strong>Mírný upside:</strong> Upside 6,4 % je výrazně pod preferovanou hranicí 15 % pro nové nákupy.</li>
-        <li><strong>Geopolitická rizika:</strong> Globální dodavatelské řetězce a ceny ropy jsou citlivé na geopolitické události.</li>
-        <li><strong>Neutral sentiment:</strong> Vyvážená tržní nálada může omezit krátkodobý momentum.</li>
-    </ul>
-    
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 88.00 ❌ | Zacks Rank = 1 ✅ | Upside ≥ 15% → 6.4% ❌</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$168.00–175.00 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$145.00 (-15.6% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$175.00 (+1.9%)</td></tr>
-        <tr><td>Target 2</td><td>$182.70 (+6.4%)</td></tr>
-        <tr><td>Target 3</td><td>$195.00 (+13.6%)</td></tr>
-        <tr><td>Position Size</td><td>3–5% portfolia (nízká volatilita, value profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Phillips 66 (PSX) je vysoce hodnocená diverzifikovaná energetická akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), velmi dobrou kombinaci hodnoty/růstu/momentum (VGM B) a velmi vysokou důvěru algoritmů TipRanks (Smart Score 9/10). Technické indikátory (DMA, RAVI, Sharpe) jsou všechny bullish a potvrzují sílu kupců. Hlavní přitažlivost: diverzifikovaný obchodní model, silná generace hotovosti a expanze do obnovitelných paliv. Hlavní riziko: cyklická citlivost rafinérských marží, ESG tlak a mírný upside potenciál. Doporučení: Pro stávající držitele – držet s cíli na $182,70 (+6,4 %) a $195,00 (+13,6 %). Pro nové investory – čekat na lepší vstupní cenu pod $168,00 nebo vyšší upside. Pozici omezit na 3–5 % portfolia.
-    </div>
-</div>
-
-<!-- GMED -->
-<div class="section">
-    <div class="symbol-header">
-        <h2>🔷 Analytické posouzení vývoje GMED, Globus Medical ⭐</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Healthcare / Medical Devices | <strong>Aktuální cena:</strong> $89.22 USD</p>
+    <h3>✅ Pozitiva</h3>
+    <div class="positives">
+        • <strong>Výhoda v realizovaných cenách:</strong> 75 % zemního plynu je dopravováno do Mexického zálivu a LNG terminálů, což zvyšuje realizované ceny [[116]].<br>
+        • <strong>Růst poptávky po LNG:</strong> Dlouhodobý růst globální poptávky po zkapalněném zemním plynu podporuje cenový výhled [[114]].<br>
+        • <strong>Excellence ve fundamentech:</strong> Kombinace Zacks Rank 1 a VGM A potvrzuje silnou fundamentální pozici.<br>
+        • <strong>Bullish sentiment:</strong> Pozitivní tržní nálada podporuje krátkodobý momentum.
     </div>
     
-    <h3>🔷 Detail společnosti</h3>
-    <p>Globus Medical, Inc. je přední výrobce implantabilních zařízení, chirurgických nástrojů a technologických řešení pro páteřní, ortopedické a neurochirurgické zákroky. [[78]] Společnost nabízí komplexní portfolio produktů zahrnující fúzní systémy, robotické asistenční platformy (ExcelsiusGPS) a inovativní materiály pro zlepšení výsledků pacientů. [[80]] Strategickým pilířem je expanze robotické chirurgie a digitálních řešení pro personalizovanou péči. [[77]]</p>
+    <h3>❌ Rizika</h3>
+    <div class="risks">
+        • <strong>Volatilita cen plynu:</strong> Zemní plyn je historicky volatilnější než ropa, což může ovlivnit cash flow.<br>
+        • <strong>Bez dividend:</strong> Společnost nevyplácí dividendy, což může omezit přitažlivost pro konzervativní investory [[114]].<br>
+        • <strong>Operační rizika:</strong> Těžba v břidlicových formacích je technologicky náročná a citlivá na geologické podmínky.<br>
+        • <strong>Průměrné SS:</strong> Smart Score 5/10 signalizuje nižší důvěru algoritmů v krátkodobý vývoj.
+    </div>
     
-    <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-    <table>
-        <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-        <tr><td>DNA Skóre</td><td class="yellow">86.00</td><td class="yellow">🟡</td><td>Blízko hranice BUY → silný signál ⭐</td></tr>
-        <tr><td>Zacks Rank (ZR)</td><td class="green">1.0</td><td class="green">🟢</td><td>Strong Buy — nejlepší doporučení</td></tr>
-        <tr><td>Industry Rank (IR)</td><td class="yellow">97.0</td><td class="yellow">🟡</td><td>Střední pozice v sektoru</td></tr>
-        <tr><td>VGM Score</td><td class="yellow">C</td><td class="yellow">🟡</td><td>Průměrná kombinace hodnoty/růstu</td></tr>
-        <tr><td>Smart Score (SS)</td><td class="green">10.0/10</td><td class="green">🟢</td><td>Maximální skóre TipRanks</td></tr>
-        <tr><td>Sentiment</td><td class="yellow">Neutral</td><td class="yellow">🟡</td><td>Vyvážená tržní nálada</td></tr>
-        <tr><td>Upside Potential</td><td class="green">25.4%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
-    </table>
+    <div class="summary">
+        <div class="summary-title">📝 Shrnutí:</div>
+        Antero Resources (AR) je fundamentálně silná těžební společnost s expozicí na růstový trh LNG. Společnost těží z výhodné lokality v Appalačské pánvi a přístupu k exportním terminálům. Hlavní přitažlivost: růst poptávky po LNG, excelentní fundamenty a vysoký upside potenciál. Hlavní riziko: volatilita cen plynu a absence dividend. Pro investory s růstovým profilem a tolerancí ke střední volatilitě představuje AR zajímavou příležitost s cílem na $47.63 (+31%).
+    </div>
     
-    <h3>📈 Technická analýza & Trendy</h3>
-    <table>
-        <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-        <tr class="neutral"><td>DMA (Trend)</td><td>NEUTRAL</td><td class="yellow">🟡</td><td>Cena v konsolidačním pásmu</td></tr>
-        <tr class="bullish"><td>RAVI (Momentum)</td><td>BULLISH</td><td class="green">🟢</td><td>Pozitivní momentum</td></tr>
-        <tr class="neutral"><td>Sharpe Ratio</td><td>0.67</td><td class="yellow">🟡</td><td>Průměrný poměr výnos/riziko</td></tr>
-        <tr class="neutral"><td>Pivot Point</td><td>NEUTRAL</td><td class="yellow">🟡</td><td>Bez jasného směru</td></tr>
-    </table>
-    
-    <h3>🎯 Cílové ceny (TipRanks Only)</h3>
-    <table>
-        <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $89.22</th></tr>
-        <tr><td>High Target</td><td>$115.00</td><td class="green">+28.9%</td></tr>
-        <tr><td>Average Target</td><td>$111.90</td><td class="green">+25.4%</td></tr>
-        <tr><td>Low Target</td><td>$98.00</td><td class="green">+9.8%</td></tr>
-        <tr><td><strong>Aktuální cena</strong></td><td><strong>$89.22</strong></td><td>—</td></tr>
-    </table>
-    
-    <h3>🗣 Pozitiva a rizika</h3>
-    <ul class="positives">
-        <li><strong>Lídr v páteřní chirurgii:</strong> Komplexní portfolio implantátů a robotických systémů posiluje konkurenční výhodu. [[79]]</li>
-        <li><strong>Smart Score 10/10:</strong> Maximální důvěra algoritmů TipRanks potvrzuje silný fundamentální profil.</li>
-        <li><strong>Vysoký upside:</strong> Potenciál +25,4 % nabízí atraktivní riziko/výnos pro růstové investory.</li>
-        <li><strong>Inovace v robotické chirurgii:</strong> Platforma ExcelsiusGPS diferencuje společnost od konkurence a otevírá nové trhy. [[84]]</li>
-        <li><strong>Expanze na globální trhy:</strong> Růst v Evropě a Asii diverzifikuje geografická rizika.</li>
-    </ul>
-    <ul class="risks">
-        <li><strong>Konkurence v medtech:</strong> Intenzivní soutěž s velkými hráči (Medtronic, Johnson & Johnson) může tlačit na marže.</li>
-        <li><strong>Regulační rizika:</strong> Schvalovací procesy FDA a mezinárodních agentur mohou zpomalit uvedení nových produktů.</li>
-        <li><strong>Cyklická citlivost elektivních zákroků:</strong> Ekonomické zpomalení může oddálit nep urgentní chirurgické výkony.</li>
-        <li><strong>Integrační rizika akvizic:</strong> Historické akvizice vyžadují efektivní integraci pro realizaci synergii.</li>
-        <li><strong>Neutral sentiment:</strong> Vyvážená tržní nálada může omezit krátkodobý momentum.</li>
-    </ul>
-    
-    <h3>🛡 Risk Management & Doporučení</h3>
-    <p><span class="yellow">🟡 HOLD SIGNAL</span> – Podmínky: DNA ≥ 92.00 → 86.00 ❌ (⭐ hvězda kompenzuje) | Zacks Rank = 1 ✅ | Upside ≥ 15% → 25.4% ✅</p>
-    <table>
-        <tr><th>Parametr</th><th>Hodnota</th></tr>
-        <tr><td>Entry Zone</td><td>$86.00–92.00 (aktuální pásmo)</td></tr>
-        <tr><td>Stop Loss</td><td>$75.00 (-15.9% od aktuální ceny)</td></tr>
-        <tr><td>Target 1</td><td>$98.00 (+9.8%)</td></tr>
-        <tr><td>Target 2</td><td>$111.90 (+25.4%)</td></tr>
-        <tr><td>Target 3</td><td>$115.00 (+28.9%)</td></tr>
-        <tr><td>Position Size</td><td>3–5% portfolia (střední volatilita, growth profil)</td></tr>
-        <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
-    </table>
-    
-    <div class="summary-box">
-        <strong>✨ Shrnutí:</strong> Globus Medical (GMED) je vysoce hodnocená medtech akcie s potvrzeným růstovým trendem. Společnost má nejlepší doporučení od Zacks (Rank 1), maximální důvěru algoritmů TipRanks (Smart Score 10/10) a výrazný upside potenciál 25,4 %. Hlavní přitažlivost: lídr v páteřní chirurgii, inovace v robotické chirurgii a expanze na globální trhy. Hlavní riziko: intenzivní konkurence v medtech, regulační rizika a cyklická citlivost elektivních zákroků. Doporučení: Pro stávající držitele – držet s cíli na $111,90 (+25,4 %) a $115,00 (+28,9 %). Pro nové investory – vstup v pásmu $86,00–92,00 s pevným stop lossem na $75,00. Pozici omezit na 3–5 % portfolia. Sledovat čtvrtletní reporty o prodejích robotických systémů, schvalování nových produktů a expanzi na nové trhy.
+    <div class="trade-plan">
+        <strong>🟡 HOLD / BUY SIGNAL</strong> – DNA 88 (na hranici), ale ZR=1, VGM A a Upside 34.4% podporují nákup při korekci.<br><br>
+        <strong>🎯 Obchodní plán:</strong><br>
+        • Entry Zone: $34.00–38.00 (při korekci preferovat nižší vstup)<br>
+        • Stop Loss: $30.00 (-17%)<br>
+        • Target 1: $40.00 (+10%) | Target 2: $47.63 (+31%) | Target 3: $55.00 (+51%)<br>
+        • Position Size: 3–4% portfolia (střední volatilita, growth profil)<br>
+        • Rebalance Trigger: Sledovat čtvrtletní reporty o produkci a cenách plynu/LNG
     </div>
 </div>
 
 <div class="footer">
-    <p><strong>Zdroje dat:</strong> Interní analytický model, TipRanks, Zacks Investment Research</p>
-    <p><strong>Metodika:</strong> DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa.</p>
-    <p><strong>Frekvence aktualizace:</strong> DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</p>
-    <p><strong>Dokument vygenerován:</strong> 07.05.2026 06:45:00 | <strong>Verze:</strong> 1.0 | <strong>Soubor:</strong> Portfolio_07052026.html</p>
+    <strong>Dokument vygenerován:</strong> 10.05.2026 14:30 CET | Verze 1.0<br>
+    <strong>Metodika:</strong> DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa.<br>
+    <strong>Frekvence aktualizace:</strong> DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.
 </div>
 
 </body>
