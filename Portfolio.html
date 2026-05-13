@@ -1,156 +1,617 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio.html - Analytické posouzení</title>
-  <style>
-    @page { size: A4; margin: 1.5cm; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2d3436; max-width: 900px; margin: 0 auto; padding: 20px; background: #fff; }
-    h1 { text-align: center; color: #0984e3; border-bottom: 3px solid #0984e3; padding-bottom: 12px; margin-bottom: 5px; }
-    .timestamp { text-align: right; font-size: 0.85em; color: #636e72; margin-bottom: 25px; }
-    h2 { color: #00b894; border-left: 5px solid #00b894; padding-left: 12px; margin-top: 40px; margin-bottom: 15px; }
-    h3 { color: #2d3436; margin-bottom: 8px; margin-top: 18px; font-size: 1.25em; }
-    .stock-card { border: 1px solid #dfe6e9; border-radius: 8px; padding: 16px; margin-bottom: 28px; background: #fdfdfd; box-shadow: 0 2px 4px rgba(0,0,0,0.05); page-break-inside: avoid; }
-    .metrics-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #f1f2f6; padding: 12px; border-radius: 6px; margin-bottom: 14px; }
-    .metric { text-align: center; font-size: 0.95em; }
-    .metric .val { font-weight: 700; color: #0984e3; display: block; font-size: 1.1em; }
-    .section-box { margin: 10px 0; padding: 10px 12px; background: #ffffff; border-left: 4px solid #74b9ff; border-radius: 0 4px 4px 0; }
-    .conclusion { background: #ffeaa7; padding: 14px; border-radius: 6px; margin-top: 16px; border: 1px solid #fdcb6e; }
-    .conclusion strong { color: #d35400; }
-    .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold; color: #fff; margin-left: 5px; }
-    .buy { background: #00b894; }
-    .hold { background: #fdcb6e; color: #2d3436; }
-    .sell { background: #d63031; }
-    @media print { .no-print { display: none; } body { font-size: 11pt; } .stock-card { break-inside: avoid; } h2 { break-before: page; } }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio – Analytické posouzení</title>
+    <style>
+        @media print {
+            body { font-size: 11pt; }
+            .no-print { display: none; }
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            color: #333; 
+            max-width: 210mm; 
+            margin: 0 auto; 
+            padding: 15mm;
+            background: #fff;
+        }
+        h1 { 
+            color: #1a365d; 
+            border-bottom: 3px solid #3182ce; 
+            padding-bottom: 10px; 
+            text-align: center;
+            font-size: 18pt;
+        }
+        h2 { 
+            color: #2c5282; 
+            border-left: 4px solid #4299e1; 
+            padding-left: 12px; 
+            margin-top: 25px;
+            font-size: 14pt;
+        }
+        h3 { 
+            color: #2d3748; 
+            margin-top: 20px;
+            font-size: 12pt;
+        }
+        .header-info {
+            background: #ebf8ff;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 10pt;
+        }
+        .disclaimer {
+            background: #fff5f5;
+            border-left: 4px solid #fc8181;
+            padding: 10px 15px;
+            margin: 15px 0;
+            font-size: 9pt;
+            color: #742a2a;
+        }
+        .stock-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 25px 0;
+            background: #fafafa;
+            page-break-inside: avoid;
+        }
+        .stock-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #1a202c;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .signal-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 10pt;
+        }
+        .signal-buy { background: #c6f6d5; color: #22543d; }
+        .signal-hold { background: #feebc8; color: #975a16; }
+        .signal-sell { background: #fed7d7; color: #9b2c2c; }
+        table { 
+            width: 100%; 
+            border-collapse: collapse; 
+            margin: 15px 0; 
+            font-size: 10pt;
+        }
+        th, td { 
+            border: 1px solid #cbd5e0; 
+            padding: 8px 12px; 
+            text-align: left; 
+        }
+        th { 
+            background: #edf2f7; 
+            font-weight: 600;
+        }
+        .emoji-col { width: 40px; text-align: center; }
+        .green { color: #22c55e; font-weight: bold; }
+        .yellow { color: #eab308; font-weight: bold; }
+        .red { color: #ef4444; font-weight: bold; }
+        .summary-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            border-radius: 6px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .section { margin-bottom: 15px; }
+        .positives { color: #166534; }
+        .risks { color: #991b1b; }
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 15px;
+            border-top: 1px solid #cbd5e0;
+            font-size: 9pt;
+            color: #64748b;
+        }
+        .price-targets {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .target-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 12px;
+            text-align: center;
+        }
+        .target-label { font-size: 9pt; color: #64748b; }
+        .target-value { font-size: 13pt; font-weight: bold; color: #1e293b; }
+        .target-upside { font-size: 10pt; }
+        .upside-pos { color: #22c55e; }
+        .upside-neg { color: #ef4444; }
+        .section-title {
+            font-weight: 600;
+            color: #334155;
+            margin: 12px 0 8px 0;
+            font-size: 11pt;
+        }
+        ul { margin: 8px 0; padding-left: 20px; }
+        li { margin: 4px 0; }
+        .metadata {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 10pt;
+            color: #475569;
+            margin: 10px 0;
+        }
+        .metadata span { display: flex; align-items: center; gap: 5px; }
+    </style>
 </head>
 <body>
 
-  <h1>📊 Portfolio a Nákupní seznam</h1>
-  <div class="timestamp">📅 Generováno: 11. 5. 2026, 10:15 SEČ</div>
+<h1>📊 Portfolio – Analytické posouzení vybraných akcií</h1>
 
-  <!-- SEKCE: NÁKUPNÍ SEZNAM -->
-  <h2>🛒 Nákupní seznam</h2>
-  <p><em>Symboly splňující kritéria: DNA &gt; 88, ZR &gt; 3, Upside pozitivní, Smart Score ≥ Neutral</em></p>
+<div class="header-info">
+    <strong>Datum generování:</strong> 13.05.2026 14:30:00 &nbsp;|&nbsp; 
+    <strong>Metodika:</strong> DNA 5.0 Hybrid Model &nbsp;|&nbsp; 
+    <strong>Verze:</strong> 1.0
+</div>
 
-  <!-- CRC -->
-  <div class="stock-card">
-    <h3>🔍 Analytické posouzení vývoje CRC, California Resources Corporation</h3>
-    <div class="metrics-grid">
-      <div class="metric">Cena: <span class="val">$44.80</span></div>
-      <div class="metric">DNA: <span class="val">91</span></div>
-      <div class="metric">ZR: <span class="val">3.5</span></div>
-      <div class="metric">Smart Score: <span class="val">Buy 🟢</span></div>
-      <div class="metric">Upside: <span class="val">+14.2%</span></div>
-      <div class="metric">Sektor: <span class="val">Energetika</span></div>
+<div class="disclaimer">
+    ⚠️ Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
+</div>
+
+<!-- ==================== PORTFOLIO SEKCE ==================== -->
+<h2>🗂 Portfolio – aktuální pozice</h2>
+
+<!-- ========== VIST ========== -->
+<div class="stock-card">
+    <div class="stock-title">
+        <span>🔷 Analytické posouzení vývoje VIST, Vista Energy</span>
+        <span class="signal-badge signal-buy">🟢 BUY</span>
     </div>
-
-    <div class="section-box">🏢 <strong>Popis společnosti:</strong> California Resources Corporation je přední nezávislý producent ropy a zemního plynu s operacemi převážně v Kalifornii. Společnost se v posledních letech soustředí na modernizaci těžebních procesů, optimalizaci nákladů a aktivní rozvoj technologií pro zachycování a ukládání uhlíku (CCS), čímž reaguje na rostoucí environmentální požadavky.</div>
     
-    <div class="section-box">🌟 <strong>Pozitiva:</strong>
-      <ul>
-        <li>Silné operační cash flow umožňující pravidelné vyplácení dividend a zpětný nákup akcií.</li>
-        <li>Aktivní transformace na nízkoemisní energetickou společnost s velkými projekty v oblasti CCS.</li>
-        <li>Geografická koncentrace v Kalifornii poskytuje stabilní poptávku a prémiové ceny ropy.</li>
-      </ul>
+    <div class="metadata">
+        <span>🏢 Burza: NYSE</span>
+        <span>🏭 Sektor: Energy / Oil & Gas E&P</span>
+        <span>💵 Cena: $69.28</span>
+        <span>📅 Analýza: 13.05.2026</span>
     </div>
 
-    <div class="section-box">⚠️ <strong>Rizika:</strong>
-      <ul>
-        <li>Vysoká citlivost na výkyvy globálních cen ropy a zemního plynu.</li>
-        <li>Přísné kalifornské environmentální regulace a dlouhé povolovací procesy.</li>
-        <li>Přirozený úbytek těžebních vrtů vyžadující neustálé reinvestice do nových projektů.</li>
-      </ul>
+    <div class="section">
+        <div class="section-title">🔷 Detail společnosti</div>
+        <p>Vista Energy je nezávislá těžební společnost zaměřená na průzkum a těžbu ropy a zemního plynu v Latinské Americe. Hlavní aktiva se nacházejí v oblasti Vaca Muerta v Argentině – jednom z největších světových ložisek břidlicové ropy a plynu. Společnost využívá moderní technologie vrtání a efektivní operační model s nízkými náklady na těžbu.</p>
     </div>
 
-    <div class="section-box">📈 <strong>Změny cílů a ratingů:</strong> V posledních čtvrtletích analytici postupně zvyšují cílové ceny v průměru o 8–12 % na základě lepších marží a úspěšného snižování dluhu. Většina analytických domů udržuje doporučení „Koupit“ nebo „Přidržet“.</div>
-    <div class="section-box">🌍 <strong>Burza & Sektor:</strong> NYSE | Energetika (Ropa & Zemní plyn)</div>
+    <h3>🧬 DNA 5.0 Hybrid Model: Klíčové metriky</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Metrika</th><th>Hodnota</th><th>Interpretace</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DNA Skóre</td><td>92.00</td><td>Silný nákupní signál</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Zacks Rank</td><td>1.0</td><td>Nejlepší doporučení (Strong Buy)</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Industry Rank</td><td>2</td><td>Top 2 % v sektoru</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>VGM Score</td><td>B</td><td>Vynikající kombinace hodnoty/růstu</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Smart Score</td><td>10.0/10</td><td>Maximální algoritmické hodnocení</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sentiment</td><td>Neutral</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Upside Potential</td><td>20.9%</td><td>Výrazný růstový potenciál</td></tr>
+    </table>
 
-    <div class="conclusion">
-      <strong>Shrnutí :</strong> Společnost CRC je jako „starší, ale stále velmi výkonný motor“, který se učí jezdit čistěji. I když těží ropu, aktivně investuje do technologií, které zachycují emise. Díky silným peněžním tokům vyplácí akcionářům podíl na zisku a snaží se snížit svůj dluh. Pro běžného investora představuje zajímavou příležitost s vyšším výnosem, ale je třeba počítat s tím, že hodnota akcií bude kolísat podle ceny ropy a změn v kalifornské legislativě. 🛢️💡
+    <h3>📈 Technická analýza</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Indikátor</th><th>Stav</th><th>Význam</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DMA Trend</td><td>BULLISH</td><td>Cena nad klouzavými průměry</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>RAVI Momentum</td><td>BULLISH</td><td>Pozitivní hybnost ceny</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sharpe Ratio</td><td>0.86</td><td>Dobrý poměr výnos/riziko</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Pivot Point</td><td>BULLISH</td><td>Podpora dalšího růstu</td></tr>
+    </table>
+
+    <h3>🎯 Cílové ceny</h3>
+    <div class="price-targets">
+        <div class="target-card">
+            <div class="target-label">High Target</div>
+            <div class="target-value">$93.00</div>
+            <div class="target-upside upside-pos">+34.3%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Average Target</div>
+            <div class="target-value">$83.75</div>
+            <div class="target-upside upside-pos">+20.9%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Low Target</div>
+            <div class="target-value">$75.00</div>
+            <div class="target-upside upside-pos">+8.3%</div>
+        </div>
     </div>
-  </div>
 
-  <!-- GMED -->
-  <div class="stock-card">
-    <h3>🔍 Analytické posouzení vývoje GMED, Globus Medical, Inc.</h3>
-    <div class="metrics-grid">
-      <div class="metric">Cena: <span class="val">$57.20</span></div>
-      <div class="metric">DNA: <span class="val">93</span></div>
-      <div class="metric">ZR: <span class="val">4.1</span></div>
-      <div class="metric">Smart Score: <span class="val">Strong Buy 🟢</span></div>
-      <div class="metric">Upside: <span class="val">+18.5%</span></div>
-      <div class="metric">Sektor: <span class="val">Zdravotnictví</span></div>
+    <div class="section">
+        <div class="section-title positives">✅ Pozitiva</div>
+        <ul>
+            <li><strong>Nízké náklady na těžbu:</strong> Flexibilní kapitálové výdaje a nízké provozní náklady chrání cash flow při kolísání cen ropy.</li>
+            <li><strong>Růst rezerv:</strong> Akvizice podílů v klíčových blocích významně zvýšily objem zásob a prodloužily životnost těžby.</li>
+            <li><strong>Operační efektivita:</strong> Úspěšné zapojení nových vrtů a odstranění technických úzkých míst podpořilo růst produkce.</li>
+            <li><strong>Strategická lokalita:</strong> Vaca Muerta patří mezi nejperspektivnější břidlicová ložiska světa s dlouhodobým potenciálem.</li>
+            <li><strong>Finanční disciplína:</strong> Společnost kombinuje růst s odpovědným řížením dluhu a návraty kapitálu akcionářům.</li>
+        </ul>
     </div>
 
-    <div class="section-box">🏢 <strong>Popis společnosti:</strong> Globus Medical je přední americký výrobce zdravotnických zařízení zaměřených na operace páteře. Po úspěšném sloučení s NuVasive rozšířila společnost své portfolio o špičkové robotické chirurgické systémy (např. ExcelsiusGPS) a implantáty, které pomáhají chirurgům provádět zákroky s vyšší přesností a menší invazivitou.</div>
+    <div class="section">
+        <div class="section-title risks">❌ Rizika</div>
+        <ul>
+            <li><strong>Volatilita cen ropy:</strong> Regionální geopolitické napětí může způsobit výkyvy cen a ovlivnit plánované investice.</li>
+            <li><strong>Geopolitické riziko:</strong> Politický vývoj v Argentině a Venezuele přináší nejistotu ohledně regulačního prostředí.</li>
+            <li><strong>Tržní dynamika:</strong> Změny v globální poptávce nebo logistice mohou omezit realizované ceny nebo přístup na trhy.</li>
+            <li><strong>Závislost na kapitálových výdajích:</strong> Pokračující rozvoj ložisek vyžaduje stabilní přístup k financování.</li>
+        </ul>
+    </div>
+
+    <div class="summary-box">
+        <strong>Shrnutí:</strong><br>
+        Vista Energy (VIST) představuje atraktivní růstovou příležitost v sektoru břidlicové ropy. Společnost těží z výhodné lokality ve Vaca Muerta, nízkých nákladů a prokázané schopnosti zvyšovat produkci. Silné fundamentální hodnocení (DNA 92, Zacks Rank 1) spolu s technickými signály potvrzují pozitivní trend. Hlavní přitažlivost spočívá v růstu rezerv a operační efektivitě. Klíčová rizika souvisí s volatilitou cen ropy a geopolitickým prostředím v Latinské Americe. Pro investory s růstovým profilem a ochotou akceptovat střední volatilitu může být VIST zajímavou součástí portfolia s cílovým horizontem 12–24 měsíců.
+    </div>
+</div>
+
+<!-- ========== CRC ========== -->
+<div class="stock-card">
+    <div class="stock-title">
+        <span>🔷 Analytické posouzení vývoje CRC, California Resources</span>
+        <span class="signal-badge signal-buy">🟢 BUY</span>
+    </div>
     
-    <div class="section-box">🌟 <strong>Pozitiva:</strong>
-      <ul>
-        <li>Rychle rostoucí poptávka po robotické chirurgii a moderních páteřních implantátech.</li>
-        <li>Stárnutí populace v rozvinutých zemích přirozeně zvyšuje počet potřebných operací.</li>
-        <li>Silné výzkumné a vývojové kapacity vedoucí k častým inovacím a rozšíření tržního podílu.</li>
-      </ul>
+    <div class="metadata">
+        <span>🏢 Burza: NYSE</span>
+        <span>🏭 Sektor: Energy / Oil & Gas E&P</span>
+        <span>💵 Cena: $59.68</span>
+        <span>📅 Analýza: 13.05.2026</span>
     </div>
 
-    <div class="section-box">⚠️ <strong>Rizika:</strong>
-      <ul>
-        <li>Intenzivní konkurence od gigantů jako Medtronic, Johnson & Johnson nebo Stryker.</li>
-        <li>Možné změny v úhradách ze strany pojišťoven a státních zdravotních systémů.</li>
-        <li>Integrační výzvy po akvizicích a závislost na schvalování nových produktů regulačními úřady.</li>
-      </ul>
+    <div class="section">
+        <div class="section-title">🔷 Detail společnosti</div>
+        <p>California Resources Corporation je nezávislá ropná a plynárenská společnost působící v Kalifornii. Zabývá se průzkumem, těžbou a zpracováním ropy, zemního plynu a kapalných uhlovodíků. Společnost také provozuje výrobu a prodej elektřiny a rozvíjí projekty zachytávání uhlíku (CCS), což ji staví do pozice hráče přizpůsobeného energetické transformaci.</p>
     </div>
 
-    <div class="section-box">📈 <strong>Změny cílů a ratingů:</strong> Analytici v posledních měsících upravili cílové ceny směrem nahoru o 10–15 %, především díky překonávání očekávání v oblasti tržeb z robotických systémů. Doporučení se konsolidují kolem „Silná koupě“.</div>
-    <div class="section-box">🌍 <strong>Burza & Sektor:</strong> NYSE | Zdravotnické zařízení (MedTech)</div>
+    <h3>🧬 DNA 5.0 Hybrid Model: Klíčové metriky</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Metrika</th><th>Hodnota</th><th>Interpretace</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DNA Skóre</td><td>92.00</td><td>Silný nákupní signál</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Zacks Rank</td><td>1.0</td><td>Nejlepší doporučení (Strong Buy)</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Industry Rank</td><td>11</td><td>Top 10 % v sektoru</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>VGM Score</td><td>B</td><td>Vynikající kombinace hodnoty/růstu</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Smart Score</td><td>9.0/10</td><td>Velmi vysoké algoritmické hodnocení</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sentiment</td><td>Neutral</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Upside Potential</td><td>32.7%</td><td>Výrazný růstový potenciál</td></tr>
+    </table>
 
-    <div class="conclusion">
-      <strong>Shrnutí :</strong> GMED funguje jako „výrobce špičkových nástrojů pro chirurgy“, kteří operují páteř. Díky robotům jsou zákroky přesnější a pacienti se rychleji zotavují. Trh roste, protože lidé žijí déle a páteřní problémy přibývají. Společnost má silnou pozici a inovace ji drží v čele. Pro běžného investora je to stabilnější růstová příležitost s menší závislostí na ekonomických cyklech, ale je třeba sledovat tlak pojišťoven na ceny zákroků. 🤖🏥
+    <h3>📈 Technická analýza</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Indikátor</th><th>Stav</th><th>Význam</th></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>DMA Trend</td><td>NEUTRAL</td><td>Cena v konsolidačním pásmu</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>RAVI Momentum</td><td>NEUTRAL</td><td>Hybnost bez jasného směru</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sharpe Ratio</td><td>1.16</td><td>Dobrý poměr výnos/riziko</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Pivot Point</td><td>NEUTRAL</td><td>Čekání na rozhodující impuls</td></tr>
+    </table>
+
+    <h3>🎯 Cílové ceny</h3>
+    <div class="price-targets">
+        <div class="target-card">
+            <div class="target-label">High Target</div>
+            <div class="target-value">$87.00</div>
+            <div class="target-upside upside-pos">+45.8%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Average Target</div>
+            <div class="target-value">$79.20</div>
+            <div class="target-upside upside-pos">+32.7%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Low Target</div>
+            <div class="target-value">$72.00</div>
+            <div class="target-upside upside-pos">+20.6%</div>
+        </div>
     </div>
-  </div>
 
-  <!-- SU -->
-  <div class="stock-card">
-    <h3>🔍 Analytické posouzení vývoje SU, Suncor Energy Inc.</h3>
-    <div class="metrics-grid">
-      <div class="metric">Cena: <span class="val">$37.90</span></div>
-      <div class="metric">DNA: <span class="val">89</span></div>
-      <div class="metric">ZR: <span class="val">3.3</span></div>
-      <div class="metric">Smart Score: <span class="val">Buy 🟢</span></div>
-      <div class="metric">Upside: <span class="val">+11.0%</span></div>
-      <div class="metric">Sektor: <span class="val">Energetika</span></div>
+    <div class="section">
+        <div class="section-title positives">✅ Pozitiva</div>
+        <ul>
+            <li><strong>Silná generace cash flow:</strong> Vysoká provozní ziskovost a volný cash flow umožňují financovat investice, dividendy a snižování dluhu.</li>
+            <li><strong>Proaktivní řízení dluhu:</strong> Prodloužení splatností a refinancování s nižšími sazbami zlepšuje finanční flexibilitu.</li>
+            <li><strong>Strategické projekty CCS:</strong> Rozvoj projektů zachytávání uhlíku a partnerství v oblasti datových center vytváří nové příjmové proudy.</li>
+            <li><strong>Lokální výhoda:</strong> Přítomnost v Kalifornii poskytuje přístup k stabilním odběratelům a regulovanému trhu s preferencí nízkoemisních zdrojů.</li>
+            <li><strong>Podpora analytiků:</strong> Konsenzus "Strong Buy" s průměrným cílem +32,7 % odráží důvěru v růstový příběh.</li>
+        </ul>
     </div>
 
-    <div class="section-box">🏢 <strong>Popis společnosti:</strong> Suncor Energy je integrovaná kanadská energetická společnost s kořeny v těžbě ropných písků v Albertě. Podnikání pokrývá celý řetězec: od těžby, přes rafinaci až po maloobchodní prodej pohonných hmot pod značkou Petro-Canada. Společnost se zaměřuje na snižování nákladů a modernizaci procesů pro zvýšení efektivity a snížení emisní stopy.</div>
+    <div class="section">
+        <div class="section-title risks">❌ Rizika</div>
+        <ul>
+            <li><strong>Volatilita zisku:</strong> Nehotovostní položky a deriváty mohou způsobit výkyvy v čistém zisku, což ovlivňuje vnímání investorů.</li>
+            <li><strong>Klesající volný cash flow:</strong> Snížená schopnost generovat hotovost může omezit možnosti pro návraty kapitálu akcionářům.</li>
+            <li><strong>Operační nejistota:</strong> Kolísání produkce způsobené údržbou nebo smluvními mechanizmy komplikuje plánování.</li>
+            <li><strong>Regulační tlak:</strong> Kalifornské environmentální předpisy mohou zvyšovat náklady nebo omezovat určité aktivity.</li>
+        </ul>
+    </div>
+
+    <div class="summary-box">
+        <strong>Shrnutí:</strong><br>
+        California Resources (CRC) kombinuje tradiční těžbu ropy s inovativními projekty v oblasti udržitelnosti. Silné fundamenty (DNA 92, Zacks Rank 1) a atraktivní upside potenciál (+32,7 %) dělají z akcie zajímavou příležitost. Klíčovou výhodou je finanční disciplína a strategické projekty CCS, které otevírají nové trhy. Rizika souvisí s volatilitou zisku a regulačním prostředím. Akcie je vhodná pro investory hledající expozici v energetickém sektoru s růstovým potenciálem a střední tolerancí k riziku. Doporučený vstup: $58–61, cíle: $72 / $79 / $87.
+    </div>
+</div>
+
+<!-- ========== YPF ========== -->
+<div class="stock-card">
+    <div class="stock-title">
+        <span>🔷 Analytické posouzení vývoje YPF, YPF Sociedad Anónima</span>
+        <span class="signal-badge signal-buy">🟢 BUY</span>
+    </div>
     
-    <div class="section-box">🌟 <strong>Pozitiva:</strong>
-      <ul>
-        <li>Velmi nízké provozní náklady na těžbu ve srovnání s globálním průměrem, což zvyšuje ziskovost i při nižších cenách ropy.</li>
-        <li>Vertikální integrace (těžba → rafinace → čerpací stanice) poskytuje stabilitu cash flow.</li>
-        <li>Štědrá dividendová politika a agresivní program zpětného nákupu akcií.</li>
-      </ul>
+    <div class="metadata">
+        <span>🏢 Burza: NYSE</span>
+        <span>🏭 Sektor: Energy / Integrated Oil & Gas</span>
+        <span>💵 Cena: $44.95</span>
+        <span>📅 Analýza: 13.05.2026</span>
     </div>
 
-    <div class="section-box">⚠️ <strong>Rizika:</strong>
-      <ul>
-        <li>Vysoká citlivost na globální cenu ropy a makroekonomické zpomalení.</li>
-        <li>Přísnější kanadské environmentální normy a zvyšování uhlíkových daní.</li>
-        <li>Provozní rizika spojená s těžbou ropných písků (energetická náročnost, potřeba vody).</li>
-      </ul>
+    <div class="section">
+        <div class="section-title">🔷 Detail společnosti</div>
+        <p>YPF je argentinská energetická společnost s vertikálně integrovaným modelem – od průzkumu a těžby ropy a plynu přes rafinaci až po maloobchodní prodej pohonných hmot. Společnost hraje klíčovou roli v energetické bezpečnosti Argentiny a rozvíjí těžbu v ložisku Vaca Muerta, jednom z největších břidlicových zdrojů na světě.</p>
     </div>
 
-    <div class="section-box">📈 <strong>Změny cílů a ratingů:</strong> Cílové ceny byly v posledním čtvrtletí mírně korigovány dolů o 3–5 % kvůli přehodnocení dlouhodobých cenových předpokladů ropy, ale většina analytiků si udržuje doporučení „Koupit“ díky silné dividendě a disciplinovanému řízení kapitálu.</div>
-    <div class="section-box">🌍 <strong>Burza & Sektor:</strong> NYSE / TSX | Integrovaná ropa & Plyn</div>
+    <h3>🧬 DNA 5.0 Hybrid Model: Klíčové metriky</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Metrika</th><th>Hodnota</th><th>Interpretace</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DNA Skóre</td><td>90.00</td><td>Silný nákupní signál</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Zacks Rank</td><td>1.0</td><td>Nejlepší doporučení (Strong Buy)</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Industry Rank</td><td>2</td><td>Top 2 % v sektoru</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>VGM Score</td><td>A</td><td>Nejlepší možná kombinace faktorů</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Smart Score</td><td>8.0/10</td><td>Vysoké algoritmické hodnocení</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sentiment</td><td>Neutral</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Upside Potential</td><td>16.1%</td><td>Pozitivní růstový potenciál</td></tr>
+    </table>
 
-    <div class="conclusion">
-      <strong>Shrnutí :</strong> Suncor je jako „kanadský energetický kolos“, který těží, zpracovává i prodává paliva. Její silnou stránkou je, že dokáže efektivně fungovat i tehdy, když ceny ropy klesnou, a část zisků pravidelně vyplácí akcionářům. Pro běžného investora jde o vhodný nástroj pro získání pravidelného dividendového příjmu a zajištění proti inflaci. Je však třeba mít na paměti, že hodnota akcií bude kolísat spolu s cenou ropy a tlakem na snižování emisí. 🍁⛽
+    <h3>📈 Technická analýza</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Indikátor</th><th>Stav</th><th>Význam</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DMA Trend</td><td>BULLISH</td><td>Cena nad klouzavými průměry</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>RAVI Momentum</td><td>BULLISH</td><td>Pozitivní hybnost ceny</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sharpe Ratio</td><td>0.69</td><td>Akceptovatelný poměr výnos/riziko</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Pivot Point</td><td>NEUTRAL</td><td>Konsolidace před dalším pohybem</td></tr>
+    </table>
+
+    <h3>🎯 Cílové ceny</h3>
+    <div class="price-targets">
+        <div class="target-card">
+            <div class="target-label">High Target</div>
+            <div class="target-value">$64.00</div>
+            <div class="target-upside upside-pos">+42.4%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Average Target</div>
+            <div class="target-value">$52.17</div>
+            <div class="target-upside upside-pos">+16.1%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Low Target</div>
+            <div class="target-value">$40.00</div>
+            <div class="target-upside upside-pos">-11.0%</div>
+        </div>
     </div>
-  </div>
 
-  <!-- SEKCE: PORTFOLIO -->
-  <h2>📁 Portfolio</h2>
-  <p><em>Sekce je vyhrazena pro pozice s ZR ≤ 3, Upside ≤ 0 nebo Smart Score horším než Neutral. V aktuálním filtru se žádné vybrané symboly CRC, GMED, SU nenacházejí. Pozice jsou zařazeny do Nákupního seznamu z důvodu splnění optimálních vstupních podmínek.</em></p>
+    <div class="section">
+        <div class="section-title positives">✅ Pozitiva</div>
+        <ul>
+            <li><strong>Makroekonomické zlepšení:</strong> Klesající inflace a lepší fiskální ukazatele v Argentině vytvářejí příznivější prostředí pro investice.</li>
+            <li><strong>Operační výkonnost:</strong> Upravená EBITDA překonala očekávání, což svědčí o efektivním řízení nákladů a produkce.</li>
+            <li><strong>Růst v Vaca Muerta:</strong> Rekordní těžba břidlicové ropy a plynu posiluje dlouhodobý růstový příběh společnosti.</li>
+            <li><strong>Deleveraging:</strong> Rychlé snižování zadlužení zlepšuje finanční stabilitu a flexibilitu pro budoucí investice.</li>
+            <li><strong>Strategické akvizice:</strong> Konsolidace aktiv v jižním hubu posiluje pozici na klíčových ložiscích.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title risks">❌ Rizika</div>
+        <ul>
+            <li><strong>Volatilita volného cash flow:</strong> Kolísání cen ropy a měnové riziko mohou ovlivnit schopnost generovat hotovost.</li>
+            <li><strong>Geopolitické riziko:</strong> Politická nestabilita v Argentině přináší nejistotu ohledně regulačního a daňového prostředí.</li>
+            <li><strong>Infrastrukturní úzká místa:</strong> Nedostatečná kapacita pro transport plynu a ropy může omezit růst produkce.</li>
+            <li><strong>Měnové riziko:</strong> Expozice vůči argentinskému pesu a omezená konvertibilita měny představují dodatečné riziko.</li>
+        </ul>
+    </div>
+
+    <div class="summary-box">
+        <strong>Shrnutí:</strong><br>
+        YPF představuje zajímavou příležitost pro investory ochotné akceptovat vyšší geopolitické riziko výměnou za expozici v růstovém břidlicovém sektoru Latinské Ameriky. Silné fundamentální skóre (DNA 90, VGM A) a pozitivní technické signály potvrzují růstový trend. Klíčovou výhodou je expanze ve Vaca Muerta a zlepšující se makroprostředí v Argentině. Hlavní rizika souvisí s politickou nestabilitou a měnovou volatilitou. Akcie je vhodná pro diverzifikované portfolio s růstovým zaměřením. Doporučený vstup: $43–46, cíle: $48 / $52 / $64.
+    </div>
+</div>
+
+<!-- ========== MCD – SELL ========== -->
+<div class="stock-card">
+    <div class="stock-title">
+        <span>🔷 Analytické posouzení vývoje MCD, McDonald's Corporation</span>
+        <span class="signal-badge signal-sell">🔴 SELL</span>
+    </div>
+    
+    <div class="metadata">
+        <span>🏢 Burza: NYSE</span>
+        <span>🏭 Sektor: Consumer Discretionary / Restaurants</span>
+        <span>💵 Cena: $274.84</span>
+        <span>📅 Analýza: 13.05.2026</span>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🔷 Detail společnosti</div>
+        <p>McDonald's je globální lídr v segmentu rychlého občerstvení s více než 40 000 restauracemi po celém světě. Společnost provozuje franšízový model, který jí umožňuje generovat stabilní příjmy z licenčních poplatků a nájemného s minimální expozicí vůči provozním nákladům jednotlivých provozoven.</p>
+    </div>
+
+    <h3>🧬 DNA 5.0 Hybrid Model: Klíčové metriky</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Metrika</th><th>Hodnota</th><th>Interpretace</th></tr>
+        <tr><td class="emoji-col red">🔴</td><td>DNA Skóre</td><td>48.00</td><td>Pod hranicí HOLD → prodejní signál</td></tr>
+        <tr><td class="emoji-col red">🔴</td><td>Zacks Rank</td><td>4.0</td><td>Underperform – negativní doporučení</td></tr>
+        <tr><td class="emoji-col red">🔴</td><td>Industry Rank</td><td>180</td><td>Spodní část sektoru</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>VGM Score</td><td>D</td><td>Slabá kombinace hodnoty/růstu</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Smart Score</td><td>5.0/10</td><td>Neutrální algoritmické hodnocení</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Sentiment</td><td>Neutral</td><td>Vyvážená tržní nálada</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Upside Potential</td><td>22.2%</td><td>Teoretický upside, ale slabé fundamenty</td></tr>
+    </div>
+
+    <h3>📈 Technická analýza</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Indikátor</th><th>Stav</th><th>Význam</th></tr>
+        <tr><td class="emoji-col red">🔴</td><td>DMA Trend</td><td>BEARISH</td><td>Cena pod klouzavými průměry</td></tr>
+        <tr><td class="emoji-col red">🔴</td><td>RAVI Momentum</td><td>BEARISH</td><td>Negativní hybnost ceny</td></tr>
+        <tr><td class="emoji-col red">🔴</td><td>Sharpe Ratio</td><td>-0.49</td><td>Nepříznivý poměr výnos/riziko</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Pivot Point</td><td>NEUTRAL</td><td>Čekání na rozhodující impuls</td></tr>
+    </table>
+
+    <h3>🎯 Cílové ceny</h3>
+    <div class="price-targets">
+        <div class="target-card">
+            <div class="target-label">High Target</div>
+            <div class="target-value">$335.00</div>
+            <div class="target-upside upside-pos">+21.9%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Average Target</div>
+            <div class="target-value">$305.00</div>
+            <div class="target-upside upside-pos">+11.0%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Low Target</div>
+            <div class="target-value">$260.00</div>
+            <div class="target-upside upside-neg">-5.4%</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title positives">✅ Pozitiva</div>
+        <ul>
+            <li><strong>Digitální ekosystém:</strong> Rozvoj mobilních aplikací, AI a věrnostních programů zvyšuje frekvenci návštěv a průměrnou útratu.</li>
+            <li><strong>Inovace produktů:</strong> Nová nabídka nápojů a specialit může přilákat nové zákazníky a zvýšit marže.</li>
+            <li><strong>Franšízový model:</strong> Asset-light struktura poskytuje stabilní cash flow s nižší kapitálovou náročností.</li>
+            <li><strong>Globální značka:</strong> Silná rozpoznatelnost a loajalita zákazníků poskytují konkurenční výhodu.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title risks">❌ Rizika</div>
+        <ul>
+            <li><strong>Rostoucí náklady:</strong> Vyšší kapitálové výdaje a úrokové sazby omezují prostor pro nákup vlastních akcií a růst zisku.</li>
+            <li><strong>Tlak na marže:</strong> Inflace surovin (zejména hovězího masa) a nutnost cenových akcí komprimují ziskovost restaurací.</li>
+            <li><strong>Nejistota expanze:</strong> Nejasné tempo zavádění nových produktů a nedostatečná podpora franšízantům mohou ohrozit růst.</li>
+            <li><strong>Slabé fundamentální hodnocení:</strong> Nízké DNA skóre a Zacks Rank 4 signalizují strukturální slabosti v porovnání s konkurencí.</li>
+            <li><strong>Technická slabost:</strong> Bearish signály v DMA a RAVI potvrzují tlak prodejců a negativní momentum.</li>
+        </ul>
+    </div>
+
+    <div class="summary-box">
+        <strong>Shrnutí:</strong><br>
+        McDonald's (MCD) čelí strukturálním výzvám, které se odrážejí ve slabém fundamentálním hodnocení (DNA 48, Zacks Rank 4). Přestože společnost disponuje silnou značkou a inovačním potenciálem, rostoucí náklady, tlak na marže a negativní technické signály převážily pozitivní faktory. Pro stávající držitele doporučujeme zvážit redukci pozice s cílem přesunout kapitál do akcií s lepším poměrem riziko/výnos. Pro nové investory není MCD v současné fázi atraktivním vstupem. Doporučený exit: $270–278, cíl realokace: akcie s DNA > 85 a Zacks Rank 1–2.
+    </div>
+</div>
+
+<!-- ==================== NÁKUPNÍ SEZNAM ==================== -->
+<h2>🛒 Nákupní seznam – nové příležitosti</h2>
+
+<!-- ========== SU ========== -->
+<div class="stock-card">
+    <div class="stock-title">
+        <span>🔷 Analytické posouzení vývoje SU, Suncor Energy</span>
+        <span class="signal-badge signal-hold">🟡 HOLD / LIMIT BUY</span>
+    </div>
+    
+    <div class="metadata">
+        <span>🏢 Burza: NYSE / TSX</span>
+        <span>🏭 Sektor: Energy / Integrated Oil & Gas</span>
+        <span>💵 Cena: $66.56</span>
+        <span>📅 Analýza: 13.05.2026</span>
+    </div>
+
+    <div class="section">
+        <div class="section-title">🔷 Detail společnosti</div>
+        <p>Suncor Energy je kanadská integrovaná energetická společnost zaměřená na těžbu ropy z písečných ložisek v Athabasca, průzkum a těžbu v offshore lokalitách, rafinaci a maloobchodní prodej pohonných hmot pod značkou Petro-Canada. Společnost kombinuje tradiční těžbu s investicemi do obnovitelných zdrojů a technologií snižujících uhlíkovou stopu.</p>
+    </div>
+
+    <h3>🧬 DNA 5.0 Hybrid Model: Klíčové metriky</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Metrika</th><th>Hodnota</th><th>Interpretace</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DNA Skóre</td><td>92.00</td><td>Silný nákupní signál</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Zacks Rank</td><td>1.0</td><td>Nejlepší doporučení (Strong Buy)</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Industry Rank</td><td>3</td><td>Top 3 % v sektoru</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>VGM Score</td><td>B</td><td>Vynikající kombinace hodnoty/růstu</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Smart Score</td><td>10.0/10</td><td>Maximální algoritmické hodnocení</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Sentiment</td><td>Bullish</td><td>Pozitivní tržní nálada</td></tr>
+        <tr><td class="emoji-col yellow">🟡</td><td>Upside Potential</td><td>8.3%</td><td>Blížíme se cíli – limitovaný upside</td></tr>
+    </table>
+
+    <h3>📈 Technická analýza</h3>
+    <table>
+        <tr><th class="emoji-col">🎨</th><th>Indikátor</th><th>Stav</th><th>Význam</th></tr>
+        <tr><td class="emoji-col green">🟢</td><td>DMA Trend</td><td>BULLISH</td><td>Cena nad klouzavými průměry</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>RAVI Momentum</td><td>BULLISH</td><td>Pozitivní hybnost ceny</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Sharpe Ratio</td><td>2.83</td><td>Vynikající poměr výnos/riziko</td></tr>
+        <tr><td class="emoji-col green">🟢</td><td>Pivot Point</td><td>BULLISH</td><td>Podpora dalšího růstu</td></tr>
+    </table>
+
+    <h3>🎯 Cílové ceny</h3>
+    <div class="price-targets">
+        <div class="target-card">
+            <div class="target-label">High Target</div>
+            <div class="target-value">$78.00</div>
+            <div class="target-upside upside-pos">+17.2%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Average Target</div>
+            <div class="target-value">$72.00</div>
+            <div class="target-upside upside-pos">+8.3%</div>
+        </div>
+        <div class="target-card">
+            <div class="target-label">Low Target</div>
+            <div class="target-value">$68.00</div>
+            <div class="target-upside upside-pos">+2.2%</div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title positives">✅ Pozitiva</div>
+        <ul>
+            <li><strong>Návraty kapitálu:</strong> Rozšíření programu odkupu akcií a růst dividend signalizují důvěru managementu v cash flow.</li>
+            <li><strong>Optimalizace produkce:</strong> Přesun k in-situ těžbě zvyšuje marže díky nižším nákladům na barel.</li>
+            <li><strong>Rozšíření zdrojové základny:</strong> Nové kontingentní zdroje poskytují dlouhodobou viditelnost růstu a flexibilitu.</li>
+            <li><strong>Silná technická pozice:</strong> Všechny klíčové indikátory potvrzují bullish trend a silné momentum.</li>
+            <li><strong>Maximální Smart Score:</strong> Algoritmické hodnocení 10/10 odráží širokou podporu fundamentálních i tržních faktorů.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <div class="section-title risks">❌ Rizika</div>
+        <ul>
+            <li><strong>Citlivost na komodity:</strong> Dlouhodobý růst závisí na cenách ropy – slabší trh může oddálit investice do nových projektů.</li>
+            <li><strong>Riziko provedení:</strong> Úspěch závisí na bezproblémové realizaci debottleneckingu a in-situ projektů.</li>
+            <li><strong>Konkurence v cash flow:</strong> Očekávaný výnos z volného cash flow může zaostávat za některými peer společnostmi.</li>
+            <li><strong>Limitovaný upside:</strong> Při aktuální ceně je prostor pro další růst omezený – vhodný spíše pro držení než agresivní nákup.</li>
+        </ul>
+    </div>
+
+    <div class="summary-box">
+        <strong>Shrnutí:</strong><br>
+        Suncor Energy (SU) je fundamentálně silná akcie s vynikajícím DNA skóre (92) a maximálním Smart Score (10/10). Technické indikátory potvrzují pozitivní trend a společnost demonstruje disciplínu v návratech kapitálu akcionářům. Hlavní atraktivita spočívá v optimalizaci těžby a rozšiřování zdrojové základny. Rizika souvisí s citlivostí na ceny ropy a prováděcími riziky projektů. Protože upside potenciál je aktuálně pod 15 % (8,3 %), akcie spadá do kategorie "blížíme se cíli" – vhodná pro držení stávajících pozic, pro nové investory doporučujeme čekat na korekci k $63–65 nebo přesun kapitálu do titulů s vyšším upside. Doporučení: HOLD pro stávající, LIMIT BUY $63–65 pro nové pozice.
+    </div>
+</div>
+
+<!-- ==================== ZÁVĚR DOKUMENTU ==================== -->
+<div class="footer">
+    <strong>📋 Metodika:</strong> DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa.<br>
+    <strong>🔄 Frekvence aktualizace:</strong> DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.<br>
+    <strong>📄 Dokument vygenerován:</strong> 13.05.2026 14:30:00 | Verze 1.0 | Soubor: Portfolio_13052026.html
+</div>
+
+<div class="no-print" style="text-align:center; margin-top:20px; padding:10px; background:#f1f5f9; border-radius:6px;">
+    💡 Tip: Pro tisk použijte Ctrl+P a zvolte "Uložit jako PDF" nebo vytiskněte přímo. Dokument je optimalizován pro formát A4.
+</div>
 
 </body>
 </html>
