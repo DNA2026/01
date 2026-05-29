@@ -5,55 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio.html - Analytické posouzení vybraných akcií</title>
     <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; line-height: 1.6; color: #222; max-width: 1000px; margin: 0 auto; padding: 20px; background: #fff; }
+        h1 { font-size: 1.8em; color: #1a365d; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; margin-top: 0; }
+        h2 { font-size: 1.4em; color: #2c5282; margin-top: 30px; margin-bottom: 10px; }
+        h3 { font-size: 1.15em; color: #2d3748; margin-top: 20px; margin-bottom: 8px; }
+        table { width: 100%; border-collapse: collapse; margin: 12px 0 20px 0; font-size: 0.95em; }
+        th, td { border: 1px solid #cbd5e0; padding: 8px 10px; text-align: left; vertical-align: top; }
+        th { background-color: #f7fafc; font-weight: 600; color: #4a5568; }
+        tr:nth-child(even) { background-color: #f9fafb; }
+        .disclaimer { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 15px; font-size: 0.85em; color: #744210; margin-bottom: 25px; border-radius: 4px; }
+        .section { margin-bottom: 45px; padding-bottom: 20px; border-bottom: 1px dashed #cbd5e0; page-break-inside: avoid; }
+        .meta { font-size: 0.9em; color: #4a5568; margin-bottom: 15px; }
+        .emoji { margin-right: 4px; }
+        .signal-buy { background-color: #def7ec; color: #03543f; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+        .signal-sell { background-color: #fde8e8; color: #9b2c2c; padding: 4px 8px; border-radius: 4px; font-weight: bold; }
+        .footer { margin-top: 40px; font-size: 0.8em; color: #718096; text-align: center; border-top: 1px solid #e2e8f0; padding-top: 15px; }
         @media print {
-            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
-            .section { page-break-inside: avoid; }
+            body { margin: 0; padding: 10px; font-size: 11pt; color: #000; }
+            .section { page-break-inside: avoid; margin-bottom: 30px; }
+            table { page-break-inside: avoid; }
+            .disclaimer { background: #fff; border: 1px solid #999; }
+            a { color: #000; text-decoration: none; }
         }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #2c3e50; max-width: 960px; margin: 0 auto; padding: 24px; background: #fff; }
-        h1 { color: #1a365d; border-bottom: 2px solid #1a365d; padding-bottom: 10px; }
-        h2 { color: #2c5282; margin-top: 30px; }
-        h3 { color: #4a5568; margin-bottom: 8px; }
-        table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 0.95em; }
-        th, td { border: 1px solid #cbd5e0; padding: 10px; text-align: left; }
-        th { background-color: #edf2f7; font-weight: 600; }
-        .disclaimer { background-color: #fffbeb; border-left: 4px solid #f59e0b; padding: 14px; margin-bottom: 24px; font-size: 0.88em; color: #92400e; }
-        .section { margin-bottom: 40px; border-top: 1px dashed #a0aec0; padding-top: 20px; }
-        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-weight: bold; font-size: 0.85em; }
-        .bg-green { background-color: #c6f6d5; color: #22543d; }
-        .bg-yellow { background-color: #fefcbf; color: #744210; }
-        .bg-red { background-color: #fed7d7; color: #742a2a; }
-        .emoji { font-size: 1.15em; }
-        .meta { color: #718096; font-size: 0.9em; margin-bottom: 4px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 6px; }
-        .footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid #e2e8f0; font-size: 0.85em; color: #718096; text-align: center; }
     </style>
 </head>
 <body>
 
+    <h1>📊 Analytické posouzení vybraných symbolů | Portfolio.html</h1>
+    <div class="meta">Exportováno: 29.05.2026 06:30:15 | Metodika: DNA 5.0 Hybrid Model | Platnost dat: 29.05.2026</div>
+
     <div class="disclaimer">
-        ⚠️ <strong>Upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
+        <strong>⚠ Upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
     </div>
 
-    <h1>📊 Analytické posouzení vybraných symbolů | Portfolio.html</h1>
-    <p class="meta">Exportováno: 28.05.2026 09:15:00 | Metodika: DNA 5.0 Hybrid Model</p>
-
-    <!-- ================= YPF ================= -->
+    <!-- YPF -->
     <div class="section">
         <h2>📊 Analytické posouzení vývoje YPF, YPF Sociedad Anónima</h2>
-        <p class="meta"><span class="emoji">🌍</span> Burza: NYSE | <span class="emoji">🏭</span> Sektor: Energie / Těžba ropy a plynu | <span class="emoji">💵</span> Aktuální cena: $51,59 USD</p>
+        <div class="meta">Burza: NYSE | Sektor: Energie / Těžba ropy a plynu | Aktuální cena: $52,00 USD</div>
         
         <h3>🔷 Detail společnosti</h3>
-        <p>YPF je přední argentinská energetická společnost s rozsáhlými operacemi v těžbě ropy, zemního plynu a rafinérském průmyslu. Společnost klade důraz na rozvoj nekonvenčních ložisek v oblasti Vaca Muerta, která patří mezi největší světové zásoby břidlicové ropy a plynu.</p>
+        <p>YPF je největší argentinská energetická společnost s dominancí v těžbě ropy, zemního plynu a rafinérském průmyslu. Firma se soustředí na rozvoj nekonvenčních ložisek v oblasti Vaca Muerta, která patří mezi největší světové zásoby břidlicové ropy a plynu. Společnost prochází restrukturalizací zaměřenou na snížení dluhu a zvýšení produkčních kapacit.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
             <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>90</td><td><span class="badge bg-green">🟢</span></td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td>1</td><td><span class="badge bg-green">🟢</span></td><td>Strong Buy</td></tr>
-            <tr><td>Industry Rank (IR)</td><td>4</td><td><span class="badge bg-green">🟢</span></td><td>Top 1% sektoru</td></tr>
-            <tr><td>Smart Score (SS)</td><td>9/10</td><td><span class="badge bg-green">🟢</span></td><td>Velmi pozitivní algoritmické hodnocení</td></tr>
-            <tr><td>Upside Potential</td><td>2,1 %</td><td><span class="badge bg-yellow">🟡</span></td><td>Nízký až střední růstový potenciál</td></tr>
+            <tr><td>DNA Skóre</td><td>90</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td>1</td><td>🟢</td><td>Nejvyšší doporučení</td></tr>
+            <tr><td>Smart Score (SS)</td><td>9</td><td>🟢</td><td>Velmi pozitivní algoritmické hodnocení</td></tr>
+            <tr><td>Upside Potential</td><td>1,3%</td><td>🟡</td><td>Omezený krátkodobý růstový prostor</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
@@ -61,65 +60,63 @@
             <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
             <tr><td>DMA (Trend)</td><td>BULLISH</td><td>🟢</td><td>Cena nad klouzavými průměry</td></tr>
             <tr><td>RAVI (Momentum)</td><td>BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
-            <tr><td>Sharpe Ratio</td><td>0,89</td><td>🟡</td><td>Vyvážený poměr výnos/riziko</td></tr>
-            <tr><td>Pivot Point</td><td>BULLISH</td><td>🟢</td><td>Podpora dalšího růstu</td></tr>
+            <tr><td>Sharpe Ratio</td><td>0,94</td><td>🟡</td><td>Vyvážený poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším směrem</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $51,59</th></tr>
-            <tr><td>High Target</td><td>$54,50</td><td>+5,6 %</td></tr>
-            <tr><td>Average Target</td><td>$52,70</td><td>+2,1 %</td></tr>
-            <tr><td>Low Target</td><td>$50,00</td><td>-3,1 %</td></tr>
-            <tr><td>Aktuální cena</td><td>$51,59</td><td>—</td></tr>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $52,00</th></tr>
+            <tr><td>High Target</td><td>$54,50</td><td>+4,8%</td></tr>
+            <tr><td>Average Target</td><td>$52,70</td><td>+1,3%</td></tr>
+            <tr><td>Low Target</td><td>$49,00</td><td>-5,8%</td></tr>
+            <tr><td>Aktuální cena</td><td>$52,00</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><span class="emoji">✅</span> <strong>Pozitiva:</strong></p>
-        <ul>
-            <li>Rekordní těžba v ložisku Vaca Muerta a pokles provozních nákladů.</li>
-            <li>Postupné snižování dluhové zátěže a zlepšování volného cash flow.</li>
-            <li>Vládní reformy energetického sektoru podporují investice a stabilizují marže.</li>
-            <li><strong>Earnings:</strong> Očekává se růst provozního zisku díky vyšší produkci a optimalizaci nákladů.</li>
-        </ul>
-        <p><span class="emoji">❌</span> <strong>Rizika:</strong></p>
-        <ul>
-            <li>Politická nestabilita v Argentině a možná změna fiskální politiky.</li>
-            <li>Měnové riziko spojené s fluktuacemi argentinského pesa vůči dolaru.</li>
-            <li>Regulace cen energií a environmentální tlaky na těžbu břidlicové ropy.</li>
-        </ul>
+        <p><strong>✅ Pozitiva:</strong><br>
+        🟢 Rekordní těžba v ložisku Vaca Muerta a snižování provozních nákladů.<br>
+        🟢 Postupné snižování dluhové zátěže a zlepšující se volný cash flow.<br>
+        🟢 Vládní reformy energetického sektoru podporují investice a stabilizují marže.<br>
+        🟢 Atraktivní dividendová politika a pravidelné zpětné nákupy akcií.</p>
+
+        <p><strong>❌ Rizika:</strong><br>
+        🔴 Politická nestabilita v Argentině a možná změna fiskální politiky.<br>
+        🔴 Měnové riziko spojené s fluktuacemi argentinského pesa vůči dolaru.<br>
+        🔴 Regulace cen energií a environmentální tlaky na těžbu břidlicové ropy.<br>
+        🔴 Omezený krátkodobý upside signalizuje nasycení aktuální ceny.</p>
 
         <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="badge bg-green">🟢 BUY SIGNAL</p>
+        <div class="signal-buy">🟢 BUY SIGNAL</div>
         <table>
             <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Entry Zone</td><td>$50,80–52,20 (aktuální konsolidace)</td></tr>
-            <tr><td>Stop Loss</td><td>$46,50 (-9,8 % od aktuální ceny)</td></tr>
-            <tr><td>Target 1</td><td>$52,70 (+2,1 %)</td></tr>
-            <tr><td>Target 2</td><td>$54,50 (+5,6 %)</td></tr>
-            <tr><td>Position Size</td><td>3–5 % portfolia (střední volatilita, růstový profil)</td></tr>
-            <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo Zacks Rank na 4–5 → přehodnotit na SELL</td></tr>
+            <tr><td>Entry Zone</td><td>$51,00–53,00 (aktuální konsolidace)</td></tr>
+            <tr><td>Stop Loss</td><td>$46,50 (-10,6% od aktuální ceny)</td></tr>
+            <tr><td>Target 1</td><td>$52,70 (+1,3%)</td></tr>
+            <tr><td>Target 2</td><td>$54,50 (+4,8%)</td></tr>
+            <tr><td>Position Size</td><td>3–5% portfolia (střední volatilita, růstový profil)</td></tr>
+            <tr><td>Rebalance Trigger</td><td>Pokud DNA klesne pod 78 nebo ZR na 4–5 → přehodnotit na SELL</td></tr>
         </table>
 
-        <p><strong>Shrnutí :</strong> YPF představuje silně fundamentálně hodnocenou akcii s potvrzeným růstovým trendem. Společnost těží z rekordní produkce v největším jihoamerickém břidlicovém ložisku, zlepšující se bilance a příznivého regulatorního prostředí. Technické indikátory potvrzují sílu kupců. Hlavní příležitostí je pokračující expanze těžby a stabilizace měny, zatímco hlavním rizikem zůstává politická nejistota v regionu. Pro nové investory je vhodný vstup v aktuálním pásmu s pevným stop lossem, pro držitele se doporučuje cílit na $52–54 s omezením pozice na 3–5 % portfolia.</p>
+        <h3>Shrnutí :</h3>
+        <p>YPF představuje silně fundamentálně hodnocenou akcii s potvrzeným růstovým trendem. Společnost těží z rekordní produkce v největším jihoamerickém břidlicovém ložisku, zlepšující se bilance a příznivého regulatorního prostředí. Technické indikátory potvrzují sílu kupců, ačkoliv krátkodobý prostor pro růst je omezený. Hlavní příležitostí je pokračující expanze těžby a stabilizace měny, zatímco hlavním rizikem zůstává politická nejistota v regionu. Pro nové investory je vhodný vstup v aktuálním pásmu s pevným stop lossem, pro držitele se doporučuje cílit na $52–54 s omezením pozice na 3–5 % portfolia.</p>
     </div>
 
-    <!-- ================= MCD ================= -->
+    <!-- MCD -->
     <div class="section">
         <h2>📊 Analytické posouzení vývoje MCD, McDonald's Corporation</h2>
-        <p class="meta"><span class="emoji">🌍</span> Burza: NYSE | <span class="emoji">🍔</span> Sektor: Spotřební zboží / Restaurace | <span class="emoji">💵</span> Aktuální cena: $280,92 USD</p>
+        <div class="meta">Burza: NYSE | Sektor: Spotřební zboží / Restaurace | Aktuální cena: $277,97 USD</div>
         
         <h3>🔷 Detail společnosti</h3>
-        <p>McDonald's je největší světový řetězec rychlého občerstvení provozující tisíce restaurací formou franšíz. Firma je známá silnou globální značkou, digitálními inovacemi a konzistentním růstem tržeb napříč různými ekonomickými cykly.</p>
+        <p>McDonald's je největší světový řetězec rychlého občerstvení provozující tisíce restaurací převážně formou franšíz. Firma je známá silnou globální značkou, digitálními inovacemi a konzistentním růstem tržeb napříč různými ekonomickými cykly. Klade důraz na automatizaci, doručování a udržitelnost.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
             <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>47</td><td><span class="badge bg-red">🔴</span></td><td>Pod hranicí BUY → slabý fundament</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td>4</td><td><span class="badge bg-red">🔴</span></td><td>Underperform → horší než trh</td></tr>
-            <tr><td>Industry Rank (IR)</td><td>193</td><td><span class="badge bg-red">🔴</span></td><td>Spodní kvartil sektoru</td></tr>
-            <tr><td>Smart Score (SS)</td><td>6/10</td><td><span class="badge bg-yellow">🟡</span></td><td>Neutrální algoritmické hodnocení</td></tr>
-            <tr><td>Upside Potential</td><td>18,7 %</td><td><span class="badge bg-green">🟢</span></td><td>Technický růstový potenciál</td></tr>
+            <tr><td>DNA Skóre</td><td>49</td><td>🔴</td><td>Pod hranicí BUY → slabý fundament</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td>4</td><td>🔴</td><td>Horší než trh → signál k prodeji</td></tr>
+            <tr><td>Smart Score (SS)</td><td>7</td><td>🟡</td><td>Neutrální algoritmické hodnocení</td></tr>
+            <tr><td>Upside Potential</td><td>20,0%</td><td>🟢</td><td>Technický růstový potenciál</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
@@ -127,118 +124,114 @@
             <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
             <tr><td>DMA (Trend)</td><td>BEARISH</td><td>🔴</td><td>Cena pod klouzavými průměry</td></tr>
             <tr><td>RAVI (Momentum)</td><td>BEARISH</td><td>🔴</td><td>Negativní momentum</td></tr>
-            <tr><td>Sharpe Ratio</td><td>-0,44</td><td>🔴</td><td>Špatný poměr výnos/riziko</td></tr>
-            <tr><td>Pivot Point</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším směrem</td></tr>
+            <tr><td>Sharpe Ratio</td><td>-0,48</td><td>🔴</td><td>Špatný poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td>BULLISH</td><td>🟢</td><td>Možná krátkodobá odrazová úroveň</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $280,92</th></tr>
-            <tr><td>High Target</td><td>$335,00</td><td>+19,2 %</td></tr>
-            <tr><td>Average Target</td><td>$333,50</td><td>+18,7 %</td></tr>
-            <tr><td>Low Target</td><td>$305,00</td><td>+8,6 %</td></tr>
-            <tr><td>Aktuální cena</td><td>$280,92</td><td>—</td></tr>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $277,97</th></tr>
+            <tr><td>High Target</td><td>$350,00</td><td>+25,9%</td></tr>
+            <tr><td>Average Target</td><td>$333,60</td><td>+20,0%</td></tr>
+            <tr><td>Low Target</td><td>$295,00</td><td>+6,1%</td></tr>
+            <tr><td>Aktuální cena</td><td>$277,97</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><span class="emoji">✅</span> <strong>Pozitiva:</strong></p>
-        <ul>
-            <li>Silná franšízová struktura s vysokými maržemi a stabilními cash flow.</li>
-            <li>Digitální transformace a expanze samoobslužných kiosků zvyšují obraty.</li>
-            <li>Globální rozpoznatelnost značky a odolnost vůči ekonomickým recesím.</li>
-            <li><strong>Earnings:</strong> Management uvádí tlak na marže kvůli vyšším mzdám a nákladům na suroviny, očekává se mírné zpomalení růstu tržeb v krátkém období.</li>
-        </ul>
-        <p><span class="emoji">❌</span> <strong>Rizika:</strong></p>
-        <ul>
-            <li>Inflace surovin a mezd stlačuje provozní marže franšízantů.</li>
-            <li>Zdravotní trendy a tlak na snižování kalorií/cukru v menu.</li>
-            <li>Měnové riziko a silná konkurence v segmentu rychlého občerstvení.</li>
-        </ul>
+        <p><strong>✅ Pozitiva:</strong><br>
+        🟢 Silná franšízová struktura s vysokými maržemi a stabilními cash flow.<br>
+        🟢 Digitální transformace a expanze samoobslužných kiosků zvyšují obraty.<br>
+        🟢 Globální rozpoznatelnost značky a odolnost vůči ekonomickým recesím.<br>
+        🟢 Stabilní výplaty dividend a historicky prověřený byznys model.</p>
+
+        <p><strong>❌ Rizika:</strong><br>
+        🔴 Inflace surovin a mezd stlačuje provozní marže franšízantů.<br>
+        🔴 Zdravotní trendy a tlak na snižování kalorií/cukru v menu.<br>
+        🔴 Měnové riziko a silná konkurence v segmentu rychlého občerstvení.<br>
+        🔴 Technický obraz a fundamentální skóre signalizují dočasnou slabost.</p>
 
         <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="badge bg-red">🔴 SELL / REDUCE SIGNAL</p>
+        <div class="signal-sell">🔴 SELL / REDUCE SIGNAL</div>
         <table>
             <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Exit Zone</td><td>$285,00–295,00 (krátkodobé rally)</td></tr>
-            <tr><td>Trailing Stop</td><td>$260,00 (-7,4 % od aktuální ceny)</td></tr>
-            <tr><td>Target 1 (Short)</td><td>$265,00 (-5,7 %)</td></tr>
-            <tr><td>Target 2 (Medium)</td><td>$245,00 (-12,8 %)</td></tr>
-            <tr><td>Position Size</td><td>Snížit na 1–2 % portfolia nebo uzavřít</td></tr>
+            <tr><td>Exit Zone</td><td>$280,00–290,00 (krátkodobé rally)</td></tr>
+            <tr><td>Trailing Stop</td><td>$260,00 (-6,5% od aktuální ceny)</td></tr>
+            <tr><td>Target 1 (Short)</td><td>$265,00 (-4,7%)</td></tr>
+            <tr><td>Target 2 (Medium)</td><td>$245,00 (-11,9%)</td></tr>
+            <tr><td>Position Size</td><td>Snížit na 1–2% portfolia nebo uzavřít</td></tr>
             <tr><td>Rebalance Trigger</td><td>Obnovení fundamentů (DNA > 65, ZR ≤ 2) → zvažet zpětný vstup</td></tr>
         </table>
 
-        <p><strong>Shrnutí :</strong> McDonald's zůstává ikonickou značkou s odolným franšízovým modelem, ale krátkodobě čelí tlaku na marže, inflačním nákladům a slabším fundamentálním ukazatelům. Technické indikátory naznačují medvědí trend a oslabený momentum. Přestože dlouhodobý potenciál zůstává solidní, aktuální kombinace nízkého DNA, horšího ratingu a negativního technického obrazu signalizuje opatrnost. Pro konzervativní investory je vhodné pozici snížit nebo uzavřít s cílem na $265–245, dokud se neobnoví fundamentální síla.</p>
+        <h3>Shrnutí :</h3>
+        <p>McDonald's zůstává ikonickou značkou s odolným franšízovým modelem, ale krátkodobě čelí tlaku na marže, inflačním nákladům a slabším fundamentálním ukazatelům. Technické indikátory naznačují medvědí trend a oslabené momentum. Přestože dlouhodobý potenciál zůstává solidní, aktuální kombinace nízkého DNA, horšího ratingu a negativního technického obrazu signalizuje opatrnost. Pro konzervativní investory je vhodné pozici snížit nebo uzavřít s cílem na $265–245, dokud se neobnoví fundamentální síla a tržní důvěra.</p>
     </div>
 
-    <!-- ================= MSTR ================= -->
+    <!-- MSTR -->
     <div class="section">
         <h2>📊 Analytické posouzení vývoje MSTR, MicroStrategy Incorporated</h2>
-        <p class="meta"><span class="emoji">🌍</span> Burza: NASDAQ | <span class="emoji">💻</span> Sektor: Technologie / Business Intelligence & Krypto expozice | <span class="emoji">💵</span> Aktuální cena: $154,20 USD</p>
+        <div class="meta">Burza: NASDAQ | Sektor: Technologie / Business Intelligence & Krypto expozice | Aktuální cena: $151,64 USD</div>
         
         <h3>🔷 Detail společnosti</h3>
-        <p>Původně poskytovatel softwaru pro business intelligence se MicroStrategy transformovala na největšího korporátního držitele Bitcoinu. Akcie nyní fungují jako páka na vývoj kryptoměnového trhu, přičemž tradiční softwarový byznys generuje stabilní, ale marginální výnosy.</p>
+        <p>Původně poskytovatel softwaru pro business intelligence se MicroStrategy transformovala na největšího korporátního držitele Bitcoinu. Akcie nyní fungují jako páka na vývoj kryptoměnového trhu, přičemž tradiční softwarový byznys generuje stabilní, ale marginální výnosy. Společnost využívá dluhové nástroje pro financování dalších nákupů BTC.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
             <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>31</td><td><span class="badge bg-red">🔴</span></td><td>Hluboko pod hranicí BUY → velmi slabý fundament</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td>5</td><td><span class="badge bg-red">🔴</span></td><td>Strong Sell → nejhorší doporučení</td></tr>
-            <tr><td>Industry Rank (IR)</td><td>101</td><td><span class="badge bg-yellow">🟡</span></td><td>Střední pozice v sektoru</td></tr>
-            <tr><td>Smart Score (SS)</td><td>1/10</td><td><span class="badge bg-red">🔴</span></td><td>Velmi negativní algoritmické hodnocení</td></tr>
-            <tr><td>Upside Potential</td><td>110,5 %</td><td><span class="badge bg-green">🟢</span></td><td>Extrémní teoretický růstový potenciál</td></tr>
+            <tr><td>DNA Skóre</td><td>31</td><td>🔴</td><td>Hluboko pod hranicí BUY → velmi slabý fundament</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td>5</td><td>🔴</td><td>Nejhorší doporučení</td></tr>
+            <tr><td>Smart Score (SS)</td><td>1</td><td>🔴</td><td>Velmi negativní algoritmické hodnocení</td></tr>
+            <tr><td>Upside Potential</td><td>114,1%</td><td>🟢</td><td>Extrémní teoretický růstový potenciál</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
         <table>
             <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-            <tr><td>DMA (Trend)</td><td>BEARISH</td><td>🔴</td><td>Cena pod klouzavými průměry</td></tr>
+            <tr><td>DMA (Trend)</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace v pásmu</td></tr>
             <tr><td>RAVI (Momentum)</td><td>NEUTRAL</td><td>🟡</td><td>Chybí jasný směr</td></tr>
-            <tr><td>Sharpe Ratio</td><td>-0,91</td><td>🔴</td><td>Velmi špatný poměr výnos/riziko</td></tr>
+            <tr><td>Sharpe Ratio</td><td>-0,96</td><td>🔴</td><td>Velmi špatný poměr výnos/riziko</td></tr>
             <tr><td>Pivot Point</td><td>BEARISH</td><td>🔴</td><td>Tlak na prodej</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $154,20</th></tr>
-            <tr><td>High Target</td><td>$450,00</td><td>+191,8 %</td></tr>
-            <tr><td>Average Target</td><td>$324,50</td><td>+110,5 %</td></tr>
-            <tr><td>Low Target</td><td>$120,00</td><td>-22,2 %</td></tr>
-            <tr><td>Aktuální cena</td><td>$154,20</td><td>—</td></tr>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $151,64</th></tr>
+            <tr><td>High Target</td><td>$400,00</td><td>+163,8%</td></tr>
+            <tr><td>Average Target</td><td>$324,70</td><td>+114,1%</td></tr>
+            <tr><td>Low Target</td><td>$120,00</td><td>-20,9%</td></tr>
+            <tr><td>Aktuální cena</td><td>$151,64</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><span class="emoji">✅</span> <strong>Pozitiva:</strong></p>
-        <ul>
-            <li>Přímá expozice na Bitcoin s možností výrazného zhodnocení při býčím trhu.</li>
-            <li>Strategie kontinuální akumulace BTC a dluhové financování s nízkými sazbami.</li>
-            <li>Možnost využití jako proxy investice do kryptoměn v regulovaném akciovém trhu.</li>
-            <li><strong>Earnings:</strong> Tržby ze softwaru stagnují, hodnota je odvozena hlavně od držby BTC a dluhových nástrojů, což vytváří vysokou volatilitu výsledků.</li>
-        </ul>
-        <p><span class="emoji">❌</span> <strong>Rizika:</strong></p>
-        <ul>
-            <li>Extrémní volatilita vázaná na cenu Bitcoinu a regulatorní nejistotu.</li>
-            <li>Vysoká zadluženost a riziko likvidace při výrazném poklesu trhu.</li>
-            <li>Odtržení ceny akcií od fundamentů softwarového byznysu a účetní dopady.</li>
-        </ul>
+        <p><strong>✅ Pozitiva:</strong><br>
+        🟢 Přímá expozice na Bitcoin s možností výrazného zhodnocení při býčím trhu.<br>
+        🟢 Strategie kontinuální akumulace BTC a dluhové financování s nízkými sazbami.<br>
+        🟢 Možnost využití jako proxy investice do kryptoměn v regulovaném akciovém trhu.<br>
+        🟢 Extrémní upside láká rizikové kapitály při očekávání růstu digitálních aktiv.</p>
+
+        <p><strong>❌ Rizika:</strong><br>
+        🔴 Extrémní volatilita vázaná na cenu Bitcoinu a regulatorní nejistotu.<br>
+        🔴 Vysoká zadluženost a riziko likvidace při výrazném poklesu trhu.<br>
+        🔴 Odtržení ceny akcií od fundamentů softwarového byznysu a účetní dopady.<br>
+        🔴 Technické a fundamentální skóre ukazují na vysokou pravděpodobnost ztráty.</p>
 
         <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="badge bg-red">🔴 SELL / AVOID SIGNAL</p>
+        <div class="signal-sell">🔴 SELL / AVOID SIGNAL</div>
         <table>
             <tr><th>Parametr</th><th>Hodnota</th></tr>
             <tr><td>Exit Zone</td><td>$155,00–170,00 (při technickém odrazu)</td></tr>
-            <tr><td>Stop Loss</td><td>$135,00 (-12,4 %)</td></tr>
-            <tr><td>Target 1 (Down)</td><td>$120,00 (-22,2 %)</td></tr>
-            <tr><td>Target 2 (Recovery)</td><td>$200,00 (+29,7 %)</td></tr>
-            <tr><td>Position Size</td><td>0–1 % portfolia (spekulativní nástroj)</td></tr>
-            <tr><td>Rebalance Trigger</td><td>Stabilizace trhu a zlepšení fundamentů (DNA > 60, ZR ≤ 2) → zvažet zpětný vstup</td></tr>
+            <tr><td>Stop Loss</td><td>$135,00 (-10,9% od aktuální ceny)</td></tr>
+            <tr><td>Target 1 (Down)</td><td>$120,00 (-20,9%)</td></tr>
+            <tr><td>Target 2 (Recovery)</td><td>$200,00 (+31,9%)</td></tr>
+            <tr><td>Position Size</td><td>0–1% portfolia (spekulativní nástroj)</td></tr>
+            <tr><td>Rebalance Trigger</td><td>Stabilizace BTC nad klíčovou úroveň a zlepšení fundamentů (DNA > 60) → zvažet zpětný vstup</td></tr>
         </table>
 
-        <p><strong>Shrnutí :</strong> MicroStrategy se stala finančním instrumentem s extrémní volatilitou přímo navázanou na cenu Bitcoinu. Přestože nabízí teoretický upside přes 110 %, fundamentální obraz je velmi slabý, technické indikátory naznačují medvědí tlak a riziko ztráty kapitálu je vysoké. Akcie je vhodná pouze pro spekulativní investory s vysokou tolerancí rizika, kteří rozumějí cyklům kryptoměn. Pro většinu portfolií je vhodné pozici uzavřít nebo výrazně omezit, dokud se trh neustálí a nezlepší se dlouhodobé fundamenty.</p>
+        <h3>Shrnutí :</h3>
+        <p>MicroStrategy se stala finančním instrumentem s extrémní volatilitou přímo navázanou na cenu Bitcoinu. Přestože nabízí teoretický upside přes 110 %, fundamentální obraz je velmi slabý, technické indikátory naznačují medvědí tlak a riziko ztráty kapitálu je vysoké. Akcie je vhodná pouze pro spekulativní investory s vysokou tolerancí rizika, kteří rozumějí cyklům kryptoměn. Pro většinu portfolií je vhodné pozici uzavřít nebo výrazně omezit, dokud se trh neustálí a nezlepší se dlouhodobé fundamenty.</p>
     </div>
 
     <div class="footer">
-        <p>Dokument vygenerován: 28.05.2026 09:15:00 | Verze 1.0 | Metodika: DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií.</p>
-        <p>Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</p>
+        <p>Dokument vygenerován: 29.05.2026 06:30:15 | Verze 2.1 | Metodika: DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</p>
     </div>
 
 </body>
