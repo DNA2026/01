@@ -14,44 +14,43 @@
             padding: 20px;
             background-color: #f9f9f9;
         }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #2c3e50;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+            font-size: 24px;
+        }
+        h2 {
+            color: #2980b9;
+            font-size: 20px;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #34495e;
+            font-size: 18px;
+            margin-top: 20px;
         }
         .disclaimer {
             background-color: #fff3cd;
             border-left: 5px solid #ffc107;
             padding: 15px;
-            font-size: 0.9em;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            font-size: 14px;
             color: #856404;
-        }
-        .stock-section {
-            background-color: #ffffff;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            page-break-inside: avoid;
-        }
-        h2 {
-            color: #2c3e50;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-            margin-top: 0;
-        }
-        h3 {
-            color: #34495e;
-            font-size: 1.1em;
-            margin-top: 20px;
         }
         table {
             width: 100%;
             border-collapse: collapse;
             margin: 15px 0;
-            font-size: 0.95em;
+            font-size: 14px;
         }
         th, td {
             border: 1px solid #ddd;
@@ -60,203 +59,258 @@
         }
         th {
             background-color: #f2f2f2;
+            color: #333;
             font-weight: bold;
         }
-        .green { color: #27ae60; font-weight: bold; }
-        .red { color: #c0392b; font-weight: bold; }
-        .yellow { color: #f39c12; font-weight: bold; }
         .buy-signal {
             background-color: #d4edda;
-            color: #155724;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
+            border-left: 5px solid #28a745;
+            padding: 15px;
             margin: 15px 0;
         }
         .sell-signal {
             background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 5px;
-            font-weight: bold;
-            text-align: center;
+            border-left: 5px solid #dc3545;
+            padding: 15px;
             margin: 15px 0;
         }
-        .summary-box {
+        .summary {
             background-color: #e8f4f8;
-            border-left: 5px solid #3498db;
+            border-left: 5px solid #17a2b8;
             padding: 15px;
             margin-top: 20px;
             font-style: italic;
         }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            font-size: 12px;
+            color: #777;
+            text-align: center;
+        }
         @media print {
             body { background-color: #fff; }
-            .stock-section { box-shadow: none; border: 1px solid #ddd; }
+            .container { box-shadow: none; padding: 0; }
+            .buy-signal, .sell-signal, .summary, .disclaimer { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
-
-    <div class="header">
+    <div class="container">
         <h1>📊 Analytické posouzení vybraných symbolů | Portfolio.html</h1>
-        <p><strong>Exportováno:</strong> Pátek, 05. června 2026 | <strong>Metodika:</strong> DNA 5.0 Hybrid Model</p>
-    </div>
-
-    <div class="disclaimer">
-        ⚠ <strong>Upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
-    </div>
-
-    <!-- CRDO -->
-    <div class="stock-section">
-        <h2>📊 Analytické posouzení vývoje CRDO, Credo Technology Group</h2>
-        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Technologie / Polovodiče a datová konektivita | <strong>Aktuální cena:</strong> $217,50 USD</p>
+        <p><strong>Exportováno:</strong> 08.06.2026 10:30:00 | <strong>Metodika:</strong> DNA 5.0 Hybrid Model</p>
         
-        <h3>🔷 Detail společnosti</h3>
-        <p>Společnost vyvíjí vysoce výkonná polovodičová řešení pro propojení v datových centrech a cloudové infrastruktuře. Je klíčovým hráčem v éře umělé inteligence, kde exponenciálně roste poptávka po rychlém a spolehlivém přenosu obrovských objemů dat.</p>
-
-        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-        <table>
-            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>92</td><td class="green">🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-            <tr><td>Analytický rating (ZR)</td><td>1</td><td class="green">🟢</td><td>Nejlepší možné doporučení</td></tr>
-            <tr><td>Algoritmické skóre (SS)</td><td>10/10</td><td class="green">🟢</td><td>Maximální důvěra algoritmů</td></tr>
-            <tr><td>Růstový potenciál (Upside)</td><td>20,3%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
-        </table>
-
-        <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong> 🟢 Masivní růst poptávky po AI infrastruktuře, expanze do nových hyperscale datových center, silné ziskové marže a technologické vedení v oblasti vysokorychlostních propojení (800G/1.6T).</p>
-        <p><strong>❌ Rizika:</strong> 🔴 Závislost na několika velkých klíčových klientech, cykličnost polovodičového průmyslu a geopolitické napětí ovlivňující globální dodavatelské řetězce.</p>
-        <p><strong>📈 Earnings (Výsledky):</strong> Společnost pravidelně překonává odhady zisků na akcii (EPS) a vykazuje robustní růst tržeb, což potvrzuje silnou pozici na trhu.</p>
-
-        <div class="buy-signal">🟢 BUY SIGNAL (NÁKUP)</div>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Vstupní zóna</td><td>$210,00 – $220,00</td></tr>
-            <tr><td>Stop Loss</td><td>$185,00 (-15,0 %)</td></tr>
-            <tr><td>Cíl 1</td><td>$240,00 (+10,3 %)</td></tr>
-            <tr><td>Cíl 2</td><td>$261,00 (+20,3 %)</td></tr>
-            <tr><td>Velikost pozice</td><td>3–5 % portfolia (růstový profil)</td></tr>
-        </table>
-
-        <div class="summary-box">
-            <strong>Shrnutí :</strong> Credo je technologický lídr s vynikajícími fundamenty. Díky celosvětovému boomu umělé inteligence a nutnosti modernizace datových center má tato akcie silný a udržitelný růstový potenciál. Pro investory hledající expozici v technologickém sektoru představuje atraktivní příležitost s jasným růstovým příběhem a solidní ochranou prostřednictvím vysokého skóre.
+        <div class="disclaimer">
+            ⚠ <strong>Upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
         </div>
-    </div>
 
-    <!-- FAF -->
-    <div class="stock-section">
+        <!-- FAF -->
         <h2>📊 Analytické posouzení vývoje FAF, First American Financial Corporation</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Finanční služby / Pojištění titulů a nemovitostí | <strong>Aktuální cena:</strong> $65,90 USD</p>
+        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Finanční služby / Titulní pojištění | <strong>Aktuální cena:</strong> $67,02 USD</p>
         
         <h3>🔷 Detail společnosti</h3>
-        <p>Přední americký poskytovatel pojištění titulů, zprostředkovatelských služeb a komplexních řešení pro správu rizik v oblasti nemovitostí. Společnost hraje klíčovou roli při zajišťování bezpečnosti realitních transakcí.</p>
+        <p>First American Financial je přední americká společnost poskytující titulní pojištění, řešení pro správu nemovitostí a služby související s hypotečním trhům. Firma hraje klíčovou roli při převodech nemovitostí a chrání kupující i věřitele před finančními ztrátami z vadných titulů.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
             <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>91</td><td class="green">🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-            <tr><td>Analytický rating (ZR)</td><td>1</td><td class="green">🟢</td><td>Nejlepší možné doporučení</td></tr>
-            <tr><td>Algoritmické skóre (SS)</td><td>9/10</td><td class="green">🟢</td><td>Vysoká důvěra algoritmů</td></tr>
-            <tr><td>Růstový potenciál (Upside)</td><td>30,1%</td><td class="green">🟢</td><td>Výrazný růstový potenciál</td></tr>
+            <tr><td>DNA Skóre</td><td>93</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Analytický Rating (ZR)</td><td>1</td><td>🟢</td><td>Nejlepší možné doporučení</td></tr>
+            <tr><td>Industry Rank (IR)</td><td>90</td><td>🟡</td><td>Top 10 % sektoru</td></tr>
+            <tr><td>VGM Score</td><td>A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+            <tr><td>Algoritmické skóre (SS)</td><td>10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
+            <tr><td>Sentiment</td><td>Bullish</td><td>🟢</td><td>Růstová tržní nálada</td></tr>
+            <tr><td>Růstový potenciál (Upside)</td><td>25,3 %</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
+        </table>
+
+        <h3>📈 Technická analýza & Trendy</h3>
+        <table>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td>BULLISH</td><td>🟢</td><td>Cena nad klouzavými průměry</td></tr>
+            <tr><td>RAVI (Momentum)</td><td>BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
+            <tr><td>Sharpe Ratio</td><td>0,89</td><td>🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td>BULLISH</td><td>🟢</td><td>Podpora dalšího růstu</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong> 🟢 Dominantní tržní pozice, očekávané oživení trhu s nemovitostmi díky stabilizaci úrokových sazeb, diverzifikované příjmy a dlouhodobě udržitelný a atraktivní dividendový výnos.</p>
-        <p><strong>❌ Rizika:</strong> 🔴 Vysoká citlivost na změny úrokových sazeb a hypotečního trhu, regulační tlaky v sektoru finančních služeb a potenciální pokles objemu realitních transakcí při neočekávaném ekonomickém zpomalení.</p>
-        <p><strong>📈 Earnings (Výsledky):</strong> Poslední čtvrtletní výsledky ukázaly lepší než očekávanou ziskovost díky přísné kontrole nákladů a nárůstu objemu pojištění titulů, což potvrdilo odolnost obchodního modelu.</p>
+        <p>✅ <strong>Pozitiva:</strong> Dominantní postavení na trhu s nemovitostmi, vysoké provozní marže a úspěšná digitální transformace, která zrychluje zpracování transakcí. Společnost pravidelně vyplácí atraktivní dividendy.</p>
+        <p>❌ <strong>Rizika:</strong> Citlivost na vývoj úrokových sazeb (vyšší sazby tlumí objem hypoték) a potenciální kybernetická rizika spojená se zpracováním citlivých dat.</p>
+        <p>📈 <strong>Earnings (Výsledky hospodaření):</strong> Společnost pravidelně překonává očekávání analytiků díky přísné kontrole nákladů a rostoucí efektivitě, což se odráží ve stabilním růstu zisku na akcii (EPS).</p>
 
-        <div class="buy-signal">🟢 BUY SIGNAL (NÁKUP)</div>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Vstupní zóna</td><td>$64,00 – $67,00</td></tr>
-            <tr><td>Stop Loss</td><td>$58,00 (-12,0 %)</td></tr>
-            <tr><td>Cíl 1</td><td>$75,00 (+13,8 %)</td></tr>
-            <tr><td>Cíl 2</td><td>$85,70 (+30,1 %)</td></tr>
-            <tr><td>Velikost pozice</td><td>3–5 % portfolia (hodnotový a dividendový profil)</td></tr>
-        </table>
-
-        <div class="summary-box">
-            <strong>Shrnutí :</strong> First American je stabilní a ověřená finanční instituce. Očekávané postupné snižování úrokových sazeb by mohlo výrazně oživit hypoteční trh a tím přímo zvýšit tržby společnosti. Akcie nabízí solidní fundamentální hodnotu a atraktivní dividendu, což z ní činí vhodnou volbu pro dlouhodobé a konzervativnější investory.
+        <div class="buy-signal">
+            <h3>🛡 Risk Management & Doporučení: 🟢 BUY SIGNAL</h3>
+            <table>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Entry Zone (Vstupní zóna)</td><td>$65,00 – $68,50</td></tr>
+                <tr><td>Stop Loss</td><td>$59,50 (-11,2 %)</td></tr>
+                <tr><td>Target 1</td><td>$75,00 (+11,9 %)</td></tr>
+                <tr><td>Target 2</td><td>$84,00 (+25,3 %)</td></tr>
+                <tr><td>Velikost pozice</td><td>3–5 % portfolia</td></tr>
+            </table>
         </div>
-    </div>
 
-    <!-- MCD -->
-    <div class="stock-section">
-        <h2>📊 Analytické posouzení vývoje MCD, McDonald's Corporation</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Spotřební zboží / Restaurace a rychlé občerstvení | <strong>Aktuální cena:</strong> $272,72 USD</p>
+        <div class="summary">
+            <strong>Shrnutí:</strong> Jednoduše řečeno, First American Financial je jako "pojišťovna bezpečného nákupu domu". Má vynikající finanční zdraví a silnou pozici na trhu. Přestože vyšší úrokové sazby mohou dočasně zpomalit počet prodejů nemovitostí, firma je dostatečně efektivní na to, aby si udržela ziskovost. Pro běžného investora představuje solidní příležitost s jasným cílem růstu kolem 25 %, chráněnou pravidelnou dividendou.
+        </div>
+
+        <hr>
+
+        <!-- YPF -->
+        <h2>📊 Analytické posouzení vývoje YPF, YPF Sociedad Anónima</h2>
+        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energie / Těžba ropy a plynu | <strong>Aktuální cena:</strong> $53,50 USD</p>
         
         <h3>🔷 Detail společnosti</h3>
-        <p>Světový lídr v segmentu rychlého občerstvení s rozsáhlou globální sítí franšízových restaurací, známý silnou značkou a konzistentním provozním modelem napříč různými ekonomickými cykly.</p>
+        <p>YPF je přední argentinská energetická společnost s rozsáhlými operacemi v těžbě ropy, zemního plynu a rafinérském průmyslu. Klade důraz na rozvoj nekonvenčních ložisek v oblasti Vaca Muerta, která patří mezi největší světové zásoby břidlicové ropy a plynu.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
             <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>47</td><td class="red">🔴</td><td>Pod hranicí BUY → slabý fundament</td></tr>
-            <tr><td>Analytický rating (ZR)</td><td>4</td><td class="red">🔴</td><td>Podprůměrný výkon vůči trhu</td></tr>
-            <tr><td>Algoritmické skóre (SS)</td><td>5/10</td><td class="yellow">🟡</td><td>Neutrální algoritmické hodnocení</td></tr>
-            <tr><td>Růstový potenciál (Upside)</td><td>22,3%</td><td class="green">🟢</td><td>Pouze technický potenciál, fundamentálně slabé</td></tr>
+            <tr><td>DNA Skóre</td><td>90</td><td>🟢</td><td>Nad hranicí BUY → silný fundament</td></tr>
+            <tr><td>Analytický Rating (ZR)</td><td>1</td><td>🟢</td><td>Nejlepší možné doporučení</td></tr>
+            <tr><td>Industry Rank (IR)</td><td>28</td><td>🟢</td><td>Top 5 % sektoru</td></tr>
+            <tr><td>VGM Score</td><td>A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+            <tr><td>Algoritmické skóre (SS)</td><td>10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
+            <tr><td>Sentiment</td><td>Bullish</td><td>🟢</td><td>Růstová tržní nálada</td></tr>
+            <tr><td>Růstový potenciál (Upside)</td><td>-1,6 %</td><td>🔴</td><td>Krátkodobý tlak na cenu</td></tr>
+        </table>
+
+        <h3>📈 Technická analýza & Trendy</h3>
+        <table>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td>BULLISH</td><td>🟢</td><td>Cena nad klouzavými průměry</td></tr>
+            <tr><td>RAVI (Momentum)</td><td>BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
+            <tr><td>Sharpe Ratio</td><td>1,10</td><td>🟡</td><td>Vyvážený poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td>BEARISH</td><td>🔴</td><td>Krátkodobý tlak na prodej</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong> 🟢 Silná globální rozpoznatelnost značky, odolný franšízový model generující stabilní cash flow a pokračující digitální transformace včetně expanze donáškových služeb.</p>
-        <p><strong>❌ Rizika:</strong> 🔴 Inflační tlaky na ceny surovin a mezd, které stlačují provozní marže franšízantů, změny spotřebitelských návyků směrem ke zdravější stravě a silná lokální i globální konkurence.</p>
-        <p><strong>📈 Earnings (Výsledky):</strong> Nedávné výsledky ukázaly mírné zpomalení růstu tržeb v klíčových regionech a tlak na provozní marže, což vedlo analytiky k opatrnějším výhledům do budoucna.</p>
+        <p>✅ <strong>Pozitiva:</strong> Rekordní těžba v ložisku Vaca Muerta, postupné snižování dluhové zátěže a vládní reformy podporující energetickou nezávislost Argentiny.</p>
+        <p>❌ <strong>Rizika:</strong> Politická nestabilita v Argentině, vysoká inflace a měnové riziko spojené s fluktuacemi argentinského pesa. Krátkodobě je akcie mírně nadhodnocená (záporný upside).</p>
+        <p>📈 <strong>Earnings (Výsledky hospodaření):</strong> Společnost vykazuje silný volný cash flow a zlepšující se EBITDA marže díky optimalizaci těžebních nákladů, navzdory složitému makroekonomickému prostředí.</p>
 
-        <div class="sell-signal">🔴 SELL / REDUCE SIGNAL (PRODEJ / SNÍŽENÍ POZICE)</div>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Výstupní zóna</td><td>$275,00 – $285,00 (při krátkodobém rally)</td></tr>
-            <tr><td>Stop Loss</td><td>$255,00 (-6,5 %)</td></tr>
-            <tr><td>Cíl (pokles)</td><td>$245,00 (-10,1 %)</td></tr>
-            <tr><td>Velikost pozice</td><td>Snížit na 1–2 % portfolia nebo zcela uzavřít</td></tr>
-        </table>
-
-        <div class="summary-box">
-            <strong>Shrnutí :</strong> Ačkoliv je McDonald's ikonickou a dlouhodobě stabilní značkou, krátkodobě čelí významným tlakům na ziskovost a slabším fundamentálním ukazatelům. Kombinace nízkého skóre a horšího ratingu signalizuje nutnost opatrnosti. Pro konzervativní investory může být vhodné vyčkat na zlepšení fundamentů nebo současnou pozici v portfoliu snížit.
+        <div class="buy-signal">
+            <h3>🛡 Risk Management & Doporučení: 🟢 BUY SIGNAL (s opatrností)</h3>
+            <table>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Entry Zone (Vstupní zóna)</td><td>$51,00 – $53,50 (vyčkat na mírnou korekci)</td></tr>
+                <tr><td>Stop Loss</td><td>$47,50 (-11,2 %)</td></tr>
+                <tr><td>Target 1</td><td>$56,00 (+4,7 %)</td></tr>
+                <tr><td>Target 2</td><td>$60,00 (+12,1 %)</td></tr>
+                <tr><td>Velikost pozice</td><td>2–4 % portfolia (zvýšená volatilita)</td></tr>
+            </table>
         </div>
-    </div>
 
-    <!-- MSTR -->
-    <div class="stock-section">
-        <h2>📊 Analytické posouzení vývoje MSTR, MicroStrategy Incorporated</h2>
-        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Technologie / Business Intelligence a kryptoměnová expozice | <strong>Aktuální cena:</strong> $129,37 USD</p>
+        <div class="summary">
+            <strong>Shrnutí:</strong> YPF je jako "těžařská firma s obrovským nevyužitým potenciálem". Má přístup k jedněm z největších zásob ropy na světě a její základní byznys vylepšuje. Nicméně, protože je vázána na Argentinu, nese riziko politických rozhodnutí a měnových otřesů. Pro laika: Je to dobrá dlouhodobá sázka na energii, ale nenechte se zlákat krátkodobým růstem, počkejte na lepší cenu a vždy mějte nastavenou pojistku (stop loss).
+        </div>
+
+        <hr>
+
+        <!-- FUTU -->
+        <h2>📊 Analytické posouzení vývoje FUTU, Futu Holdings Limited</h2>
+        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Finanční služby / Online brokeráž | <strong>Aktuální cena:</strong> $92,33 USD</p>
         
         <h3>🔷 Detail společnosti</h3>
-        <p>Původně softwarová společnost poskytující analytické nástroje, která se strategicky transformovala na největšího korporátního držitele Bitcoinu. Akcie nyní primárně reflektují vývoj ceny této kryptoměny s vysokou pákou.</p>
+        <p>Futu Holdings je čínská technologická společnost poskytující online brokerážní služby, správu majetku a finanční informace prostřednictvím svých vlajkových platforem (např. Moomoo). Firma se agresivně expanzuje na mezinárodní trhy, včetně USA, Singapuru a Austrálie.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
             <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td>27</td><td class="red">🔴</td><td>Hluboko pod hranicí BUY → velmi slabý fundament</td></tr>
-            <tr><td>Analytický rating (ZR)</td><td>5</td><td class="red">🔴</td><td>Silný prodej → nejhorší možné doporučení</td></tr>
-            <tr><td>Algoritmické skóre (SS)</td><td>1/10</td><td class="red">🔴</td><td>Velmi negativní algoritmické hodnocení</td></tr>
-            <tr><td>Růstový potenciál (Upside)</td><td>133,6%</td><td class="green">🟢</td><td>Extrémní teoretický potenciál, ale s obřím rizikem</td></tr>
+            <tr><td>DNA Skóre</td><td>56</td><td>🔴</td><td>Pod hranicí BUY → slabý fundament</td></tr>
+            <tr><td>Analytický Rating (ZR)</td><td>5</td><td>🔴</td><td>Nejhorší možné doporučení (Strong Sell)</td></tr>
+            <tr><td>Industry Rank (IR)</td><td>147</td><td>🔴</td><td>Spodní kvartil sektoru</td></tr>
+            <tr><td>VGM Score</td><td>B</td><td>🟢</td><td>Dobrá kombinace hodnoty a růstu</td></tr>
+            <tr><td>Algoritmické skóre (SS)</td><td>10/10</td><td>🟢</td><td>Algoritmy vnímají silné momentum</td></tr>
+            <tr><td>Sentiment</td><td>Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+            <tr><td>Růstový potenciál (Upside)</td><td>87,3 %</td><td>🟢</td><td>Extrémní teoretický růstový potenciál</td></tr>
+        </table>
+
+        <h3>📈 Technická analýza & Trendy</h3>
+        <table>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td>BEARISH</td><td>🔴</td><td>Cena pod klouzavými průměry</td></tr>
+            <tr><td>RAVI (Momentum)</td><td>BEARISH</td><td>🔴</td><td>Negativní momentum</td></tr>
+            <tr><td>Sharpe Ratio</td><td>0,13</td><td>🔴</td><td>Špatný poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td>BEARISH</td><td>🔴</td><td>Tlak na prodej</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong> 🟢 Přímá expozice na růst Bitcoinu v regulovaném akciovém trhu a strategie agresivní akumulace kryptoměn pomocí dluhového financování s nízkými sazbami.</p>
-        <p><strong>❌ Rizika:</strong> 🔴 Extrémní volatilita vázaná na cenu Bitcoinu, vysoká zadluženost společnosti, riziko odlivu investorů při medvědím trhu s kryptoměnami a úplné odtržení ceny od fundamentů původního softwarového byznysu.</p>
-        <p><strong>📈 Earnings (Výsledky):</strong> Tržby ze softwarového segmentu dlouhodobě stagnují, zatímco účetní výsledky jsou výrazně a nepředvídatelně ovlivňovány znehodnocením nebo zisky z držby digitálních aktiv.</p>
+        <p>✅ <strong>Pozitiva:</strong> Rychlý růst počtu klientů mimo Čínu, silná uživatelská platforma s nízkými poplatky a vysoká ziskovost z úrokových marží.</p>
+        <p>❌ <strong>Rizika:</strong> Intenzivní regulační tlak ze strany čínské vlády na finanční technologie, geopolitické napětí mezi USA a Čínou a hrozba omezení přeshraničních toků kapitálu.</p>
+        <p>📈 <strong>Earnings (Výsledky hospodaření):</strong> Ačkoliv firma vykazuje silný růst tržeb a zisku, analytici snižují hodnocení kvůli obavám z udržitelnosti tohoto růstu v případě zpřísnění regulací.</p>
 
-        <div class="sell-signal">🔴 SELL / AVOID SIGNAL (PRODEJ / VYHNOUT SE)</div>
+        <div class="sell-signal">
+            <h3>🛡 Risk Management & Doporučení: 🔴 SELL / AVOID SIGNAL</h3>
+            <table>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Exit Zone (Zóna pro výstup)</td><td>$95,00 – $100,00 (při technickém odrazu)</td></tr>
+                <tr><td>Stop Loss</td><td>$85,00 (-7,9 %)</td></tr>
+                <tr><td>Target 1 (Short)</td><td>$75,00 (-18,8 %)</td></tr>
+                <tr><td>Velikost pozice</td><td>0–1 % portfolia (pouze pro spekulativní investory)</td></tr>
+            </table>
+        </div>
+
+        <div class="summary">
+            <strong>Shrnutí:</strong> Futu je jako "moderní banka pro obchodování na burze v kapse". Technologie a růst jsou skvělé, ale firma je jako na houpačce závislá na politických rozhodnutích v Číně. Pro běžného investora je toto riziko příliš vysoké. I když čísla slibují obrovský růst, stín regulací a geopolitiky dělá z této akcie spíše hazard než rozumnou investici. Doporučuje se pozici uzavřít nebo se jí vyhnout.
+        </div>
+
+        <hr>
+
+        <!-- NXST -->
+        <h2>📊 Analytické posouzení vývoje NXST, Nexstar Media Group</h2>
+        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Komunikace / Média a vysílání | <strong>Aktuální cena:</strong> $182,02 USD</p>
+        
+        <h3>🔷 Detail společnosti</h3>
+        <p>Nexstar Media Group je největší vlastník a provozovatel lokálních televizních stanic v USA. Společnost pokrývá významnou část amerických domácností a nedávno rozšířila své portfolio o akvizici televizní sítě The CW, čímž posílila svou pozici v digitálním i tradičním vysílání.</p>
+
+        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Výstupní zóna</td><td>$135,00 – $150,00 (při technickém odrazu)</td></tr>
-            <tr><td>Stop Loss</td><td>$110,00 (-15,0 %)</td></tr>
-            <tr><td>Cíl (pokles)</td><td>$90,00 (-30,4 %)</td></tr>
-            <tr><td>Velikost pozice</td><td>0–1 % portfolia (pouze pro extrémně spekulativní účely)</td></tr>
+            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
+            <tr><td>DNA Skóre</td><td>74</td><td>🟡</td><td>Neutrální fundament</td></tr>
+            <tr><td>Analytický Rating (ZR)</td><td>1</td><td>🟢</td><td>Nejlepší možné doporučení</td></tr>
+            <tr><td>Industry Rank (IR)</td><td>78</td><td>🟡</td><td>Střední pozice v sektoru</td></tr>
+            <tr><td>VGM Score</td><td>C</td><td>🟡</td><td>Průměrná kombinace hodnoty a růstu</td></tr>
+            <tr><td>Algoritmické skóre (SS)</td><td>3/10</td><td>🔴</td><td>Horší než neutrální (Bearish)</td></tr>
+            <tr><td>Sentiment</td><td>Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+            <tr><td>Růstový potenciál (Upside)</td><td>42,8 %</td><td>🟢</td><td>Vysoký teoretický růstový potenciál</td></tr>
         </table>
 
-        <div class="summary-box">
-            <strong>Shrnutí :</strong> MicroStrategy se stala vysoce spekulativním finančním instrumentem s extrémní volatilitou. Přestože nabízí teoreticky vysoký růstový potenciál, fundamentální obraz je velmi slabý a riziko ztráty kapitálu je značné. Tato akcie je vhodná pouze pro investory s velmi vysokou tolerancí rizika, kteří aktivně sledují cykly kryptoměn a rozumí mechanismu pákového efektu. Pro většinu portfolií je vhodné pozici uzavřít.
+        <h3>📈 Technická analýza & Trendy</h3>
+        <table>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td>BEARISH</td><td>🔴</td><td>Cena pod klouzavými průměry</td></tr>
+            <tr><td>RAVI (Momentum)</td><td>NEUTRAL</td><td>🟡</td><td>Chybí jasný směr</td></tr>
+            <tr><td>Sharpe Ratio</td><td>0,50</td><td>🔴</td><td>Suboptimální poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace v pásmu</td></tr>
+        </table>
+
+        <h3>🗣 Sentiment & Tržní nálada</h3>
+        <p>✅ <strong>Pozitiva:</strong> Dominantní postavení na lokálních trzích s reklamou, silný volný cash flow umožňující vyplácení dividend a agresivní splácení dluhu po nedávných akvizicích.</p>
+        <p>❌ <strong>Rizika:</strong> Cyklický pokles příjmů z politické reklamy po volbách, dlouhodobý trend přesunu diváků od tradiční televize ke streamingovým službám a vysoká úroveň zadlužení.</p>
+        <p>📈 <strong>Earnings (Výsledky hospodaření):</strong> Společnost generuje stabilní cash flow, ale růst tržeb je pomalý. Analytici oceňují disciplinovaný kapitálový management, ale obávají se dlouhodobé udržitelnosti modelu.</p>
+
+        <div class="sell-signal">
+            <h3>🛡 Risk Management & Doporučení: 🔴 SELL / REDUCE SIGNAL</h3>
+            <table>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Exit Zone (Zóna pro výstup)</td><td>$185,00 – $190,00 (při krátkodobém rally)</td></tr>
+                <tr><td>Stop Loss</td><td>$170,00 (-6,6 %)</td></tr>
+                <tr><td>Target 1 (Short)</td><td>$155,00 (-14,8 %)</td></tr>
+                <tr><td>Velikost pozice</td><td>Snížit na 1–2 % portfolia nebo uzavřít</td></tr>
+            </table>
+        </div>
+
+        <div class="summary">
+            <strong>Shrnutí:</strong> Nexstar je jako "místní televizní stanice, která vlastní polovinu obrazovek v zemi". Má spolehlivý příjem z reklam a vyplácí hezké dividendy. Problém je, že lidé stále více sledují Netflix nebo YouTube než tradiční zprávy v šest hodin. Navíc po volbách vždy klesnou příjmy z politických reklam. Pro laika: Je to firma, která pomalu ztrácí dech v digitální době. I když vypadá levně, riziko dalšího propadu je reálné. Je lepší peníze investovat do modernějších mediálních technologií.
+        </div>
+
+        <hr>
+
+        <div class="footer">
+            <p>Dokument vygenerován: <strong>08.06.2026 10:30:00</strong> | Verze 1.0</p>
+            <p><strong>Metodika:</strong> DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</p>
         </div>
     </div>
-
-    <div style="text-align: center; margin-top: 40px; font-size: 0.85em; color: #777; border-top: 1px solid #ccc; padding-top: 15px;">
-        <p>Dokument vygenerován: Pátek, 05. června 2026 | Verze 1.0 | Metodika: DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií.</p>
-        <p>Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: Skóre a ratingy jsou přepočítávány minimálně 1× týdně.</p>
-    </div>
-
 </body>
 </html>
