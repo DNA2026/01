@@ -3,134 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio - Analytické posouzení vybraných akcií</title>
+    <title>Portfolio.html - Analytické posouzení vybraných akcií</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f9f9f9;
-        }
-        .header {
-            text-align: center;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 20px;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            color: #0056b3;
-            margin-bottom: 5px;
-        }
-        .disclaimer {
-            font-size: 0.85em;
-            color: #666;
-            background-color: #fff3cd;
-            border: 1px solid #ffeeba;
-            padding: 10px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .stock-section {
-            background: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 25px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            page-break-inside: avoid;
-        }
-        .stock-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .stock-title h2 {
-            margin: 0;
-            color: #2c3e50;
-        }
-        .stock-meta {
-            font-size: 0.9em;
-            color: #555;
-        }
-        .dna-badge {
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 5px 15px;
-            border-radius: 20px;
-            color: #fff;
-        }
-        .bg-green { background-color: #28a745; }
-        .bg-yellow { background-color: #ffc107; color: #333; }
-        .bg-red { background-color: #dc3545; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 1200px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 40px; border-left: 5px solid #2980b9; padding-left: 10px; background-color: #eaf2f8; padding: 10px; }
+        h3 { color: #16a085; margin-top: 20px; }
+        .disclaimer { background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 5px; font-size: 0.9em; margin-bottom: 20px; border: 1px solid #ffeeba; }
+        .stock-section { background-color: #ffffff; padding: 20px; margin-bottom: 30px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); page-break-inside: avoid; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.95em; }
+        th, td { border: 1px solid #ddd; padding: 8px 12px; text-align: left; }
+        th { background-color: #f2f2f2; color: #333; font-weight: bold; }
+        tr:nth-child(even) { background-color: #f9f9f9; }
+        .green { color: #27ae60; font-weight: bold; }
+        .red { color: #c0392b; font-weight: bold; }
+        .yellow { color: #f39c12; font-weight: bold; }
+        .bullish { color: #27ae60; }
+        .bearish { color: #c0392b; }
+        .neutral { color: #7f8c8d; }
+        .summary-box { background-color: #e8f6f3; border: 1px solid #a3e4d7; padding: 15px; border-radius: 5px; margin-top: 15px; }
+        .footer { text-align: center; font-size: 0.8em; color: #7f8c8d; margin-top: 40px; border-top: 1px solid #ddd; padding-top: 10px; }
         
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 20px;
-            font-size: 0.95em;
-        }
-        th, td {
-            padding: 10px;
-            border-bottom: 1px solid #eee;
-            text-align: left;
-        }
-        th {
-            background-color: #f8f9fa;
-            color: #495057;
-            font-weight: 600;
-        }
-        .metric-value {
-            font-weight: bold;
-        }
-        .sentiment-box {
-            display: flex;
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .pros, .cons {
-            flex: 1;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .pros {
-            background-color: #d4edda;
-            border-left: 5px solid #28a745;
-        }
-        .cons {
-            background-color: #f8d7da;
-            border-left: 5px solid #dc3545;
-        }
-        .risk-management {
-            background-color: #e2e3e5;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .summary {
-            margin-top: 20px;
-            font-style: italic;
-            color: #444;
-            border-top: 1px dashed #ccc;
-            padding-top: 15px;
-        }
         @media print {
             body { background-color: #fff; }
-            .stock-section { box-shadow: none; border: 1px solid #000; }
-            .disclaimer { display: none; } /* Optional: hide disclaimer in print if desired, or keep it */
+            .stock-section { box-shadow: none; border: 1px solid #ccc; }
+            h2 { background-color: #eee !important; -webkit-print-color-adjust: exact; }
         }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>📊 Analytické posouzení vybraných symbolů | Portfolio.html</h1>
-        <p>Exportováno: 29.06.2026 05:49:01 | Metodika: DNA 5.0 Hybrid Model</p>
+    <h1>📊 Analytické posouzení vybraných symbolů | Portfolio.html</h1>
+    <div style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
+        Exportováno: 30.06.2026 05:45:53 | Metodika: DNA 5.0 Hybrid Model
     </div>
 
     <div class="disclaimer">
@@ -139,350 +44,361 @@
 
     <!-- CASY -->
     <div class="stock-section">
-        <div class="stock-header">
-            <div class="stock-title">
-                <h2>📊 Analytické posouzení vývoje CASY, Casey's General Stores</h2>
-                <div class="stock-meta">Burza: NASDAQ | Sektor: Spotřební zboží / Maloobchod (Convenience Stores) | Aktuální cena: $778,63 USD</div>
-            </div>
-            <div class="dna-badge bg-green">DNA 96 🟢</div>
-        </div>
-
+        <h2>📊 Analytické posouzení vývoje CASY, Casey's General Stores Inc.</h2>
+        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Spotřební zboží / Maloobchod s potravinami a PHM | <strong>Aktuální cena:</strong> $780,24 USD</p>
+        
         <h3>🔷 Detail společnosti</h3>
-        <p>Casey's General Stores je jedním z největších provozovatelů čerpacích stanic a obchodů s potravinami v USA, se silným zaměřením na středozápad. Společnost je známá svým unikátním modelem "food-first", kde významnou část tržeb tvoří čerstvě připravené jídlo (pizza, sendviče), což zvyšuje marže a loajalitu zákazníků nezávisle na cenách pohonných hmot.</p>
+        <p>Casey's General Stores je přední americký řetězec provozující convenience obchody kombinující prodej pohonných hmot, potravin a připravených jídel. Společnost je známá svou silnou pozicí na středozápadě USA, vynikající logistikou a rostoucím podílem vlastních značek potravin, které generují vysoké marže.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
-            <thead><tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr></thead>
-            <tbody>
-                <tr><td>DNA Skóre</td><td>96,00</td><td>🟢</td><td>Extrémně silný nákupní signál</td></tr>
-                <tr><td>Zacks Rank (ZR)</td><td>1</td><td>🟢</td><td>Strong Buy</td></tr>
-                <tr><td>Industry Rank (IR)</td><td>3</td><td>🟢</td><td>Top 1% sektoru</td></tr>
-                <tr><td>VGM Score</td><td>B</td><td>🟢</td><td>Silná kombinace růstu a hodnoty</td></tr>
-                <tr><td>Smart Score (SS)</td><td>10/10</td><td>🟢</td><td>Maximální algoritmická důvěra</td></tr>
-                <tr><td>Sentiment</td><td>Very Bullish</td><td>🟢</td><td>Silná tržní nálada</td></tr>
-                <tr><td>Upside Potential</td><td>21,3%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
-            </tbody>
+            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
+            <tr><td>DNA Skóre</td><td class="green">96,00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Strong Buy</td></tr>
+            <tr><td>Industry Rank (IR)</td><td class="green">3</td><td>🟢</td><td>Top 1% sektoru</td></tr>
+            <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Velmi dobrá kombinace hodnoty a růstu</td></tr>
+            <tr><td>Smart Score (SS)</td><td class="green">10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
+            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní nálada</td></tr>
+            <tr><td>Upside Potential</td><td class="green">21,3%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
         <table>
-            <thead><tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr></thead>
-            <tbody>
-                <tr><td>DMA (Trend)</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace po růstu</td></tr>
-                <tr><td>RAVI (Momentum)</td><td>BULLISH</td><td>🟢</td><td>Pozitivní momentum přetrvává</td></tr>
-                <tr><td>Sharpe Ratio</td><td>1,54</td><td>🟢</td><td>Vynikající poměr výnos/riziko</td></tr>
-                <tr><td>Pivot Point</td><td>NEUTRAL</td><td>🟡</td><td>Očekávání dalšího směru</td></tr>
-            </tbody>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Konsolidace v pásmu</td></tr>
+            <tr><td>RAVI (Momentum)</td><td class="bullish">BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
+            <tr><td>Sharpe Ratio</td><td class="bullish">1,52</td><td>🟢</td><td>Dobrý poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším směrem</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <thead><tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $778,63</th></tr></thead>
-            <tbody>
-                <tr><td>High Target</td><td>$950,00</td><td>+22,0%</td></tr>
-                <tr><td>Average Target</td><td>$944,00</td><td>+21,3%</td></tr>
-                <tr><td>Low Target</td><td>$850,00</td><td>+9,2%</td></tr>
-            </tbody>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $780,24</th></tr>
+            <tr><td>High Target</td><td>$950,00</td><td>+21,8%</td></tr>
+            <tr><td>Average Target</td><td>$946,00</td><td>+21,3%</td></tr>
+            <tr><td>Low Target</td><td>$850,00</td><td>+9,0%</td></tr>
+            <tr><td>Aktuální cena</td><td>$780,24</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <div class="sentiment-box">
-            <div class="pros">
-                <strong>✅ Pozitiva:</strong>
-                <ul>
-                    <li>Rekordní růst tržeb z prodejny čerstvého jídla, které má vyšší marže než benzín.</li>
-                    <li>Expanze do nových států a otevírání nových poboček nad plán.</li>
-                    <li>Odolnost vůči ekonomickým cyklům díky základním potřebám (jídlo, palivo).</li>
-                    <li>Silný volný cash flow umožňující pravidelné navyšování dividendy.</li>
-                </ul>
-            </div>
-            <div class="cons">
-                <strong>❌ Rizika:</strong>
-                <ul>
-                    <li>Růst cen vstupů (potraviny, mzdy) může tlačit na operační marže.</li>
-                    <li>Změny v cenách ropy mohou krátkodobě ovlivnit návštěvnost čerpacích stanic.</li>
-                    <li>Vysoká valuace oproti historickým průměrům vyžaduje neustálý růst.</li>
-                </ul>
-            </div>
-        </div>
+        <p><strong>✅ Pozitiva:</strong></p>
+        <ul>
+            <li>Rekordní růst tržeb z prodeje vlastních značek potravin (high-margin business).</li>
+            <li>Expanze počtu poboček a modernizace stávajících prodejen.</li>
+            <li>Odolnost vůči ekonomickým cyklům díky základním potřebám zákazníků.</li>
+            <li>Silný volný cash flow umožňující pravidelné zvyšování dividendy.</li>
+        </ul>
+        <p><strong>❌ Rizika:</strong></p>
+        <ul>
+            <li>Kolísání cen ropy může ovlivnit marže z prodeje PHM.</li>
+            <li>Růst mezd a nákladů na práci v maloobchodním sektoru.</li>
+            <li>Saturace trhu na středozápadě USA.</li>
+        </ul>
 
-        <div class="risk-management">
-            <h3>🛡 Risk Management & Doporučení</h3>
+        <h3>🛡 Risk Management & Doporučení</h3>
+        <div class="summary-box">
             <p><strong>🟢 BUY SIGNAL</strong></p>
             <table>
-                <tr><td>Entry Zone</td><td>$760,00–785,00</td></tr>
-                <tr><td>Stop Loss</td><td>$700,00 (-10,1%)</td></tr>
-                <tr><td>Target 1</td><td>$850,00 (+9,2%)</td></tr>
-                <tr><td>Target 2</td><td>$944,00 (+21,3%)</td></tr>
-                <tr><td>Position Size</td><td>3–5% portfolia (Core pozice)</td></tr>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Entry Zone</td><td>$770,00–790,00</td></tr>
+                <tr><td>Stop Loss</td><td>$720,00 (-7,7%)</td></tr>
+                <tr><td>Target 1</td><td>$850,00 (+9,0%)</td></tr>
+                <tr><td>Target 2</td><td>$946,00 (+21,3%)</td></tr>
+                <tr><td>Position Size</td><td>3–5% portfolia (defenzivní růst)</td></tr>
             </table>
         </div>
 
-        <div class="summary">
-            <strong>Shrnutí:</strong> Casey's General Stores představuje špičkově řízenou společnost s unikátním byznys modelem, který úspěšně kombinuje maloobchod s gastronomií. Díky rekordnímu DNA skóre 96 a maximální podpoře algoritmů jde o jednu z nejatraktivnějších příležitostí v defenzivním sektoru. Společnost pravidelně překonává očekávání analytiků a její expanze je udržitelná. Pro investory nabízí stabilitu růstu i ochranu před recesí. Doporučený vstup je v aktuálním pásmu s cílem na $940+ v horizontu 12 měsíců.
+        <div class="summary-box">
+            <strong>Shrnutí :</strong> Casey's General Stores představuje špičkově řízenou společnost v defenzivním sektoru s překvapivě dynamickým růstem. Kombinace maximálního Smart Score a Zacks Rank 1 potvrzuje mimořádnou kvalitu fundamentů. Akcie je vhodná jako stabilní pilíř portfolia s potenciálem zhodnocení přes 20 %. Hlavním lákadlem je schopnost generovat vysoké marže z vlastních značek a expanze sítě. Rizika jsou nízká a spočívají především v makroekonomických tlacích na mzdy.
         </div>
     </div>
 
     <!-- YPF -->
     <div class="stock-section">
-        <div class="stock-header">
-            <div class="stock-title">
-                <h2>📊 Analytické posouzení vývoje YPF, YPF Sociedad Anónima</h2>
-                <div class="stock-meta">Burza: NYSE | Sektor: Energie / Těžba ropy a plynu | Aktuální cena: $45,33 USD</div>
-            </div>
-            <div class="dna-badge bg-green">DNA 91 🟢</div>
-        </div>
-
+        <h2>📊 Analytické posouzení vývoje YPF, YPF Sociedad Anónima</h2>
+        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energie / Těžba ropy a plynu | <strong>Aktuální cena:</strong> $45,25 USD</p>
+        
         <h3>🔷 Detail společnosti</h3>
-        <p>YPF je argentinská energetická jednička s dominantní pozicí v těžbě břidlicové ropy a plynu v oblasti Vaca Muerta. Společnost prochází transformací pod novým vládním vedením, které podporuje deregulaci energetického sektoru a láká zahraniční investice. YPF je klíčovým hráčem při snaze Argentiny dosáhnout energetické soběstačnosti a exportu LNG.</p>
+        <p>YPF je přední argentinská energetická společnost s rozsáhlými operacemi v těžbě ropy, zemního plynu a rafinérském průmyslu. Společnost klade důraz na rozvoj nekonvenčních ložisek v oblasti Vaca Muerta, která patří mezi největší světové zásoby břidlicové ropy a plynu.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
-            <thead><tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr></thead>
-            <tbody>
-                <tr><td>DNA Skóre</td><td>91,00</td><td>🟢</td><td>Silný nákupní signál</td></tr>
-                <tr><td>Zacks Rank (ZR)</td><td>1</td><td>🟢</td><td>Strong Buy</td></tr>
-                <tr><td>Industry Rank (IR)</td><td>65</td><td>🟢</td><td>Top 20% sektoru</td></tr>
-                <tr><td>VGM Score</td><td>A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
-                <tr><td>Smart Score (SS)</td><td>10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
-                <tr><td>Sentiment</td><td>Neutral</td><td>🟡</td><td>Opatrnost trhu kvůli geopolitice</td></tr>
-                <tr><td>Upside Potential</td><td>26,6%</td><td>🟢</td><td>Vysoký růstový potenciál</td></tr>
-            </tbody>
+            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
+            <tr><td>DNA Skóre</td><td class="green">91,00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Strong Buy</td></tr>
+            <tr><td>Industry Rank (IR)</td><td class="green">65</td><td>🟢</td><td>Top 25% sektoru</td></tr>
+            <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
+            <tr><td>Smart Score (SS)</td><td class="green">10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
+            <tr><td>Sentiment</td><td class="neutral">Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
+            <tr><td>Upside Potential</td><td class="green">26,8%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
         <table>
-            <thead><tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr></thead>
-            <tbody>
-                <tr><td>DMA (Trend)</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším pohybem</td></tr>
-                <tr><td>RAVI (Momentum)</td><td>BULLISH</td><td>🟢</td><td>Nákupní tlak sílí</td></tr>
-                <tr><td>Sharpe Ratio</td><td>0,84</td><td>🟡</td><td>Akceptovatelný poměr výnos/riziko</td></tr>
-                <tr><td>Pivot Point</td><td>NEUTRAL</td><td>🟡</td><td>Klíčová úroveň podpory</td></tr>
-            </tbody>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Konsolidace v pásmu</td></tr>
+            <tr><td>RAVI (Momentum)</td><td class="bullish">BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
+            <tr><td>Sharpe Ratio</td><td class="neutral">0,95</td><td>🟡</td><td>Průměrný poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším směrem</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <thead><tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $45,33</th></tr></thead>
-            <tbody>
-                <tr><td>High Target</td><td>$60,00</td><td>+32,4%</td></tr>
-                <tr><td>Average Target</td><td>$57,40</td><td>+26,6%</td></tr>
-                <tr><td>Low Target</td><td>$50,00</td><td>+10,3%</td></tr>
-            </tbody>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $45,25</th></tr>
+            <tr><td>High Target</td><td>$60,00</td><td>+32,6%</td></tr>
+            <tr><td>Average Target</td><td>$57,40</td><td>+26,8%</td></tr>
+            <tr><td>Low Target</td><td>$50,00</td><td>+10,5%</td></tr>
+            <tr><td>Aktuální cena</td><td>$45,25</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <div class="sentiment-box">
-            <div class="pros">
-                <strong>✅ Pozitiva:</strong>
-                <ul>
-                    <li>Obrovský potenciál ložiska Vaca Muerta a snížení těžebních nákladů.</li>
-                    <li>Nová argentinská vláda provádí pro-tržní reformy a odstraňuje dotace/cenové stropy.</li>
-                    <li>Plány na export LNG do Evropy a Asie zvyšují dlouhodobé vyhlídky.</li>
-                    <li>Akcie jsou stále relativně levné oproti západním konkurentům.</li>
-                </ul>
-            </div>
-            <div class="cons">
-                <strong>❌ Rizika:</strong>
-                <ul>
-                    <li>Makroekonomická nestabilita Argentiny a inflace pesa.</li>
-                    <li>Riziko změny politického kurzu v budoucnosti.</li>
-                    <li>Regulační nejistota ohledně repatriace zisků pro zahraniční investory.</li>
-                </ul>
-            </div>
-        </div>
+        <p><strong>✅ Pozitiva:</strong></p>
+        <ul>
+            <li>Rekordní těžba v ložisku Vaca Muerta a pokles provozních nákladů.</li>
+            <li>Postupné snižování dluhové zátěže a zlepšování volného cash flow.</li>
+            <li>Vládní reformy energetického sektoru podporují investice a stabilizují marže.</li>
+            <li>Atraktivní dividendová politika a pravidelné zpětné nákupy akcií.</li>
+        </ul>
+        <p><strong>❌ Rizika:</strong></p>
+        <ul>
+            <li>Politická nestabilita v Argentině a možná změna fiskální politiky.</li>
+            <li>Měnové riziko spojené s fluktuacemi argentinského pesa vůči dolaru.</li>
+            <li>Regulace cen energií a environmentální tlaky na těžbu břidlicové ropy.</li>
+        </ul>
 
-        <div class="risk-management">
-            <h3>🛡 Risk Management & Doporučení</h3>
+        <h3>🛡 Risk Management & Doporučení</h3>
+        <div class="summary-box">
             <p><strong>🟢 BUY SIGNAL</strong></p>
             <table>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
                 <tr><td>Entry Zone</td><td>$44,00–46,50</td></tr>
-                <tr><td>Stop Loss</td><td>$39,00 (-13,9%)</td></tr>
-                <tr><td>Target 1</td><td>$50,00 (+10,3%)</td></tr>
-                <tr><td>Target 2</td><td>$57,40 (+26,6%)</td></tr>
-                <tr><td>Position Size</td><td>3–5% portfolia (Vyšší riziko/vyšší výnos)</td></tr>
+                <tr><td>Stop Loss</td><td>$40,00 (-11,6%)</td></tr>
+                <tr><td>Target 1</td><td>$50,00 (+10,5%)</td></tr>
+                <tr><td>Target 2</td><td>$57,40 (+26,8%)</td></tr>
+                <tr><td>Position Size</td><td>3–5% portfolia (vyšší riziko země)</td></tr>
             </table>
         </div>
 
-        <div class="summary">
-            <strong>Shrnutí:</strong> YPF je agresivní růstová hra na obnovu argentinské ekonomiky a boom břidlicové energie. Díky DNA skóre 91 a Zacks Rank 1 fundamentálně vypadá velmi silně. Ačkoli sentiment zůstává opatrný kvůli politickému riziku, technické indikátory a cílové ceny naznačují velký prostor pro růst. Vhodné pro investory, kteří chtějí diverzifikovat portfolio o emerging markets a energetiku s vysokým upside potenciálem.
+        <div class="summary-box">
+            <strong>Shrnutí :</strong> YPF představuje silně fundamentálně hodnocenou akcii s potvrzeným růstovým trendem. Společnost těží z rekordní produkce v největším jihoamerickém břidlicovém ložisku, zlepšující se bilance a příznivého regulatorního prostředí. Technické indikátory potvrzují sílu kupců. Hlavní příležitostí je pokračující expanze těžby a stabilizace měny, zatímco hlavním rizikem zůstává politická nejistota v regionu. Pro nové investory je vhodný vstup v aktuálním pásmu s pevným stop lossem.
         </div>
     </div>
 
-    <!-- TOST -->
+    <!-- MU -->
     <div class="stock-section">
-        <div class="stock-header">
-            <div class="stock-title">
-                <h2>📊 Analytické posouzení vývoje TOST, Toast, Inc.</h2>
-                <div class="stock-meta">Burza: NYSE | Sektor: Technologie / Software pro restaurace | Aktuální cena: $29,38 USD</div>
-            </div>
-            <div class="dna-badge bg-green">DNA 91 🟢</div>
-        </div>
-
+        <h2>📊 Analytické posouzení vývoje MU, Micron Technology Inc.</h2>
+        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Technologie / Polovodiče a paměti | <strong>Aktuální cena:</strong> $1145,28 USD</p>
+        
         <h3>🔷 Detail společnosti</h3>
-        <p>Toast je vedoucí cloudová platforma určená specificky pro restaurační průmysl. Nabízí komplexní řešení včetně POS systémů, online objednávání, zpracování plateb a analytiky personálu. Společnost těží z digitalizace gastronomie a postupného přechodu na předplatné modely, které generují stabilní recurring revenue.</p>
+        <p>Micron Technology je jeden z největších světových producentů pamětí DRAM a NAND flash. Společnost je klíčovým dodavatelem pro datová centra, osobní počítače a mobilní zařízení. Aktuálně těží z boomu umělé inteligence, který vyžaduje vysokokapacitní a rychlé paměti HBM (High Bandwidth Memory).</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
-            <thead><tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr></thead>
-            <tbody>
-                <tr><td>DNA Skóre</td><td>91,00</td><td>🟢</td><td>Silný nákupní signál</td></tr>
-                <tr><td>Zacks Rank (ZR)</td><td>1</td><td>🟢</td><td>Strong Buy</td></tr>
-                <tr><td>Industry Rank (IR)</td><td>79</td><td>🟡</td><td>Průměrná pozice v sektoru</td></tr>
-                <tr><td>VGM Score</td><td>B</td><td>🟢</td><td>Dobrá rovnováha růstu a ziskovosti</td></tr>
-                <tr><td>Smart Score (SS)</td><td>10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
-                <tr><td>Sentiment</td><td>Neutral</td><td>🟡</td><td>Trh čeká na potvrzení ziskovosti</td></tr>
-                <tr><td>Upside Potential</td><td>44,3%</td><td>🟢</td><td>Velmi vysoký růstový potenciál</td></tr>
-            </tbody>
+            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
+            <tr><td>DNA Skóre</td><td class="green">91,00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Strong Buy</td></tr>
+            <tr><td>Industry Rank (IR)</td><td class="green">3</td><td>🟢</td><td>Top 1% sektoru</td></tr>
+            <tr><td>VGM Score</td><td class="neutral">C</td><td>🟡</td><td>Průměrné hodnocení růstu/hodnoty</td></tr>
+            <tr><td>Smart Score (SS)</td><td class="green">8/10</td><td>🟢</td><td>Vysoká důvěra algoritmů</td></tr>
+            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní nálada</td></tr>
+            <tr><td>Upside Potential</td><td class="green">37,5%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
         <table>
-            <thead><tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr></thead>
-            <tbody>
-                <tr><td>DMA (Trend)</td><td>NEUTRAL</td><td>🟡</td><td>Fáze akumulace</td></tr>
-                <tr><td>RAVI (Momentum)</td><td>BEARISH</td><td>🔴</td><td>Krátkodobý tlak na cenu</td></tr>
-                <tr><td>Sharpe Ratio</td><td>-0,82</td><td>🔴</td><td>Vyšší volatilita v poslední době</td></tr>
-                <tr><td>Pivot Point</td><td>BULLISH</td><td>🟢</td><td>Podpora na nižších hladinách</td></tr>
-            </tbody>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td class="bullish">BULLISH</td><td>🟢</td><td>Cena nad klouzavými průměry</td></tr>
+            <tr><td>RAVI (Momentum)</td><td class="bullish">BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
+            <tr><td>Sharpe Ratio</td><td class="bullish">3,39</td><td>🟢</td><td>Vynikající poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším směrem</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <thead><tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $29,38</th></tr></thead>
-            <tbody>
-                <tr><td>High Target</td><td>$45,00</td><td>+53,2%</td></tr>
-                <tr><td>Average Target</td><td>$42,40</td><td>+44,3%</td></tr>
-                <tr><td>Low Target</td><td>$35,00</td><td>+19,1%</td></tr>
-            </tbody>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $1145,28</th></tr>
+            <tr><td>High Target</td><td>$1600,00</td><td>+39,7%</td></tr>
+            <tr><td>Average Target</td><td>$1575,00</td><td>+37,5%</td></tr>
+            <tr><td>Low Target</td><td>$1300,00</td><td>+13,5%</td></tr>
+            <tr><td>Aktuální cena</td><td>$1145,28</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <div class="sentiment-box">
-            <div class="pros">
-                <strong>✅ Pozitiva:</strong>
-                <ul>
-                    <li>Rychlý růst počtu aktivních restaurací a penetrace trhu.</li>
-                    <li>Přechod na ziskovost na úrovni EBITDA a zlepšování cash flow.</li>
-                    <li>Silná "sticky" ekosystémová vazba – klienti obtížně mění poskytovatele.</li>
-                    <li>Expanze do mezinárodních trhů (UK, Irsko).</li>
-                </ul>
-            </div>
-            <div class="cons">
-                <strong>❌ Rizika:</strong>
-                <ul>
-                    <li>Konkurence od tradičních POS systémů (Square, Clover).</li>
-                    <li>Ekonomické zpomalení může vést k zavírání restaurací a churn rate.</li>
-                    <li>Regulační tlak na poplatky za zpracování platebních karet.</li>
-                </ul>
-            </div>
-        </div>
+        <p><strong>✅ Pozitiva:</strong></p>
+        <ul>
+            <li>Obrovská poptávka po pamětech HBM pro AI čipy (NVIDIA, AMD).</li>
+            <li>Oživení cyklu v segmentu tradičních DRAM a NAND pamětí.</li>
+            <li>Růst cen pamětí díky omezené nabídce na trhu.</li>
+            <li>Technologické vedení ve výrobě nejnovějších generací pamětí.</li>
+        </ul>
+        <p><strong>❌ Rizika:</strong></p>
+        <ul>
+            <li>Cykličnost polovodičového průmyslu a riziko přehřátí trhu.</li>
+            <li>Geopolitické napětí mezi USA a Čínou omezující export.</li>
+            <li>Vysoké kapitálové výdaje na výstavbu nových fabrik.</li>
+        </ul>
 
-        <div class="risk-management">
-            <h3>🛡 Risk Management & Doporučení</h3>
+        <h3>🛡 Risk Management & Doporučení</h3>
+        <div class="summary-box">
             <p><strong>🟢 BUY SIGNAL</strong></p>
             <table>
-                <tr><td>Entry Zone</td><td>$28,00–30,50</td></tr>
-                <tr><td>Stop Loss</td><td>$24,50 (-16,6%)</td></tr>
-                <tr><td>Target 1</td><td>$35,00 (+19,1%)</td></tr>
-                <tr><td>Target 2</td><td>$42,40 (+44,3%)</td></tr>
-                <tr><td>Position Size</td><td>3–5% portfolia (Growth tech)</td></tr>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Entry Zone</td><td>$1100,00–1160,00</td></tr>
+                <tr><td>Stop Loss</td><td>$980,00 (-14,4%)</td></tr>
+                <tr><td>Target 1</td><td>$1300,00 (+13,5%)</td></tr>
+                <tr><td>Target 2</td><td>$1575,00 (+37,5%)</td></tr>
+                <tr><td>Position Size</td><td>3–5% portfolia (technologický růst)</td></tr>
             </table>
         </div>
 
-        <div class="summary">
-            <strong>Shrnutí:</strong> Toast je lídrem v digitalizaci restaurací s obrovským tržním potenciálem. Přestože krátkodobé technické indikátory ukazují slabost, fundamentální obraz (DNA 91, Zacks 1) je vynikající. Trh oceňuje cestu společnosti k ziskovosti a dominanci v segmentu. Upside přes 40 % činí z akcie atraktivní volbu pro růstová portfolia s ochotou akceptovat vyšší volatilitu.
+        <div class="summary-box">
+            <strong>Shrnutí :</strong> Micron Technology je hlavní beneficiář revoluce umělé inteligence v hardwarovém segmentu pamětí. S DNA skórem 91 a velmi bullish sentimentem nabízí akcie silný růstový potenciál drivený poptávkou po HBM pamětech. Technické ukazatele jsou vynikající. Hlavním lákadlem je technologické лидерství a růst cen komodit, rizikem je cyklickost odvětví. Vhodné pro agresivnější růstová portfolia.
+        </div>
+    </div>
+
+    <!-- ALB -->
+    <div class="stock-section">
+        <h2>📊 Analytické posouzení vývoje ALB, Albemarle Corporation</h2>
+        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Materiály / Těžba lithia | <strong>Aktuální cena:</strong> $129,72 USD</p>
+        
+        <h3>🔷 Detail společnosti</h3>
+        <p>Albemarle je světový lídr v těžbě a zpracování lithia, klíčové suroviny pro výrobu baterií do elektrických vozidel a energetických úložišť. Společnost vlastní významná ložiska v USA, Austrálii a Chile a disponuje dlouhodobými kontrakty s předními výrobci automobilů.</p>
+
+        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
+        <table>
+            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
+            <tr><td>DNA Skóre</td><td class="green">91,00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Strong Buy</td></tr>
+            <tr><td>Industry Rank (IR)</td><td class="neutral">107</td><td>🟡</td><td>Střední pozice v sektoru</td></tr>
+            <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Velmi dobrá kombinace hodnoty a růstu</td></tr>
+            <tr><td>Smart Score (SS)</td><td class="green">9/10</td><td>🟢</td><td>Velmi pozitivní algoritmické hodnocení</td></tr>
+            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní nálada</td></tr>
+            <tr><td>Upside Potential</td><td class="green">67,8%</td><td>🟢</td><td>Extrémní růstový potenciál</td></tr>
+        </table>
+
+        <h3>📈 Technická analýza & Trendy</h3>
+        <table>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td class="bearish">BEARISH</td><td>🔴</td><td>Cena pod klouzavými průměry (long-term recovery)</td></tr>
+            <tr><td>RAVI (Momentum)</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Chybí jasný směr</td></tr>
+            <tr><td>Sharpe Ratio</td><td class="bullish">1,50</td><td>🟢</td><td>Dobrý poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td class="bearish">BEARISH</td><td>🔴</td><td>Tlak na prodej (krátkodobě)</td></tr>
+        </table>
+
+        <h3>🎯 Cílové ceny</h3>
+        <table>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $129,72</th></tr>
+            <tr><td>High Target</td><td>$220,00</td><td>+69,6%</td></tr>
+            <tr><td>Average Target</td><td>$217,70</td><td>+67,8%</td></tr>
+            <tr><td>Low Target</td><td>$180,00</td><td>+38,8%</td></tr>
+            <tr><td>Aktuální cena</td><td>$129,72</td><td>—</td></tr>
+        </table>
+
+        <h3>🗣 Sentiment & Tržní nálada</h3>
+        <p><strong>✅ Pozitiva:</strong></p>
+        <ul>
+            <li>Očekávaný masivní nárůst poptávky po lithiu s rozvojem elektromobility.</li>
+            <li>Strategická pozice nízkorozpočtového producenta s dlouhodobými kontrakty.</li>
+            <li>Expanze kapacit v Austrálii a USA snižující závislost na Číně.</li>
+            <li>Akcie je po propadu cen lithia hluboko pod historickými maximy (value play).</li>
+        </ul>
+        <p><strong>❌ Rizika:</strong></p>
+        <ul>
+            <li>Pokračující pokles spotových cen lithia v krátkém období.</li>
+            <li>Zpomalení prodeje elektrických vozidel v západních zemích.</li>
+            <li>Politická rizika v Chile a změny v těžební legislativě.</li>
+        </ul>
+
+        <h3>🛡 Risk Management & Doporučení</h3>
+        <div class="summary-box">
+            <p><strong>🟢 BUY SIGNAL</strong></p>
+            <table>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Entry Zone</td><td>$125,00–135,00</td></tr>
+                <tr><td>Stop Loss</td><td>$105,00 (-19,0%)</td></tr>
+                <tr><td>Target 1</td><td>$180,00 (+38,8%)</td></tr>
+                <tr><td>Target 2</td><td>$217,70 (+67,8%)</td></tr>
+                <tr><td>Position Size</td><td>3–5% portfolia (spekulativní obrat)</td></tr>
+            </table>
+        </div>
+
+        <div class="summary-box">
+            <strong>Shrnutí :</strong> Albemarle představuje klasickou "obrátovou" příležitost s enormním upside potenciálem téměř 68 %. Přestože technické indikátory zatím naznačují slabost, fundamentální model DNA 91 a Very Bullish sentiment analytiků signalizují blížící se dno cyklu. Společnost je dobře připravena na další vlnu elektromobility. Vhodné pro trpělivé investory ochotné akceptovat vyšší volatilitu výměnou za možnost násobného zhodnocení při obratu trhu s lithiem.
         </div>
     </div>
 
     <!-- NTES -->
     <div class="stock-section">
-        <div class="stock-header">
-            <div class="stock-title">
-                <h2>📊 Analytické posouzení vývoje NTES, NetEase, Inc.</h2>
-                <div class="stock-meta">Burza: NASDAQ | Sektor: Komunikace / Online hry | Aktuální cena: $123,71 USD</div>
-            </div>
-            <div class="dna-badge bg-green">DNA 90 🟢</div>
-        </div>
-
+        <h2>📊 Analytické posouzení vývoje NTES, NetEase Inc.</h2>
+        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Komunikační služby / Videohry a zábava | <strong>Aktuální cena:</strong> $129,16 USD</p>
+        
         <h3>🔷 Detail společnosti</h3>
-        <p>NetEase je jeden z největších čínských technologických konglomerátů, primárně známý jako globální vydavatel online her (PC i mobilní). Společnost má silnou pozici v Číně a expanduje na západní trhy. Kromě her působí v oblasti streamování hudby, e-learningu a AI technologií. Je považována za stabilní "cash cow" s nízkou valutací oproti růstu.</p>
+        <p>NetEase je druhý největčí vydavatel online her v Číně a globální hráč v oblasti interaktivní zábavy. Společnost vlastní silné IP tituly, investuje do e-sportu a expanduje do oblastí hudby a online vzdělávání. Je známá svou schopností vytvářet dlouhodobě úspěšné herní tituly.</p>
 
         <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
         <table>
-            <thead><tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr></thead>
-            <tbody>
-                <tr><td>DNA Skóre</td><td>90,00</td><td>🟢</td><td>Silný nákupní signál</td></tr>
-                <tr><td>Zacks Rank (ZR)</td><td>1</td><td>🟢</td><td>Strong Buy</td></tr>
-                <tr><td>Industry Rank (IR)</td><td>73</td><td>🟡</td><td>Průměrná pozice v sektoru</td></tr>
-                <tr><td>VGM Score</td><td>C</td><td>🟡</td><td>Střední hodnocení růstu/hodnoty</td></tr>
-                <tr><td>Smart Score (SS)</td><td>10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
-                <tr><td>Sentiment</td><td>Very Bullish</td><td>🟢</td><td>Silná tržní nálada</td></tr>
-                <tr><td>Upside Potential</td><td>23,4%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
-            </tbody>
+            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
+            <tr><td>DNA Skóre</td><td class="green">90,00</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
+            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Strong Buy</td></tr>
+            <tr><td>Industry Rank (IR)</td><td class="neutral">73</td><td>🟡</td><td>Střední pozice v sektoru</td></tr>
+            <tr><td>VGM Score</td><td class="neutral">C</td><td>🟡</td><td>Průměrné hodnocení růstu/hodnoty</td></tr>
+            <tr><td>Smart Score (SS)</td><td class="green">10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
+            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní nálada</td></tr>
+            <tr><td>Upside Potential</td><td class="green">20,3%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
         </table>
 
         <h3>📈 Technická analýza & Trendy</h3>
         <table>
-            <thead><tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr></thead>
-            <tbody>
-                <tr><td>DMA (Trend)</td><td>NEUTRAL</td><td>🟡</td><td>Konsolidace v pásmu</td></tr>
-                <tr><td>RAVI (Momentum)</td><td>NEUTRAL</td><td>🟡</td><td>Vyvážené síly</td></tr>
-                <tr><td>Sharpe Ratio</td><td>-0,00</td><td>🔴</td><td>Bez rizikové prémie v poslední době</td></tr>
-                <tr><td>Pivot Point</td><td>BULLISH</td><td>🟢</td><td>Technická podpora růstu</td></tr>
-            </tbody>
+            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
+            <tr><td>DMA (Trend)</td><td class="bullish">BULLISH</td><td>🟢</td><td>Cena nad klouzavými průměry</td></tr>
+            <tr><td>RAVI (Momentum)</td><td class="neutral">NEUTRAL</td><td>🟡</td><td>Chybí jasný směr</td></tr>
+            <tr><td>Sharpe Ratio</td><td class="bearish">0,10</td><td>🔴</td><td>Nízký poměr výnos/riziko</td></tr>
+            <tr><td>Pivot Point</td><td class="bullish">BULLISH</td><td>🟢</td><td>Podpora dalšího růstu</td></tr>
         </table>
 
         <h3>🎯 Cílové ceny</h3>
         <table>
-            <thead><tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $123,71</th></tr></thead>
-            <tbody>
-                <tr><td>High Target</td><td>$160,00</td><td>+29,3%</td></tr>
-                <tr><td>Average Target</td><td>$152,70</td><td>+23,4%</td></tr>
-                <tr><td>Low Target</td><td>$140,00</td><td>+13,2%</td></tr>
-            </tbody>
+            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $129,16</th></tr>
+            <tr><td>High Target</td><td>$160,00</td><td>+23,9%</td></tr>
+            <tr><td>Average Target</td><td>$155,40</td><td>+20,3%</td></tr>
+            <tr><td>Low Target</td><td>$140,00</td><td>+8,4%</td></tr>
+            <tr><td>Aktuální cena</td><td>$129,16</td><td>—</td></tr>
         </table>
 
         <h3>🗣 Sentiment & Tržní nálada</h3>
-        <div class="sentiment-box">
-            <div class="pros">
-                <strong>✅ Pozitiva:</strong>
-                <ul>
-                    <li>Silná pipeline nových her a úspěch titulů jako "Eggy Party".</li>
-                    <li>Licenční partnerství s Blizzardem přináší stabilní příjmy ze Západu.</li>
-                    <li>Akcie jsou historicky levné (nízké P/E) s vysokým dividendovým výnosem a zpětnými odkupy.</li>
-                    <li>Robustní bilance s velkou hotovostní rezervou.</li>
-                </ul>
-            </div>
-            <div class="cons">
-                <strong>❌ Rizika:</strong>
-                <ul>
-                    <li>Regulační riziko ze strany čínské vlády (omezení herního času pro mládež).</li>
-                    <li>Geopolitické napětí mezi USA a Čínou může ovlivnit kotaci na NASDAQ.</li>
-                    <li>Zpomalení růstu čínského spotřebitele.</li>
-                </ul>
-            </div>
-        </div>
+        <p><strong>✅ Pozitiva:</strong></p>
+        <ul>
+            <li>Silná pipeline nových herních titulů a úspěch mobilních her.</li>
+            <li>Expanze na globální trhy mimo Čínu (Japonsko, Západ).</li>
+            <li>Diverzifikace příjmů do streamování hudby a dalších služeb.</li>
+            <li>Velmi atraktivní valuace oproti konkurenci a silná hotovostní pozice.</li>
+        </ul>
+        <p><strong>❌ Rizika:</strong></p>
+        <ul>
+            <li>Regulační riziko ze strany čínské vlády týkající se herního průmyslu.</li>
+            <li>Zpomalení růstu čínské ekonomiky a spotřebitelské důvěry.</li>
+            <li>Intenzivní konkurence od Tencentu a dalších globálních vydavatelů.</li>
+        </ul>
 
-        <div class="risk-management">
-            <h3>🛡 Risk Management & Doporučení</h3>
+        <h3>🛡 Risk Management & Doporučení</h3>
+        <div class="summary-box">
             <p><strong>🟢 BUY SIGNAL</strong></p>
             <table>
-                <tr><td>Entry Zone</td><td>$120,00–125,00</td></tr>
-                <tr><td>Stop Loss</td><td>$110,00 (-11,1%)</td></tr>
-                <tr><td>Target 1</td><td>$140,00 (+13,2%)</td></tr>
-                <tr><td>Target 2</td><td>$152,70 (+23,4%)</td></tr>
-                <tr><td>Position Size</td><td>3–5% portfolia (Value/Growth mix)</td></tr>
+                <tr><th>Parametr</th><th>Hodnota</th></tr>
+                <tr><td>Entry Zone</td><td>$125,00–132,00</td></tr>
+                <tr><td>Stop Loss</td><td>$115,00 (-11,0%)</td></tr>
+                <tr><td>Target 1</td><td>$140,00 (+8,4%)</td></tr>
+                <tr><td>Target 2</td><td>$155,40 (+20,3%)</td></tr>
+                <tr><td>Position Size</td><td>3–5% portfolia (geografická diverzifikace)</td></tr>
             </table>
         </div>
 
-        <div class="summary">
-            <strong>Shrnutí:</strong> NetEase představuje kvalitní vstup do čínského technologického sektoru s minimálním spekulativním nádechem. Díky DNA 90 a Very Bullish sentimentu ukazuje na podceněnost trhu. Společnost generuje obrovské množství hotovosti, kterou vrací akcionářům. Hlavním lákadlem je kombinace nízké valuace, růstu nových her a dividend. Rizika jsou převážně makro-politická, nikoliv operační.
+        <div class="summary-box">
+            <strong>Shrnutí :</strong> NetEase je fundamentálně silná společnost s maximálním Smart Score 10/10, což odráží vysokou kvalitu managementu a stabilní cash flow. Přestože čelí regulačním rizikům v Číně, její globální expanze a silné herní IP jí umožňují růst. Akcie nabízí solidní upside přes 20 % a slouží jako dobrá diverzifikace do asijského technologického sektoru. Technický trend je pozitivní, což podporuje nákupní doporučení.
         </div>
     </div>
 
-    <div style="text-align: center; margin-top: 40px; font-size: 0.8em; color: #777;">
-        <p>Dokument vygenerován: 29.06.2026 05:49:01 | Verze 1.0 | Metodika: DNA 5.0 Hybrid Model</p>
+    <div class="footer">
+        Dokument vygenerován: 30.06.2026 05:45:53 | Verze 1.0 | Metodika: DNA 5.0 Hybrid Model kombinuje fundamentální a tržní signály pro komplexní hodnocení akcií. Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.
     </div>
 
 </body>
