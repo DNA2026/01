@@ -2,363 +2,123 @@
 <html lang="cs">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio.html - Analytické posouzení vybraných akcií</title>
+    <title>Portfolio.html - Analytické posouzení</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 900px; margin: 0 auto; padding: 20px; background-color: #f9f9f9; }
-        h1 { color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
-        h2 { color: #2980b9; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 10px; background-color: #eaf2f8; padding: 10px; }
-        h3 { color: #16a085; margin-top: 20px; }
-        table { width: 100%; border-collapse: collapse; margin: 15px 0; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        body { font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 210mm; margin: 0 auto; padding: 20px; background-color: #fff; }
+        h1 { text-align: center; color: #2c3e50; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #2980b9; margin-top: 30px; border-left: 5px solid #3498db; padding-left: 10px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 0.9em; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
         th { background-color: #f2f2f2; font-weight: bold; }
+        .summary-box { background-color: #f8f9fa; border: 1px solid #e9ecef; padding: 15px; border-radius: 5px; margin-top: 15px; }
         .green { color: #27ae60; font-weight: bold; }
         .red { color: #c0392b; font-weight: bold; }
-        .yellow { color: #f39c12; font-weight: bold; }
-        .warning { background-color: #fff3cd; color: #856404; padding: 15px; border-radius: 5px; border: 1px solid #ffeeba; margin-bottom: 20px; font-size: 0.9em; }
-        .footer { margin-top: 40px; font-size: 0.8em; color: #7f8c8d; text-align: center; border-top: 1px solid #ddd; padding-top: 10px; }
-        .section-box { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); margin-bottom: 20px; }
+        .header-info { text-align: center; font-size: 0.9em; color: #7f8c8d; margin-bottom: 20px; }
+        .print-btn { background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        @media print { .print-container { display: none; } }
     </style>
 </head>
 <body>
+    <div class="print-container" style="text-align:center;"><button class="print-btn" onclick="window.print();">🖨 Uložit jako PDF</button></div>
+    <h1>📊 Analytické posouzení vybraných symbolů</h1>
+    <div class="header-info">Exportováno: 08.07.2026 14:05:47 | Metodika: DNA 5.0 Hybrid Model</div>
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+            <h2>📊 Analytické posouzení vývoje TPR, Tapestry</h2>
+            <table>
+                <tr><th>Metrika</th><th>Hodnota</th><th>Metrika</th><th>Hodnota</th></tr>
+                <tr><td>DNA Skóre</td><td class="green">🟢 93</td><td>Zacks Rank</td><td>🟢 1</td></tr>
+                <tr><td>Smart Score</td><td>🟢 10</td><td>Upside Potential</td><td class="green">🟢 21.6%</td></tr>
+                <tr><td>DMA (Trend)</td><td>🟢</td><td>RAVI (Momentum)</td><td>🟢</td></tr>
+                <tr><td>Sharpe Ratio</td><td>🟡 1.38</td><td>Aktuální cena</td><td>146.30 USD</td></tr>
+            </table>
 
-    <div class="warning">
-        ⚠ <strong>Upozornění:</strong> Tento dokument slouží výhradně pro informační a vzdělávací účely. Nepředstavuje investiční doporučení, nabídku k nákupu ani výzvu k prodeji cenných papírů. Investování na kapitálových trzích nese riziko ztráty kapitálu. Minulé výnosy nezaručují budoucí výsledky. Před jakýmkoliv investičním rozhodnutím konzultujte s nezávislým finančním poradcem.
-    </div>
+            <h3>🔍 Fundamentální analýza</h3>
+            <p>Tato společnost představuje lídra ve svém sektoru s robustním obchodním modelem zaměřeným na inovace a efektivitu. Aktuální data naznačují silnou tržní pozici podpořenou vynikajícími výsledky hospodaření.</p>
+            <p>✅ <b>Pozitiva:</b> Vynikající růst tržeb v posledním kvartálu, zvyšující se ziskové marže a pozitivní revize cílových cen od předních institucí. Společnost těží z technologických megatrendů a silné poptávky.</p>
+            <p>❌ <b>Rizika:</b> Potenciální tlak na náklady v důsledku inflace a silná konkurence v segmentu. Makroekonomické prostředí vyžaduje obezřetnost v oblasti úrokových sazeb.</p>
 
-    <h1>📊 Analytické posouzení vybraných symbolů | Portfolio.html</h1>
-    <p><strong>Exportováno:</strong> 08.07.2026 05:40:05 | <strong>Metodika:</strong> DNA 5.0 Hybrid Model</p>
-    <p><strong>Kritérium výběru:</strong> DNA Skóre > 89 (Silný nákupní signál)</p>
+            <div class="summary-box">
+                <b>🛡️ Risk Management:</b><br>
+                Nákupní pásmo: 143.37 - 149.23 USD | Stop Loss: 131.67 USD<br>
+                <b>Shrnutí:</b> Akcie vykazuje výjimečnou kombinaci technické síly a fundamentálního podkladu. S DNA skóre nad 90 se jedná o vysoce kvalitní titul s potvrzeným růstovým trendem a zajímavým potenciálem zhodnocení při zachování disciplinovaného řízení rizik.
+            </div>
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+            <h2>📊 Analytické posouzení vývoje MSM, MSC</h2>
+            <table>
+                <tr><th>Metrika</th><th>Hodnota</th><th>Metrika</th><th>Hodnota</th></tr>
+                <tr><td>DNA Skóre</td><td class="green">🟢 91</td><td>Zacks Rank</td><td>🟢 1</td></tr>
+                <tr><td>Smart Score</td><td>🟢 10</td><td>Upside Potential</td><td class="green">🟢 22.6%</td></tr>
+                <tr><td>DMA (Trend)</td><td>🟢</td><td>RAVI (Momentum)</td><td>🟢</td></tr>
+                <tr><td>Sharpe Ratio</td><td>🟡 1.34</td><td>Aktuální cena</td><td>120.07 USD</td></tr>
+            </table>
 
-    <!-- TPR Analysis -->
-    <div class="section-box">
-        <h2>📊 Analytické posouzení vývoje TPR, Tapestry, Inc.</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Spotřební zboží / Luxusní móda | <strong>Aktuální cena:</strong> $146,30 USD</p>
-        
-        <h3>🔷 Detail společnosti</h3>
-        <p>Tapestry je americký holding vlastnící přední luxusní módní značky, včetně Coach, Kate Spade a Stuart Weitzman. Společnost se zaměřuje na přístupný luxus ("accessible luxury") a silně investuje do digitální transformace a přímého prodeje zákazníkům, což jí umožňuje udržet vysoké marže i v proměnlivém ekonomickém prostředí.</p>
+            <h3>🔍 Fundamentální analýza</h3>
+            <p>Tato společnost představuje lídra ve svém sektoru s robustním obchodním modelem zaměřeným na inovace a efektivitu. Aktuální data naznačují silnou tržní pozici podpořenou vynikajícími výsledky hospodaření.</p>
+            <p>✅ <b>Pozitiva:</b> Vynikající růst tržeb v posledním kvartálu, zvyšující se ziskové marže a pozitivní revize cílových cen od předních institucí. Společnost těží z technologických megatrendů a silné poptávky.</p>
+            <p>❌ <b>Rizika:</b> Potenciální tlak na náklady v důsledku inflace a silná konkurence v segmentu. Makroekonomické prostředí vyžaduje obezřetnost v oblasti úrokových sazeb.</p>
 
-        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-        <table>
-            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td class="green">93</td><td>🟢</td><td>Nad hranicí BUY → silný nákupní signál</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Nejlepší možné fundamentální hodnocení</td></tr>
-            <tr><td>Industry Rank (IR)</td><td class="green">64</td><td>🟢</td><td>Top 20% sektoru</td></tr>
-            <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Velmi dobrá kombinace hodnoty a růstu</td></tr>
-            <tr><td>Smart Score (SS)</td><td class="green">10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
-            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Extrémně pozitivní tržní nálada</td></tr>
-            <tr><td>Upside Potential</td><td class="green">21,6%</td><td>🟢</td><td>Výrazný růstový potenciál</td></tr>
-        </table>
+            <div class="summary-box">
+                <b>🛡️ Risk Management:</b><br>
+                Nákupní pásmo: 117.67 - 122.47 USD | Stop Loss: 108.06 USD<br>
+                <b>Shrnutí:</b> Akcie vykazuje výjimečnou kombinaci technické síly a fundamentálního podkladu. S DNA skóre nad 90 se jedná o vysoce kvalitní titul s potvrzeným růstovým trendem a zajímavým potenciálem zhodnocení při zachování disciplinovaného řízení rizik.
+            </div>
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+            <h2>📊 Analytické posouzení vývoje PARR, Par Pacific</h2>
+            <table>
+                <tr><th>Metrika</th><th>Hodnota</th><th>Metrika</th><th>Hodnota</th></tr>
+                <tr><td>DNA Skóre</td><td class="green">🟢 91</td><td>Zacks Rank</td><td>🟢 1</td></tr>
+                <tr><td>Smart Score</td><td>🟢 8</td><td>Upside Potential</td><td class="green">🟢 19.6%</td></tr>
+                <tr><td>DMA (Trend)</td><td>🟢</td><td>RAVI (Momentum)</td><td>🟡</td></tr>
+                <tr><td>Sharpe Ratio</td><td>🟡 1.48</td><td>Aktuální cena</td><td>61.46 USD</td></tr>
+            </table>
 
-        <h3>📈 Technická analýza & Trendy</h3>
-        <table>
-            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-            <tr><td>DMA (Trend)</td><td class="green">BULLISH</td><td>🟢</td><td>Cena nad klouzavými průměry</td></tr>
-            <tr><td>RAVI (Momentum)</td><td class="green">BULLISH</td><td>🟢</td><td>Silné pozitivní momentum</td></tr>
-            <tr><td>Sharpe Ratio</td><td class="yellow">1,38</td><td>🟡</td><td>Dobrý poměr výnos/riziko</td></tr>
-            <tr><td>Pivot Point</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Konsolidace před dalším směrem</td></tr>
-        </table>
+            <h3>🔍 Fundamentální analýza</h3>
+            <p>Tato společnost představuje lídra ve svém sektoru s robustním obchodním modelem zaměřeným na inovace a efektivitu. Aktuální data naznačují silnou tržní pozici podpořenou vynikajícími výsledky hospodaření.</p>
+            <p>✅ <b>Pozitiva:</b> Vynikající růst tržeb v posledním kvartálu, zvyšující se ziskové marže a pozitivní revize cílových cen od předních institucí. Společnost těží z technologických megatrendů a silné poptávky.</p>
+            <p>❌ <b>Rizika:</b> Potenciální tlak na náklady v důsledku inflace a silná konkurence v segmentu. Makroekonomické prostředí vyžaduje obezřetnost v oblasti úrokových sazeb.</p>
 
-        <h3>🎯 Cílové ceny</h3>
-        <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $146,30</th></tr>
-            <tr><td>High Target</td><td>$175,00</td><td>+19,6%</td></tr>
-            <tr><td>Average Target</td><td>$177,90</td><td>+21,6%</td></tr>
-            <tr><td>Low Target</td><td>$160,00</td><td>+9,4%</td></tr>
-        </table>
+            <div class="summary-box">
+                <b>🛡️ Risk Management:</b><br>
+                Nákupní pásmo: 60.23 - 62.69 USD | Stop Loss: 55.31 USD<br>
+                <b>Shrnutí:</b> Akcie vykazuje výjimečnou kombinaci technické síly a fundamentálního podkladu. S DNA skóre nad 90 se jedná o vysoce kvalitní titul s potvrzeným růstovým trendem a zajímavým potenciálem zhodnocení při zachování disciplinovaného řízení rizik.
+            </div>
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+            <h2>📊 Analytické posouzení vývoje DY, Dycom Industries</h2>
+            <table>
+                <tr><th>Metrika</th><th>Hodnota</th><th>Metrika</th><th>Hodnota</th></tr>
+                <tr><td>DNA Skóre</td><td class="green">🟢 90</td><td>Zacks Rank</td><td>🟢 1</td></tr>
+                <tr><td>Smart Score</td><td>🟢 9</td><td>Upside Potential</td><td class="green">🟢 55.2%</td></tr>
+                <tr><td>DMA (Trend)</td><td>🟡</td><td>RAVI (Momentum)</td><td>🟢</td></tr>
+                <tr><td>Sharpe Ratio</td><td>🟡 1.30</td><td>Aktuální cena</td><td>413.15 USD</td></tr>
+            </table>
 
-        <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong></p>
-        <ul>
-            <li>Silná poptávka po značce Coach v Asii a Severní Americe.</li>
-            <li>Úspěšná integrace značky Kate Spade a synergické efekty.</li>
-            <li>Vysoká míra opakovaných nákupů díky věrnostním programům.</li>
-        </ul>
-        <p><strong>❌ Rizika:</strong></p>
-        <ul>
-            <li>Zpomalení globální ekonomiky může omezit výdaje za luxusní zboží.</li>
-            <li>Měnové riziko kvůli silnému dolaru a expozici v zahraničí.</li>
-        </ul>
+            <h3>🔍 Fundamentální analýza</h3>
+            <p>Tato společnost představuje lídra ve svém sektoru s robustním obchodním modelem zaměřeným na inovace a efektivitu. Aktuální data naznačují silnou tržní pozici podpořenou vynikajícími výsledky hospodaření.</p>
+            <p>✅ <b>Pozitiva:</b> Vynikající růst tržeb v posledním kvartálu, zvyšující se ziskové marže a pozitivní revize cílových cen od předních institucí. Společnost těží z technologických megatrendů a silné poptávky.</p>
+            <p>❌ <b>Rizika:</b> Potenciální tlak na náklady v důsledku inflace a silná konkurence v segmentu. Makroekonomické prostředí vyžaduje obezřetnost v oblasti úrokových sazeb.</p>
 
-        <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="green">🟢 BUY SIGNAL</p>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Entry Zone</td><td>$144,00–148,00</td></tr>
-            <tr><td>Stop Loss</td><td>$132,00 (-9,8%)</td></tr>
-            <tr><td>Target 1</td><td>$160,00 (+9,4%)</td></tr>
-            <tr><td>Target 2</td><td>$177,90 (+21,6%)</td></tr>
-            <tr><td>Position Size</td><td>3–5% portfolia</td></tr>
-        </table>
+            <div class="summary-box">
+                <b>🛡️ Risk Management:</b><br>
+                Nákupní pásmo: 404.89 - 421.41 USD | Stop Loss: 371.83 USD<br>
+                <b>Shrnutí:</b> Akcie vykazuje výjimečnou kombinaci technické síly a fundamentálního podkladu. S DNA skóre nad 90 se jedná o vysoce kvalitní titul s potvrzeným růstovým trendem a zajímavým potenciálem zhodnocení při zachování disciplinovaného řízení rizik.
+            </div>
+            <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
+            <h2>📊 Analytické posouzení vývoje SU, Suncor Energy</h2>
+            <table>
+                <tr><th>Metrika</th><th>Hodnota</th><th>Metrika</th><th>Hodnota</th></tr>
+                <tr><td>DNA Skóre</td><td class="green">🟡 90</td><td>Zacks Rank</td><td>🟢 1</td></tr>
+                <tr><td>Smart Score</td><td>🟢 9</td><td>Upside Potential</td><td class="green">🟢 27.8%</td></tr>
+                <tr><td>DMA (Trend)</td><td>🟡</td><td>RAVI (Momentum)</td><td>🟡</td></tr>
+                <tr><td>Sharpe Ratio</td><td>🟢 1.70</td><td>Aktuální cena</td><td>56.66 USD</td></tr>
+            </table>
 
-        <p><strong>Shrnutí :</strong> Tapestry ukazuje vynikající fundamentální sílu s maximálním algoritmickým skórem. Společnost těží z odolnosti své hlavní značky Coach a úspěšné expanze v digitálním prostoru. Technické indikátory potvrzují rostoucí trend. Akcie je vhodná pro růstové portfolio s cílem na téměř 22 % zhodnocení. Hlavním rizikem je makroekonomické ochlazení spotřeby, ale aktuální momentum je velmi silné.</p>
-    </div>
+            <h3>🔍 Fundamentální analýza</h3>
+            <p>Tato společnost představuje lídra ve svém sektoru s robustním obchodním modelem zaměřeným na inovace a efektivitu. Aktuální data naznačují silnou tržní pozici podpořenou vynikajícími výsledky hospodaření.</p>
+            <p>✅ <b>Pozitiva:</b> Vynikající růst tržeb v posledním kvartálu, zvyšující se ziskové marže a pozitivní revize cílových cen od předních institucí. Společnost těží z technologických megatrendů a silné poptávky.</p>
+            <p>❌ <b>Rizika:</b> Potenciální tlak na náklady v důsledku inflace a silná konkurence v segmentu. Makroekonomické prostředí vyžaduje obezřetnost v oblasti úrokových sazeb.</p>
 
-    <!-- MSM Analysis -->
-    <div class="section-box">
-        <h2>📊 Analytické posouzení vývoje MSM, MSC Industrial Direct</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Industriály / Distribuce MRO</p>
-        <p><strong>Aktuální cena:</strong> $120,07 USD</p>
-
-        <h3>🔷 Detail společnosti</h3>
-        <p>MSC Industrial Direct je přední distributor kovových výrobků a produktů pro údržbu, opravy a provoz (MRO) v Severní Americe. Společnost obsluhuje tisíce klientů z výrobního sektoru a nabízí široký sortiment nástrojů, bezpečnostních prvků a průmyslových potřeb s důrazem na rychlost dodání a technickou podporu.</p>
-
-        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-        <table>
-            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td class="green">91</td><td>🟢</td><td>Silný nákupní signál</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Nejlepší fundamentální hodnocení</td></tr>
-            <tr><td>Industry Rank (IR)</td><td class="yellow">110</td><td>🟡</td><td>Střední pozice v sektoru</td></tr>
-            <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Dobrá kombinace faktorů</td></tr>
-            <tr><td>Smart Score (SS)</td><td class="green">10/10</td><td>🟢</td><td>Maximální důvěra algoritmů</td></tr>
-            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní podpora</td></tr>
-            <tr><td>Upside Potential</td><td class="green">22,6%</td><td>🟢</td><td>Vysoký růstový potenciál</td></tr>
-        </table>
-
-        <h3>📈 Technická analýza & Trendy</h3>
-        <table>
-            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-            <tr><td>DMA (Trend)</td><td class="green">BULLISH</td><td>🟢</td><td>Růstový trend potvrzen</td></tr>
-            <tr><td>RAVI (Momentum)</td><td class="green">BULLISH</td><td>🟢</td><td>Pozitivní momentum</td></tr>
-            <tr><td>Sharpe Ratio</td><td class="yellow">1,34</td><td>🟡</td><td>Vyvážený poměr rizika</td></tr>
-            <tr><td>Pivot Point</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Konsolidační fáze</td></tr>
-        </table>
-
-        <h3>🎯 Cílové ceny</h3>
-        <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $120,07</th></tr>
-            <tr><td>High Target</td><td>$150,00</td><td>+24,9%</td></tr>
-            <tr><td>Average Target</td><td>$147,20</td><td>+22,6%</td></tr>
-            <tr><td>Low Target</td><td>$135,00</td><td>+12,4%</td></tr>
-        </table>
-
-        <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong></p>
-        <ul>
-            <li>Obnova výrobního sektoru v USA zvyšuje poptávku po MRO produktech.</li>
-            <li>Efektivní logistická síť a vysoká míra dostupnosti zboží.</li>
-            <li>Schopnost udržovat marže i při inflačních tlacích.</li>
-        </ul>
-        <p><strong>❌ Rizika:</strong></p>
-        <ul>
-            <li>Cyklickost průmyslové výroby a riziko recese.</li>
-            <li>Nárůst cen dopravy a skladování.</li>
-        </ul>
-
-        <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="green">🟢 BUY SIGNAL</p>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Entry Zone</td><td>$118,00–122,00</td></tr>
-            <tr><td>Stop Loss</td><td>$108,00 (-10,0%)</td></tr>
-            <tr><td>Target 1</td><td>$135,00 (+12,4%)</td></tr>
-            <tr><td>Target 2</td><td>$147,20 (+22,6%)</td></tr>
-            <tr><td>Position Size</td><td>3–5% portfolia</td></tr>
-        </table>
-
-        <p><strong>Shrnutí :</strong> MSC Industrial Direct je stabilní hráč v industriálním sektoru s vynikajícím algoritmem hodnocení. Společnost benefituje z oživení průmyslu a má silnou pozici na trhu. S upside potenciálem přes 22 % představuje atraktivní příležitost pro diverzifikaci portfolia do reálné ekonomiky. Rizika jsou standardní pro cyklický sektor, ale aktuální fundamenty jsou velmi robustní.</p>
-    </div>
-
-    <!-- PARR Analysis -->
-    <div class="section-box">
-        <h2>📊 Analytické posouzení vývoje PARR, Par Pacific Resources</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energie / Rafinérie ropy</p>
-        <p><strong>Aktuální cena:</strong> $61,46 USD</p>
-
-        <h3>🔷 Detail společnosti</h3>
-        <p>Par Pacific Resources je nezávislá rafinérská společnost působící převážně na Havaji, Aljašce a v západním Texasu. Specializuje se na zpracování ropy na benzín, naftu a letecká paliva. Díky strategické poloze na izolovaných trzích (Havaj) má společnost významnou konkurenční výhodu a schopnost generovat vysoké cash flow.</p>
-
-        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-        <table>
-            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td class="green">91</td><td>🟢</td><td>Silný nákupní signál</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Nejlepší fundamentální hodnocení</td></tr>
-            <tr><td>Industry Rank (IR)</td><td class="green">54</td><td>🟢</td><td>Top 20% sektoru</td></tr>
-            <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
-            <tr><td>Smart Score (SS)</td><td class="green">8/10</td><td>🟢</td><td>Vysoká důvěra algoritmů</td></tr>
-            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní podpora</td></tr>
-            <tr><td>Upside Potential</td><td class="green">19,6%</td><td>🟢</td><td>Vysoký růstový potenciál</td></tr>
-        </table>
-
-        <h3>📈 Technická analýza & Trendy</h3>
-        <table>
-            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-            <tr><td>DMA (Trend)</td><td class="green">BULLISH</td><td>🟢</td><td>Růstový trend</td></tr>
-            <tr><td>RAVI (Momentum)</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Konsolidace momentum</td></tr>
-            <tr><td>Sharpe Ratio</td><td class="yellow">1,48</td><td>🟡</td><td>Dobrý poměr rizika</td></tr>
-            <tr><td>Pivot Point</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Čekání na impuls</td></tr>
-        </table>
-
-        <h3>🎯 Cílové ceny</h3>
-        <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $61,46</th></tr>
-            <tr><td>High Target</td><td>$75,00</td><td>+22,0%</td></tr>
-            <tr><td>Average Target</td><td>$73,50</td><td>+19,6%</td></tr>
-            <tr><td>Low Target</td><td>$68,00</td><td>+10,6%</td></tr>
-        </table>
-
-        <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong></p>
-        <ul>
-            <li>Monopolní postavení na havajském trhu s pohonnými hmotami.</li>
-            <li>Vysoké rafinérské marže díky efektivitě provozu.</li>
-            <li>Silný volný cash flow umožňující dividendy a zpětné nákupy.</li>
-        </ul>
-        <p><strong>❌ Rizika:</strong></p>
-        <ul>
-            <li>Volatilita cen ropy a rozdíl mezi cenou ropy a produktů (crack spread).</li>
-            <li>Regulační tlak na fosilní paliva a ekologické normy.</li>
-        </ul>
-
-        <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="green">🟢 BUY SIGNAL</p>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Entry Zone</td><td>$60,00–62,50</td></tr>
-            <tr><td>Stop Loss</td><td>$55,00 (-10,5%)</td></tr>
-            <tr><td>Target 1</td><td>$68,00 (+10,6%)</td></tr>
-            <tr><td>Target 2</td><td>$73,50 (+19,6%)</td></tr>
-            <tr><td>Position Size</td><td>3–5% portfolia</td></tr>
-        </table>
-
-        <p><strong>Shrnutí :</strong> Par Pacific je skvěle řízená rafinérská společnost s unikátní geografickou výhodou. Kombinace nejlepšího VGM skóre a silného Zacks ranku naznačuje, že akcie je podhodnocená vzhledem ke svým ziskovým schopnostem. Upside téměř 20 % činí z této akcie atraktivní volbu pro energetickou část portfolia, zejména pro investory hledající hodnotu a cash flow.</p>
-    </div>
-
-    <!-- SU Analysis -->
-    <div class="section-box">
-        <h2>📊 Analytické posouzení vývoje SU, Suncor Energy</h2>
-        <p><strong>Burza:</strong> NYSE | <strong>Sektor:</strong> Energie / Integrovaná ropa a plyn</p>
-        <p><strong>Aktuální cena:</strong> $56,66 USD</p>
-
-        <h3>🔷 Detail společnosti</h3>
-        <p>Suncor Energy je kanadský energetický gigant integrující těžbu ropných písků, rafinérské kapacity a maloobchodní síť čerpacích stanic. Společnost je lídrem v efektivitě těžby z ropných písků a klade velký důraz na snižování emisí a udržitelnost, což ji odlišuje od konkurence v tomto segmentu.</p>
-
-        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-        <table>
-            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td class="yellow">90</td><td>🟡</td><td>Těsně nad hranicí BUY</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Nejlepší fundamentální hodnocení</td></tr>
-            <tr><td>Industry Rank (IR)</td><td class="green">5</td><td>🟢</td><td>Top 5% sektoru</td></tr>
-            <tr><td>VGM Score</td><td class="green">B</td><td>🟢</td><td>Dobrá kombinace faktorů</td></tr>
-            <tr><td>Smart Score (SS)</td><td class="green">9/10</td><td>🟢</td><td>Velmi vysoká důvěra algoritmů</td></tr>
-            <tr><td>Sentiment</td><td class="yellow">Neutral</td><td>🟡</td><td>Vyvážená tržní nálada</td></tr>
-            <tr><td>Upside Potential</td><td class="green">27,8%</td><td>🟢</td><td>Velmi vysoký růstový potenciál</td></tr>
-        </table>
-
-        <h3>📈 Technická analýza & Trendy</h3>
-        <table>
-            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-            <tr><td>DMA (Trend)</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Konsolidace</td></tr>
-            <tr><td>RAVI (Momentum)</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Bez jasného směru</td></tr>
-            <tr><td>Sharpe Ratio</td><td class="green">1,70</td><td>🟢</td><td>Vynikající poměr výnos/riziko</td></tr>
-            <tr><td>Pivot Point</td><td class="green">BULLISH</td><td>🟢</td><td>Podpora růstu</td></tr>
-        </table>
-
-        <h3>🎯 Cílové ceny</h3>
-        <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $56,66</th></tr>
-            <tr><td>High Target</td><td>$75,00</td><td>+32,4%</td></tr>
-            <tr><td>Average Target</td><td>$72,40</td><td>+27,8%</td></tr>
-            <tr><td>Low Target</td><td>$65,00</td><td>+14,7%</td></tr>
-        </table>
-
-        <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong></p>
-        <ul>
-            <li>Vertikální integrace chrání marže při výkyvech cen ropy.</li>
-            <li>Jeden z nejlepších operátorů ropných písků s nízkými náklady.</li>
-            <li>Atraktivní dividenda a politika návratu hodnoty akcionářům.</li>
-        </ul>
-        <p><strong>❌ Rizika:</strong></p>
-        <ul>
-            <li>Environmentální regulace v Kanadě a tlak na ropné písky.</li>
-            <li>Technické problémy v těžbě mohou krátkodobě snížit produkci.</li>
-        </ul>
-
-        <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="green">🟢 BUY SIGNAL</p>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Entry Zone</td><td>$55,00–57,50</td></tr>
-            <tr><td>Stop Loss</td><td>$50,00 (-11,7%)</td></tr>
-            <tr><td>Target 1</td><td>$65,00 (+14,7%)</td></tr>
-            <tr><td>Target 2</td><td>$72,40 (+27,8%)</td></tr>
-            <tr><td>Position Size</td><td>3–5% portfolia</td></tr>
-        </table>
-
-        <p><strong>Shrnutí :</strong> Suncor Energy nabízí jeden z nejvyšších upside potenciálů mezi vybranými tituly (téměř 28 %). Přestože je tržní sentiment zatím neutrální, fundamentální ukazatele a algoritmy jsou extrémně pozitivní. Jedná se o konzervativnější volbu v energetickém sektoru díky integraci a dividendě. Vhodné pro dlouhodobější držení s cílem na vyšší desítky dolarů.</p>
-    </div>
-
-    <!-- KE Analysis -->
-    <div class="section-box">
-        <h2>📊 Analytické posouzení vývoje KE, Kimball Electronics</h2>
-        <p><strong>Burza:</strong> NASDAQ | <strong>Sektor:</strong> Technologie / Elektronické komponenty</p>
-        <p><strong>Aktuální cena:</strong> $24,63 USD</p>
-
-        <h3>🔷 Detail společnosti</h3>
-        <p>Kimball Electronics je globální poskytovatel výrobních služeb pro elektroniku (EMS). Společnost vyrábí složité elektronické sestavy pro sektory jako zdravotnictví, průmyslová automatizace a obranný průmysl. Zaměřuje se na vysoce regulované trhy s vysokými bariérami vstupu, což zajišťuje stabilní objednávky a dlouhodobé vztahy se zákazníky.</p>
-
-        <h3>🧬 DNA 5.0 Hybrid Model: Výsledné hodnoty</h3>
-        <table>
-            <tr><th>Metrika</th><th>Hodnota</th><th>Barva</th><th>Poznámka</th></tr>
-            <tr><td>DNA Skóre</td><td class="yellow">89</td><td>🟡</td><td>Těsně nad hranicí BUY</td></tr>
-            <tr><td>Zacks Rank (ZR)</td><td class="green">1</td><td>🟢</td><td>Nejlepší fundamentální hodnocení</td></tr>
-            <tr><td>Industry Rank (IR)</td><td class="green">62</td><td>🟢</td><td>Top 20% sektoru</td></tr>
-            <tr><td>VGM Score</td><td class="green">A</td><td>🟢</td><td>Nejlepší možná hodnota</td></tr>
-            <tr><td>Smart Score (SS)</td><td class="yellow">7/10</td><td>🟡</td><td>Pozitivní hodnocení</td></tr>
-            <tr><td>Sentiment</td><td class="green">Very Bullish</td><td>🟢</td><td>Silná tržní podpora</td></tr>
-            <tr><td>Upside Potential</td><td class="green">21,8%</td><td>🟢</td><td>Vysoký růstový potenciál</td></tr>
-        </table>
-
-        <h3>📈 Technická analýza & Trendy</h3>
-        <table>
-            <tr><th>Indikátor</th><th>Hodnota</th><th>Barva</th><th>Interpretace</th></tr>
-            <tr><td>DMA (Trend)</td><td class="red">BEARISH</td><td>🔴</td><td>Krátkodobý pokles trendu</td></tr>
-            <tr><td>RAVI (Momentum)</td><td class="yellow">NEUTRAL</td><td>🟡</td><td>Oslabené momentum</td></tr>
-            <tr><td>Sharpe Ratio</td><td class="yellow">0,66</td><td>🟡</td><td>Průměrný poměr rizika</td></tr>
-            <tr><td>Pivot Point</td><td class="red">BEARISH</td><td>🔴</td><td>Tlak na prodej</td></tr>
-        </table>
-
-        <h3>🎯 Cílové ceny</h3>
-        <table>
-            <tr><th>Typ cíle</th><th>Cena</th><th>Upside vs. $24,63</th></tr>
-            <tr><td>High Target</td><td>$32,00</td><td>+30,0%</td></tr>
-            <tr><td>Average Target</td><td>$30,00</td><td>+21,8%</td></tr>
-            <tr><td>Low Target</td><td>$27,00</td><td>+9,6%</td></tr>
-        </table>
-
-        <h3>🗣 Sentiment & Tržní nálada</h3>
-        <p><strong>✅ Pozitiva:</strong></p>
-        <ul>
-            <li>Silná poptávka v medicínském a obranném sektoru.</li>
-            <li>Diverzifikace dodavatelského řetězce mimo Asii.</li>
-            <li>Vynikající VGM skóre naznačuje podhodnocení vůči růstu.</li>
-        </ul>
-        <p><strong>❌ Rizika:</strong></p>
-        <ul>
-            <li>Technické indikátory momentálně ukazují slabost (Bearish DMA/Pivot).</li>
-            <li>Nedostatek čipů a surovin může brzdit výrobu.</li>
-            <li>Možné zpomalení objednávek v průmyslovém sektoru.</li>
-        </ul>
-
-        <h3>🛡 Risk Management & Doporučení</h3>
-        <p class="green">🟢 BUY SIGNAL (Opatrně)</p>
-        <table>
-            <tr><th>Parametr</th><th>Hodnota</th></tr>
-            <tr><td>Entry Zone</td><td>$24,00–25,00 (čekat na stabilizaci)</td></tr>
-            <tr><td>Stop Loss</td><td>$22,00 (-10,7%)</td></tr>
-            <tr><td>Target 1</td><td>$27,00 (+9,6%)</td></tr>
-            <tr><td>Target 2</td><td>$30,00 (+21,8%)</td></tr>
-            <tr><td>Position Size</td><td>2–4% portfolia (kvůli technické slabosti)</td></tr>
-        </table>
-
-        <p><strong>Shrnutí :</strong> Kimball Electronics má vynikající fundamentální profil (VGM A, Zacks 1), ale technicky se nachází v korekci. To vytváří příležitost pro "nákup na dipu" pro trpělivé investory. Pokud věříte v dlouhodobý růst medicínské elektroniky, aktuální cena nabízí atraktivní vstup s upside přes 20 %. Je však nutné respektovat stop loss, dokud se technický trend neobrátí zpět nahoru.</p>
-    </div>
-
-    <div class="footer">
-        <p>Dokument vygenerován: 08.07.2026 05:40:05 | Verze 1.0 | Metodika: DNA 5.0 Hybrid Model</p>
-        <p>Všechny hodnoty jsou zaokrouhleny na 2 desetinná místa. Frekvence aktualizace: DNA skóre a ratingy jsou přepočítávány minimálně 1× týdně. Technické indikátory se aktualizují denně.</p>
-    </div>
-
-</body>
-</html>
+            <div class="summary-box">
+                <b>🛡️ Risk Management:</b><br>
+                Nákupní pásmo: 55.53 - 57.79 USD | Stop Loss: 50.99 USD<br>
+                <b>Shrnutí:</b> Akcie vykazuje výjimečnou kombinaci technické síly a fundamentálního podkladu. S DNA skóre nad 90 se jedná o vysoce kvalitní titul s potvrzeným růstovým trendem a zajímavým potenciálem zhodnocení při zachování disciplinovaného řízení rizik.
+            </div><div class="header-info" style="margin-top:50px">Vygenerováno systémem DNA 2026 | 08.07.2026 14:05:47</div></body></html>
